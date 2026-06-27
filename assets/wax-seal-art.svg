@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="wax" cx=".34" cy=".26" r=".72">
+      <stop offset="0" stop-color="#f48aa0"/>
+      <stop offset=".32" stop-color="#b73551"/>
+      <stop offset=".77" stop-color="#782032"/>
+      <stop offset="1" stop-color="#531622"/>
+    </radialGradient>
+    <filter id="sealShadow" x="-30%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#3c0d16" flood-opacity=".42"/>
+    </filter>
+  </defs>
+  <path d="M119 15c18 0 29 15 44 20 17 5 35 0 47 13 12 12 6 31 12 47 6 15 22 27 19 45-3 17-22 25-31 39-9 15-9 35-25 44-15 9-32-2-49 0-17 2-33 16-49 9-16-7-19-28-31-40-12-12-33-17-39-34-6-16 9-31 11-48 1-17-11-34-3-50 8-15 29-17 43-27 14-10 31-18 51-18Z" fill="url(#wax)" filter="url(#sealShadow)"/>
+  <circle cx="120" cy="120" r="76" fill="none" stroke="#ffe1b7" stroke-opacity=".34" stroke-width="7"/>
+  <circle cx="120" cy="120" r="57" fill="none" stroke="#571321" stroke-opacity=".3" stroke-width="3"/>
+  <path d="M72 87c23 21 38 53 48 95 9-42 25-74 48-95" fill="none" stroke="#ffe9c7" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"/>
+  <path d="M82 162h76" stroke="#ffe9c7" stroke-linecap="round" stroke-width="11"/>
+  <path d="M64 61c11-9 23-14 37-16" stroke="#ffd7bd" stroke-linecap="round" stroke-width="7" opacity=".5"/>
+</svg>

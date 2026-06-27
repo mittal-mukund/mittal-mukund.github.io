@@ -25,6 +25,9 @@
   --card-y: 115%;
   --card-opacity: 0;
   --scroll-opacity: 0;
+  --envelope-art: url("assets/invitation-envelope-art.svg");
+  --seal-art: url("assets/wax-seal-art.svg");
+  --flower-art: url("assets/falling-flower-texture.svg");
   color-scheme: light;
 }
 
@@ -63,6 +66,89 @@ a {
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+.music-toggle {
+  position: fixed;
+  z-index: 30;
+  right: clamp(14px, 3vw, 30px);
+  top: clamp(14px, 3vw, 28px);
+  min-height: 44px;
+  padding: 0 14px 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 245, 221, 0.34);
+  border-radius: 999px;
+  color: #fff8e8;
+  background: rgba(31, 17, 15, 0.54);
+  box-shadow: 0 14px 36px rgba(23, 11, 9, 0.28);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  font: 800 0.82rem/1 Inter, system-ui, sans-serif;
+}
+
+.music-toggle:focus-visible {
+  outline: 3px solid rgba(255, 220, 160, 0.8);
+  outline-offset: 3px;
+}
+
+.music-bars {
+  width: 24px;
+  height: 22px;
+  display: inline-flex;
+  align-items: end;
+  justify-content: center;
+  gap: 3px;
+}
+
+.music-bars i {
+  width: 4px;
+  border-radius: 999px;
+  background: #ffdca0;
+  animation: musicBar 760ms ease-in-out infinite;
+}
+
+.music-bars i:nth-child(1) {
+  height: 11px;
+}
+
+.music-bars i:nth-child(2) {
+  height: 18px;
+  animation-delay: 120ms;
+}
+
+.music-bars i:nth-child(3) {
+  height: 14px;
+  animation-delay: 240ms;
+}
+
+.music-toggle:not(.is-on) .music-bars i {
+  height: 5px;
+  animation-play-state: paused;
+  background: rgba(255, 248, 232, 0.62);
+}
+
+.flower-fall {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.falling-flower {
+  position: absolute;
+  top: -14vh;
+  left: var(--fall-left);
+  width: var(--fall-size);
+  aspect-ratio: 1;
+  background: var(--flower-art) center/contain no-repeat;
+  opacity: var(--fall-opacity);
+  transform: translate3d(0, -18vh, 0) rotate(0deg);
+  animation: flowerFall var(--fall-duration) linear infinite;
+  animation-delay: var(--fall-delay);
+  filter: drop-shadow(0 8px 9px rgba(61, 25, 20, 0.16));
 }
 
 .invitation-sequence {
@@ -141,22 +227,23 @@ a {
 }
 
 .env-back {
-  background:
-    radial-gradient(circle at 13% 20%, rgba(167, 63, 85, 0.16), transparent 12%),
-    radial-gradient(circle at 82% 78%, rgba(217, 144, 40, 0.13), transparent 16%),
-    linear-gradient(138deg, #fff0d9, #f3cfc0 52%, #e5b9ad);
+  background: var(--envelope-art) center/cover no-repeat;
   border: 1px solid rgba(128, 75, 45, 0.24);
   box-shadow: 0 42px 90px var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.38);
 }
 
 .env-front {
   clip-path: polygon(0 100%, 50% 46%, 100% 100%);
-  background: linear-gradient(165deg, #f0b7a5, #ffe4c4 48%, #d9998d);
+  background:
+    linear-gradient(rgba(255, 238, 216, 0.18), rgba(174, 83, 81, 0.22)),
+    var(--envelope-art) center bottom/cover no-repeat;
   z-index: 5;
 }
 
 .flap {
-  background: linear-gradient(145deg, #ffe6ce, #e9a99b);
+  background:
+    linear-gradient(rgba(255, 246, 230, 0.22), rgba(175, 73, 79, 0.18)),
+    var(--envelope-art) center/cover no-repeat;
   transform-origin: center;
   z-index: 6;
   box-shadow: inset 0 0 0 1px rgba(129, 70, 44, 0.2);
@@ -193,17 +280,9 @@ a {
   left: calc(50% - clamp(36px, 7vw, 52px));
   top: 45%;
   z-index: 9;
-  display: grid;
-  place-items: center;
   border-radius: 50%;
-  color: #fff4de;
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  background:
-    radial-gradient(circle at 32% 25%, rgba(255, 255, 255, 0.24), transparent 18%),
-    radial-gradient(circle, #ad2f47, #73202f 72%);
-  box-shadow: 0 12px 24px rgba(77, 10, 18, 0.42), inset 0 0 0 6px rgba(93, 16, 29, 0.28);
+  background: var(--seal-art) center/contain no-repeat;
+  filter: drop-shadow(0 12px 16px rgba(77, 10, 18, 0.42));
   transform: translateY(var(--seal-y)) rotate(var(--seal-rotate));
   opacity: var(--seal-opacity);
 }
@@ -652,6 +731,30 @@ a {
   }
 }
 
+@keyframes musicBar {
+  50% {
+    transform: scaleY(0.46);
+  }
+}
+
+@keyframes flowerFall {
+  0% {
+    transform: translate3d(0, -18vh, 0) rotate(0deg);
+  }
+
+  35% {
+    transform: translate3d(calc(var(--fall-sway) * 0.45), 38vh, 0) rotate(145deg);
+  }
+
+  70% {
+    transform: translate3d(var(--fall-sway), 86vh, 0) rotate(310deg);
+  }
+
+  100% {
+    transform: translate3d(calc(var(--fall-sway) * 0.35), 122vh, 0) rotate(520deg);
+  }
+}
+
 @media (max-width: 780px) {
   .invitation-sequence {
     height: 680vh;
@@ -713,6 +816,12 @@ a {
   .button {
     width: 100%;
   }
+
+  .music-toggle {
+    top: auto;
+    right: 14px;
+    bottom: 14px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -726,5 +835,9 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .flower-fall {
+    display: none;
   }
 }

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+  <defs>
+    <radialGradient id="petalA" cx=".42" cy=".28" r=".72">
+      <stop offset="0" stop-color="#fff0ef"/>
+      <stop offset=".38" stop-color="#f1a7b4"/>
+      <stop offset="1" stop-color="#b53f58"/>
+    </radialGradient>
+    <radialGradient id="petalB" cx=".35" cy=".25" r=".75">
+      <stop offset="0" stop-color="#fff8d8"/>
+      <stop offset=".45" stop-color="#f0bc61"/>
+      <stop offset="1" stop-color="#c06f24"/>
+    </radialGradient>
+    <filter id="petalShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#5c1f23" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <g filter="url(#petalShadow)">
+    <path d="M111 102C78 63 83 31 111 11c30 23 34 55 0 91Z" fill="url(#petalA)"/>
+    <path d="M119 106c46-23 78-13 92 22-33 22-66 16-92-22Z" fill="url(#petalB)"/>
+    <path d="M104 110c-49 18-79 5-91-31 36-18 67-8 91 31Z" fill="#d6536b"/>
+    <path d="M109 121c-22 47-53 58-84 37 16-37 47-49 84-37Z" fill="#f2c77a"/>
+    <path d="M121 121c18 48 7 78-29 91-19-36-8-67 29-91Z" fill="#c74562"/>
+    <circle cx="111" cy="112" r="17" fill="#7c2732"/>
+    <circle cx="111" cy="112" r="9" fill="#ffd585"/>
+  </g>
+</svg>

@@ -1,6 +1,9 @@
 const intro = document.querySelector(".invitation-sequence");
 const stage = document.getElementById("introStage");
 const label = document.getElementById("stageLabel");
+const flowerFall = document.getElementById("flowerFall");
+const musicToggle = document.getElementById("musicToggle");
+const musicText = document.getElementById("musicText");
 
 const stages = [
   [0, "Closed Floral Envelope"],
@@ -151,9 +154,126 @@ function buildCalendarActions() {
   });
 }
 
+function buildFallingFlowers() {
+  if (!flowerFall || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const flowerCount = window.innerWidth < 780 ? 18 : 30;
+  flowerFall.textContent = "";
+
+  for (let index = 0; index < flowerCount; index += 1) {
+    const flower = document.createElement("span");
+    flower.className = "falling-flower";
+    flower.style.setProperty("--fall-left", `${Math.random() * 100}%`);
+    flower.style.setProperty("--fall-size", `${24 + Math.random() * 34}px`);
+    flower.style.setProperty("--fall-duration", `${9 + Math.random() * 10}s`);
+    flower.style.setProperty("--fall-delay", `${Math.random() * -18}s`);
+    flower.style.setProperty("--fall-sway", `${-90 + Math.random() * 180}px`);
+    flower.style.setProperty("--fall-opacity", `${0.48 + Math.random() * 0.34}`);
+    flowerFall.appendChild(flower);
+  }
+}
+
+let musicContext;
+let musicMaster;
+let musicTimer;
+let musicOn = true;
+
+const melody = [
+  392, 440, 493.88, 587.33, 493.88, 440, 392, 329.63,
+  349.23, 392, 440, 523.25, 440, 392, 349.23, 293.66,
+];
+
+function scheduleTone(frequency, start, duration, type = "sine", gain = 0.055) {
+  const oscillator = musicContext.createOscillator();
+  const toneGain = musicContext.createGain();
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, start);
+  toneGain.gain.setValueAtTime(0.0001, start);
+  toneGain.gain.exponentialRampToValueAtTime(gain, start + 0.04);
+  toneGain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+  oscillator.connect(toneGain);
+  toneGain.connect(musicMaster);
+  oscillator.start(start);
+  oscillator.stop(start + duration + 0.04);
+}
+
+function scheduleMusicBar() {
+  if (!musicContext || !musicOn) return;
+
+  const now = musicContext.currentTime + 0.05;
+  const beat = 0.42;
+
+  melody.forEach((note, index) => {
+    const start = now + index * beat;
+    scheduleTone(note, start, beat * 0.82, "sine", 0.038);
+    if (index % 2 === 0) scheduleTone(note / 2, start, beat * 1.6, "triangle", 0.025);
+  });
+
+  musicTimer = window.setTimeout(scheduleMusicBar, melody.length * beat * 1000);
+}
+
+function setMusicButtonState(isOn) {
+  if (!musicToggle || !musicText) return;
+  musicToggle.classList.toggle("is-on", isOn);
+  musicToggle.setAttribute("aria-pressed", String(isOn));
+  musicToggle.setAttribute("aria-label", isOn ? "Turn music off" : "Turn music on");
+  musicText.textContent = isOn ? "Music On" : "Music Off";
+}
+
+async function startMusic() {
+  if (!musicToggle) return;
+  musicOn = true;
+  setMusicButtonState(true);
+
+  if (!musicContext) {
+    musicContext = new (window.AudioContext || window.webkitAudioContext)();
+    musicMaster = musicContext.createGain();
+    musicMaster.gain.value = 0.34;
+    musicMaster.connect(musicContext.destination);
+  }
+
+  try {
+    await musicContext.resume();
+    if (!musicTimer) scheduleMusicBar();
+  } catch (error) {
+    window.addEventListener("pointerdown", startMusic, { once: true });
+    window.addEventListener("keydown", startMusic, { once: true });
+  }
+}
+
+function stopMusic() {
+  musicOn = false;
+  setMusicButtonState(false);
+  window.clearTimeout(musicTimer);
+  musicTimer = undefined;
+
+  if (musicContext) musicContext.suspend();
+}
+
+function setupMusic() {
+  if (!musicToggle || !window.AudioContext && !window.webkitAudioContext) return;
+
+  musicToggle.addEventListener("click", () => {
+    if (musicOn) {
+      stopMusic();
+      return;
+    }
+    startMusic();
+  });
+
+  startMusic();
+  window.addEventListener("pointerdown", () => {
+    if (musicOn) startMusic();
+  }, { once: true });
+}
+
 window.addEventListener("scroll", updateIntro, { passive: true });
 window.addEventListener("resize", updateIntro);
 
+buildFallingFlowers();
+setupMusic();
 buildCalendarActions();
 updateIntro();
 updateCountdown();
