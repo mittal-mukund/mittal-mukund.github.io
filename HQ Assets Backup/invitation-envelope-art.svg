@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+  <defs>
+    <linearGradient id="paper" x1="90" x2="800" y1="50" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff1dc"/>
+      <stop offset=".36" stop-color="#ffd6c8"/>
+      <stop offset=".72" stop-color="#e9a195"/>
+      <stop offset="1" stop-color="#f6cfb5"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" x2="900" y1="0" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff5e7"/>
+      <stop offset=".5" stop-color="#efb4a6"/>
+      <stop offset="1" stop-color="#c77276"/>
+    </linearGradient>
+    <radialGradient id="rose" cx=".34" cy=".29" r=".82">
+      <stop offset="0" stop-color="#ffd7d9"/>
+      <stop offset=".36" stop-color="#ca5167"/>
+      <stop offset="1" stop-color="#742437"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#341413" flood-opacity=".24"/>
+    </filter>
+    <pattern id="petalPattern" width="170" height="150" patternUnits="userSpaceOnUse">
+      <path d="M18 52c28-32 62-23 75 7-33 8-57 3-75-7Z" fill="#c9455e" opacity=".2"/>
+      <path d="M108 28c18-22 43-16 53 5-22 8-39 6-53-5Z" fill="#df9840" opacity=".22"/>
+      <path d="M70 112c20-18 45-12 54 8-23 5-40 2-54-8Z" fill="#35705d" opacity=".15"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="560" rx="34" fill="url(#paper)" filter="url(#softShadow)"/>
+  <rect x="20" y="20" width="860" height="520" rx="24" fill="url(#petalPattern)" opacity=".8"/>
+  <path d="M26 52 450 310 874 52v456H26Z" fill="url(#fold)" opacity=".88"/>
+  <path d="M26 508 450 246l424 262Z" fill="#f4c6ae" opacity=".92"/>
+  <path d="M26 52 450 310 874 52" fill="none" stroke="#9d654b" stroke-opacity=".28" stroke-width="3"/>
+  <path d="M26 508 450 246l424 262" fill="none" stroke="#9d654b" stroke-opacity=".24" stroke-width="3"/>
+  <path d="M88 87c56-30 109-19 141 23-61 19-111 9-141-23Z" fill="url(#rose)" opacity=".52"/>
+  <path d="M716 389c57-27 104-15 135 29-57 16-103 5-135-29Z" fill="#c7445f" opacity=".34"/>
+  <path d="M731 98c32-24 69-18 87 12-35 10-64 6-87-12Z" fill="#d99028" opacity=".42"/>
+  <path d="M112 404c34-27 74-20 95 14-40 10-71 5-95-14Z" fill="#2e6550" opacity=".24"/>
+  <g fill="none" stroke="#bd8b3d" stroke-linecap="round" stroke-opacity=".38">
+    <path d="M118 130c76 31 132 72 173 127"/>
+    <path d="M750 126c-76 42-132 96-168 162"/>
+    <path d="M157 428c67-34 124-50 190-49"/>
+    <path d="M720 421c-72-31-136-42-205-32"/>
+  </g>
+</svg>
