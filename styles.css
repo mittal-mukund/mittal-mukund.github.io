@@ -28,6 +28,10 @@
   --envelope-art: url("assets/invitation-envelope-art.svg");
   --seal-art: url("assets/wax-seal-art.svg");
   --flower-art: url("assets/falling-flower-texture.svg");
+  --flap-top-art: url("assets/top_flap.png");
+  --flap-bottom-art: url("assets/bottom_flap.png");
+  --flap-left-art: url("assets/left_flap.png");
+  --flap-right-art: url("assets/right_flap.png");
   color-scheme: light;
 }
 
@@ -241,36 +245,67 @@ a {
 }
 
 .flap {
-  background:
-    linear-gradient(rgba(255, 246, 230, 0.22), rgba(175, 73, 79, 0.18)),
-    var(--envelope-art) center/cover no-repeat;
+  position: absolute;
   transform-origin: center;
   z-index: 6;
-  box-shadow: inset 0 0 0 1px rgba(129, 70, 44, 0.2);
 }
 
 .flap-top {
-  clip-path: polygon(0 0, 100% 0, 50% 56%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  height: auto;
+  aspect-ratio: 1698 / 715;
+  background: var(--flap-top-art) center / 100% 100% no-repeat;
   transform-origin: top center;
   transform: rotateX(var(--top-rotation));
+  filter: drop-shadow(0 14px 18px rgba(40, 19, 16, 0.28));
+  z-index: 10;
 }
 
 .flap-left {
-  clip-path: polygon(0 0, 50% 50%, 0 100%);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1216 / 1194;
+  background: var(--flap-left-art) center / 100% 100% no-repeat;
   transform-origin: left center;
   transform: rotateY(var(--left-rotation));
+  filter: drop-shadow(0 10px 14px rgba(40, 19, 16, 0.22));
+  z-index: 9;
 }
 
 .flap-right {
-  clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1154 / 1205;
+  background: var(--flap-right-art) center / 100% 100% no-repeat;
   transform-origin: right center;
   transform: rotateY(var(--right-rotation));
+  filter: drop-shadow(0 10px 14px rgba(40, 19, 16, 0.22));
+  z-index: 8;
 }
 
 .flap-bottom {
-  clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: auto;
+  height: auto;
+  aspect-ratio: 1553 / 578;
+  background: var(--flap-bottom-art) center / 100% 100% no-repeat;
   transform-origin: bottom center;
   transform: rotateX(var(--bottom-rotation));
+  filter: drop-shadow(0 10px 14px rgba(40, 19, 16, 0.2));
+  z-index: 7;
 }
 
 .wax-seal {
@@ -279,7 +314,7 @@ a {
   position: absolute;
   left: calc(50% - clamp(36px, 7vw, 52px));
   top: 45%;
-  z-index: 9;
+  z-index: 10;
   border-radius: 50%;
   background: var(--seal-art) center/contain no-repeat;
   filter: drop-shadow(0 12px 16px rgba(77, 10, 18, 0.42));
