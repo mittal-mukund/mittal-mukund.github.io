@@ -17,6 +17,17 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Put your music file in the assets folder and set its path below -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="assets/sitar_music.mp3" type="audio/mpeg" />
+    </audio>
+    <div class="start-gate" id="startGate" role="button" tabindex="0" aria-label="Tap to begin">
+      <div class="start-gate-inner">
+        <span class="gate-icon" aria-hidden="true">&#10022;</span>
+        <p class="gate-text">Tap to Begin</p>
+        <p class="gate-sub">Yashi weds Mukund</p>
+      </div>
+    </div>
     <button class="music-toggle is-on" id="musicToggle" type="button" aria-pressed="true" aria-label="Turn music off">
       <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i></span>
       <span id="musicText">Music On</span>
@@ -40,7 +51,7 @@
             <div class="wax-seal" aria-label="Yashi and Mukund seal"></div>
           </div>
         </div>
-        <div class="stage-label" id="stageLabel">Closed Floral Envelope</div>
+        <div class="stage-label" id="stageLabel">Scroll to Open ↓</div>
       </div>
     </section>
 

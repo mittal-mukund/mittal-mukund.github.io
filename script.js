@@ -6,16 +6,16 @@ const musicToggle = document.getElementById("musicToggle");
 const musicText = document.getElementById("musicText");
 
 const stages = [
-  [0, "Closed Floral Envelope"],
-  [0.1, "Wax Seal Falls"],
-  [0.24, "Top Flap"],
-  [0.36, "Right Flap"],
-  [0.48, "Left Flap"],
-  [0.6, "Bottom Flap"],
-  [0.69, "Invitation Card Rises"],
-  [0.76, "Scroll to Begin"],
-  [0.84, "Invitation Floats Up"],
-  [0.93, "Hero Revealed Underneath"],
+  [0.00, "Scroll to Open ↓"],
+  [0.10, "The Journey Begins"],
+  [0.24, "One Fold at a Time"],
+  [0.36, "Love Unfolds"],
+  [0.48, "Just a Few More Scrolls..."],
+  [0.60, "Your Invitation Awaits"],
+  [0.69, "Lift the Invitation"],
+  [0.76, "Step Into Our Story"],
+  [0.84, "Welcome to Our Celebration"],
+  [0.93, "Yashi ♥ Mukund"],
 ];
 
 function clamp(value, min, max) {
@@ -175,46 +175,9 @@ function buildFallingFlowers() {
   }
 }
 
-let musicContext;
-let musicMaster;
-let musicTimer;
-let musicOn = true;
-
-const melody = [
-  392, 440, 493.88, 587.33, 493.88, 440, 392, 329.63,
-  349.23, 392, 440, 523.25, 440, 392, 349.23, 293.66,
-];
-
-function scheduleTone(frequency, start, duration, type = "sine", gain = 0.055) {
-  const oscillator = musicContext.createOscillator();
-  const toneGain = musicContext.createGain();
-
-  oscillator.type = type;
-  oscillator.frequency.setValueAtTime(frequency, start);
-  toneGain.gain.setValueAtTime(0.0001, start);
-  toneGain.gain.exponentialRampToValueAtTime(gain, start + 0.04);
-  toneGain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-  oscillator.connect(toneGain);
-  toneGain.connect(musicMaster);
-  oscillator.start(start);
-  oscillator.stop(start + duration + 0.04);
-}
-
-function scheduleMusicBar() {
-  if (!musicContext || !musicOn) return;
-
-  const now = musicContext.currentTime + 0.05;
-  const beat = 0.42;
-
-  melody.forEach((note, index) => {
-    const start = now + index * beat;
-    scheduleTone(note, start, beat * 0.82, "sine", 0.038);
-    if (index % 2 === 0) scheduleTone(note / 2, start, beat * 1.6, "triangle", 0.025);
-  });
-
-  musicTimer = window.setTimeout(scheduleMusicBar, melody.length * beat * 1000);
-}
+const bgMusic = document.getElementById("bgMusic");
+const startGate = document.getElementById("startGate");
+let userPausedMusic = false;
 
 function setMusicButtonState(isOn) {
   if (!musicToggle || !musicText) return;
@@ -224,57 +187,68 @@ function setMusicButtonState(isOn) {
   musicText.textContent = isOn ? "Music On" : "Music Off";
 }
 
-async function startMusic() {
-  if (!musicToggle) return;
-  musicOn = true;
-  setMusicButtonState(true);
-
-  if (!musicContext) {
-    musicContext = new (window.AudioContext || window.webkitAudioContext)();
-    musicMaster = musicContext.createGain();
-    musicMaster.gain.value = 0.34;
-    musicMaster.connect(musicContext.destination);
-  }
-
-  try {
-    await musicContext.resume();
-    if (!musicTimer) scheduleMusicBar();
-  } catch (error) {
-    window.addEventListener("pointerdown", startMusic, { once: true });
-    window.addEventListener("keydown", startMusic, { once: true });
-  }
+function tryPlayMusic() {
+  if (!bgMusic || userPausedMusic) return;
+  bgMusic.volume = 0.5;
+  bgMusic.play().catch(() => {
+    /* blocked until user interacts; resumeEvents below will retry */
+  });
 }
 
-function stopMusic() {
-  musicOn = false;
-  setMusicButtonState(false);
-  window.clearTimeout(musicTimer);
-  musicTimer = undefined;
+function dismissStartGate() {
+  if (!startGate || startGate.classList.contains("is-hidden")) return;
+  tryPlayMusic();
+  startGate.classList.add("is-hidden");
+  window.setTimeout(() => startGate.remove(), 650);
+}
 
-  if (musicContext) musicContext.suspend();
+function setupStartGate() {
+  if (!startGate) return;
+  startGate.addEventListener("click", dismissStartGate);
+  startGate.addEventListener("touchend", dismissStartGate, { passive: true });
+  startGate.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") dismissStartGate();
+  });
 }
 
 function setupMusic() {
-  if (!musicToggle || !window.AudioContext && !window.webkitAudioContext) return;
+  if (!musicToggle || !bgMusic) return;
+
+  setMusicButtonState(false);
+  bgMusic.addEventListener("play", () => setMusicButtonState(true));
+  bgMusic.addEventListener("pause", () => setMusicButtonState(false));
 
   musicToggle.addEventListener("click", () => {
-    if (musicOn) {
-      stopMusic();
-      return;
+    if (bgMusic.paused) {
+      userPausedMusic = false;
+      tryPlayMusic();
+    } else {
+      userPausedMusic = true;
+      bgMusic.pause();
     }
-    startMusic();
   });
 
-  startMusic();
-  window.addEventListener("pointerdown", () => {
-    if (musicOn) startMusic();
-  }, { once: true });
+  tryPlayMusic();
+
+  // Real click/key/tap gestures reliably unlock audio per browser policy.
+  // Wheel/scroll don't officially count, but we retry on them too in case
+  // a browser allows it - they're harmless no-ops otherwise.
+  const resumeEvents = ["pointerdown", "keydown", "touchstart", "wheel", "scroll"];
+  const onFirstInteraction = () => {
+    tryPlayMusic();
+    resumeEvents.forEach((evt) => window.removeEventListener(evt, onFirstInteraction));
+  };
+  resumeEvents.forEach((evt) =>
+    window.addEventListener(evt, onFirstInteraction, { once: true, passive: true })
+
+  );
 }
 
 window.addEventListener("scroll", updateIntro, { passive: true });
 window.addEventListener("resize", updateIntro);
 
 buildFallingFlowers();
+setupStartGate();
 setupMusic();
 buildCalendarActions();
 updateIntro();
