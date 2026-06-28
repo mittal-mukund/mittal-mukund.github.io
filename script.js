@@ -9,8 +9,8 @@ const stages = [
   [0, "Closed Floral Envelope"],
   [0.1, "Wax Seal Falls"],
   [0.24, "Top Flap"],
-  [0.36, "Left Flap"],
-  [0.48, "Right Flap"],
+  [0.36, "Right Flap"],
+  [0.48, "Left Flap"],
   [0.6, "Bottom Flap"],
   [0.69, "Invitation Card Rises"],
   [0.76, "Scroll to Begin"],
@@ -34,8 +34,8 @@ function updateIntro() {
   const sealDrop = segment(progress, 0.1, 0.14);
   const sealFade = segment(progress, 0.18, 0.09);
   const topOpen = segment(progress, 0.24, 0.12);
-  const leftOpen = segment(progress, 0.36, 0.12);
-  const rightOpen = segment(progress, 0.48, 0.12);
+  const rightOpen = segment(progress, 0.36, 0.12);
+  const leftOpen = segment(progress, 0.48, 0.12);
   const bottomOpen = segment(progress, 0.6, 0.12);
   const cardRise = segment(progress, 0.69, 0.15);
   const cardShow = segment(progress, 0.61, 0.12);
@@ -158,11 +158,13 @@ function buildFallingFlowers() {
   if (!flowerFall || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const flowerCount = window.innerWidth < 780 ? 18 : 30;
+  const variants = ["", "is-variant-2", "is-variant-3", "is-variant-4", "is-variant-5"];
   flowerFall.textContent = "";
 
   for (let index = 0; index < flowerCount; index += 1) {
     const flower = document.createElement("span");
-    flower.className = "falling-flower";
+    const variant = variants[Math.floor(Math.random() * variants.length)];
+    flower.className = variant ? `falling-flower ${variant}` : "falling-flower";
     flower.style.setProperty("--fall-left", `${Math.random() * 100}%`);
     flower.style.setProperty("--fall-size", `${24 + Math.random() * 34}px`);
     flower.style.setProperty("--fall-duration", `${9 + Math.random() * 10}s`);
