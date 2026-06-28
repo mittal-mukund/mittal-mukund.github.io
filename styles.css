@@ -25,8 +25,8 @@
   --card-y: 115%;
   --card-opacity: 0;
   --scroll-opacity: 0;
-  --envelope-art: url("assets/invitation-envelope-art.svg");
-  --seal-art: url("assets/wax-seal-art.svg");
+  --envelope-art: url("assets/envelope_back.png");
+  --seal-art: url("assets/wax-seal.png");
   --flower-art: url("assets/falling-flower-texture.svg");
   --flap-top-art: url("assets/top_flap.png");
   --flap-bottom-art: url("assets/bottom_flap.png");
