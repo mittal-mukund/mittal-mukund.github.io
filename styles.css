@@ -281,7 +281,6 @@ a {
 .envelope {
   position: absolute;
   inset: 16% 5% 6%;
-  transform-style: preserve-3d;
 }
 
 .env-back {
@@ -374,7 +373,7 @@ a {
 
 .invitation-card {
   position: absolute;
-  z-index: 4;
+  z-index: 11;
   left: 12%;
   right: 12%;
   top: 8%;
