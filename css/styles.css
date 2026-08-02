@@ -434,10 +434,10 @@ body.interacting {
 .reveal-hint span {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 13px;
+  font-size: 26px;
   letter-spacing: 0.22em;
   color: var(--plum);
-  opacity: 0.78;
+  opacity: 1;
 }
 .reveal-hint::before {
   content: 'â€';
