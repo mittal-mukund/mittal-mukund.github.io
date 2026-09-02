@@ -2305,3 +2305,145 @@
     padding-top: 0 !important;
   }
 }
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. MOBILE INVITE ARCH: EXTRA LARGE COVERAGE (ASPECT RATIO PRESERVED)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: Maximized width & height covering almost the entire mobile viewport */
+.invite-arch-frame {
+  display: block !important;
+  width: 98vw !important;
+  max-width: min(98vw, 560px) !important;
+  height: 98svh !important;
+  max-height: 98svh !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 36px rgba(216,169,87,.55)) drop-shadow(0 0 14px rgba(166,56,79,.32)) !important;
+}
+
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(390px, 86vw) !important;
+  max-height: min(90svh, 760px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 2px !important;
+  padding: 8px 12px !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. DESKTOP WIDESCREEN: DECREASED CARD WIDTH & LOWER TEXT POSITION
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(740px, 72vw, 980px) !important;
+    height: auto !important;
+    max-width: 88vw !important;
+    max-height: 94svh !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 57% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(480px, 48vw) !important;
+    height: min(480px, 50svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   3. LARGER ROYAL HANGING JHOOMERS (EVENTS & VENUE SECTIONS)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* Events section jhoomer */
+.evt-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(140px, 24vw, 220px) !important;
+  pointer-events: none !important;
+}
+
+/* Venue section jhoomer */
+.venue-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(130px, 22vw, 210px) !important;
+  pointer-events: none !important;
+}
+
+.evt-jhoomer-img,
+.venue-jhoomer-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform-origin: 50% 0 !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(240,200,106,0.4)) !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   INCREASED VERTICAL HEIGHT FOR DESKTOP WIDESCREEN INVITE ARCH FRAME
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    height: clamp(700px, 98svh, 1150px) !important;
+    width: auto !important;
+    max-width: 94vw !important;
+    max-height: 99svh !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 55% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(520px, 50vw) !important;
+    height: min(520px, 56svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
