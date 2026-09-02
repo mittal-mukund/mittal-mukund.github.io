@@ -1387,3 +1387,419 @@
   height: 15px !important;
   flex-shrink: 0 !important;
 }
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. IPHONE & MOBILE ASPECT RATIO FIX: FORMAL INVITATION ARCH CARD
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: Aspect Ratio locked, fits perfectly within viewport without top/bottom cropping */
+.invite-arch-frame {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 90svh !important;
+  max-width: min(94vw, 440px) !important;
+  object-fit: contain !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 28px rgba(216,169,87,.44)) drop-shadow(0 0 10px rgba(166,56,79,.24)) !important;
+}
+
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(340px, 78vw) !important;
+  max-height: min(78svh, 580px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+/* Desktop: Preserves original desktop full arch presentation */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(1000px, 140vw, 1320px) !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(500px, 52vw) !important;
+    height: min(490px, 52svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. OUR EVENTS SCROLL â€” BILATERAL OUTWARD UNROLLING (NO JUMPING)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.farman-stop {
+  position: relative !important;
+}
+
+.farman-open-wrap {
+  position: relative !important;
+  width: 100% !important;
+  clip-path: inset(50% 0 50% 0 round 2px) !important;
+  -webkit-clip-path: inset(50% 0 50% 0 round 2px) !important;
+  transition: -webkit-clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms, clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms !important;
+  will-change: clip-path;
+  transform: translateZ(0);
+}
+
+.farman-stop.is-unrolling .farman-open-wrap,
+.farman-stop.is-open .farman-open-wrap {
+  clip-path: inset(0% 0 0% 0 round 2px) !important;
+  -webkit-clip-path: inset(0% 0 0% 0 round 2px) !important;
+}
+
+.farman-rolled-wrap {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  transition: opacity 0.5s ease 80ms, transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+}
+
+.farman-stop.is-unrolling .farman-rolled-wrap,
+.farman-stop.is-open .farman-rolled-wrap {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scaleY(0.2) !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   3. SPACIOUS DARK JHAROKHA INVITATION CARD (VENUE SECTION)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.venue-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: clamp(65px, 10svh, 110px) 12px clamp(45px, 7svh, 80px) !important;
+  min-height: 90vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ivory) !important;
+}
+
+.venue-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  background: url(../assets/gallery/pn-gal-bg-hanging-courtyard-m-v01.webp) center top / cover no-repeat !important;
+  filter: brightness(0.6) saturate(1.2) !important;
+  transform-origin: center top !important;
+  z-index: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .venue-bg {
+    background-image: url(../assets/gallery/pn-gal-bg-hanging-courtyard-d-v01.webp) !important;
+  }
+}
+
+.venue-bg-vignette {
+  position: absolute !important;
+  inset: 0 !important;
+  background: radial-gradient(ellipse at center, rgba(14, 6, 10, 0.35) 0%, rgba(8, 3, 5, 0.92) 100%),
+              linear-gradient(180deg, rgba(8,3,5,0.85) 0%, transparent 20%, transparent 80%, rgba(8,3,5,0.92) 100%) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.venue-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(70px, 18vw, 96px) !important;
+  pointer-events: none !important;
+}
+
+.venue-jhoomer-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform-origin: 50% 0 !important;
+  animation: evtJhoomerSway 6.8s ease-in-out infinite, evtJhoomerGlow 4.2s ease-in-out infinite !important;
+}
+
+.venue-motif--peacock-l {
+  position: absolute !important;
+  bottom: 6% !important;
+  left: -2% !important;
+  width: clamp(120px, 26vw, 180px) !important;
+  opacity: 0.48 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)) !important;
+  animation: evtMotifDrift 13s ease-in-out 0s infinite !important;
+}
+
+.venue-motif--peacock-r {
+  position: absolute !important;
+  bottom: 6% !important;
+  right: -2% !important;
+  width: clamp(120px, 26vw, 180px) !important;
+  opacity: 0.48 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  transform: scaleX(-1) !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)) !important;
+  animation: evtElephantDrift 14s ease-in-out 1.5s infinite !important;
+}
+
+.venue-content {
+  position: relative !important;
+  z-index: 3 !important;
+  width: 100% !important;
+  max-width: min(560px, 96vw) !important;
+  margin: 0 auto !important;
+}
+
+.venue-jharokha-hero {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+}
+
+/* Sizing of the Hanging Jharokha Container */
+.venue-jharokha-frame-wrap {
+  position: relative !important;
+  width: 100% !important;
+  max-width: min(520px, 94vw) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@media (min-width: 768px) {
+  .venue-jharokha-frame-wrap {
+    max-width: 540px !important;
+  }
+}
+
+.venue-jharokha-arch-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  filter: drop-shadow(0 24px 55px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(216,169,87,0.32)) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 2 !important;
+}
+
+/* Spacious Inner Chamber: Expanded margins to fit all content comfortably */
+.venue-jharokha-window {
+  position: absolute !important;
+  top: 18% !important;
+  bottom: 4% !important;
+  left: 9% !important;
+  right: 9% !important;
+  background: radial-gradient(ellipse 95% 95% at 50% 30%, rgba(42, 12, 26, 0.98) 0%, rgba(18, 5, 12, 0.99) 100%) !important;
+  border-radius: 40px 40px 10px 10px !important;
+  border: 1px solid rgba(216, 169, 87, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  box-shadow: inset 0 0 32px rgba(0,0,0,0.75), 0 0 24px rgba(216,169,87,0.18) !important;
+}
+
+.venue-jharokha-jaali {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: 
+    radial-gradient(circle at center, rgba(216,169,87,0.06) 1.5px, transparent 1.5px),
+    repeating-linear-gradient(45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px) !important;
+  background-size: 18px 18px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.venue-jharokha-body {
+  position: relative !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  padding: clamp(14px, 3.5vw, 24px) clamp(12px, 3vw, 20px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.venue-eyebrow {
+  font-family: var(--display) !important;
+  font-size: clamp(0.68rem, 1.9vw, 0.8rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+  margin: 0 0 3px !important;
+}
+
+.venue-title {
+  font-family: var(--display) !important;
+  font-size: clamp(1.85rem, 5.2vw, 2.75rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #fff8eb !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 2px !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 0 28px rgba(216,169,87,0.35) !important;
+}
+
+.venue-location-sub {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.86rem, 2.3vw, 1.05rem) !important;
+  color: #f0c86a !important;
+  margin: 0 0 4px !important;
+  letter-spacing: 0.03em !important;
+}
+
+.venue-lotus-div {
+  display: block !important;
+  width: clamp(48px, 12vw, 70px) !important;
+  height: auto !important;
+  margin: 2px auto 6px !important;
+  opacity: 0.85 !important;
+}
+
+.venue-desc {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.8rem, 2.1vw, 0.94rem) !important;
+  color: #f7eedc !important;
+  line-height: 1.45 !important;
+  margin: 0 auto 10px !important;
+  max-width: 360px !important;
+}
+
+.venue-details-grid {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(8px, 2.5vw, 18px) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(216, 169, 87, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  margin: 0 auto 12px !important;
+  max-width: 360px !important;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3) !important;
+}
+
+.venue-info-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+.venue-info-label {
+  font-family: var(--display) !important;
+  font-size: clamp(0.5rem, 1.4vw, 0.6rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+}
+
+.venue-info-val {
+  font-family: var(--display) !important;
+  font-size: clamp(0.78rem, 2.1vw, 0.94rem) !important;
+  font-weight: 600 !important;
+  color: #fff8eb !important;
+  letter-spacing: 0.03em !important;
+}
+
+.venue-info-sep {
+  width: 1px !important;
+  height: 22px !important;
+  background: rgba(216, 169, 87, 0.35) !important;
+}
+
+.venue-actions {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.venue-maps-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, #a6384f 0%, #70202f 100%) !important;
+  color: #fff8eb !important;
+  border: 1px solid rgba(216, 169, 87, 0.65) !important;
+  border-radius: 999px !important;
+  padding: 8px 22px !important;
+  font-family: var(--display) !important;
+  font-size: clamp(0.64rem, 1.8vw, 0.76rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 6px 20px rgba(112, 32, 47, 0.5), 0 0 16px rgba(216, 169, 87, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.venue-maps-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 10px 28px rgba(112, 32, 47, 0.7), 0 0 24px rgba(216, 169, 87, 0.45) !important;
+  background: linear-gradient(135deg, #b83f58 0%, #822738 100%) !important;
+}
+
+.venue-map-pin-icon {
+  width: 15px !important;
+  height: 15px !important;
+  flex-shrink: 0 !important;
+}
