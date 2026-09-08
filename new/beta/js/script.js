@@ -179,8 +179,16 @@
     const invParents = document.getElementById("invParents");
     if (invParents && (invite.brideParents || invite.groomParents)) {
       invParents.innerHTML = `
-        <p class="inv-parent-line"><span class="inv-parent-strong">${couple.brideFull || couple.bride}</span> &middot; ${invite.brideParents || ""} &middot; ${invite.brideSibling || ""}</p>
-        <p class="inv-parent-line"><span class="inv-parent-strong">${couple.groomFull || couple.groom}</span> &middot; ${invite.groomParents || ""} &middot; ${invite.groomSibling || ""}</p>
+        <div class="inv-parent-row">
+          <span class="inv-parent-name">${couple.brideFull || couple.bride}</span>
+          <span class="inv-parent-sep" aria-hidden="true">&middot;</span>
+          <span class="inv-parent-info">${invite.brideParents || ""} &middot; ${invite.brideSibling || ""}</span>
+        </div>
+        <div class="inv-parent-row">
+          <span class="inv-parent-name">${couple.groomFull || couple.groom}</span>
+          <span class="inv-parent-sep" aria-hidden="true">&middot;</span>
+          <span class="inv-parent-info">${invite.groomParents || ""} &middot; ${invite.groomSibling || ""}</span>
+        </div>
       `;
     }
 

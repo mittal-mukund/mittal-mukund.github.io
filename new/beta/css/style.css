@@ -2447,3 +2447,792 @@
     padding-top: 0 !important;
   }
 }
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. INTRO / FORMAL INVITATION ARCH â€” MOBILE & IPAD/TABLET (PORTRAIT & LANDSCAPE <= 1024px)
+      Uses rich mobile floral background & tall royal arch card
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+/* Mobile & iPad/Tablet Background: Rich pink Pichwai floral pattern */
+.invite-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  background-image: url(../assets/invite/pn-inv-bg-panel-m-v01.webp) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  animation: kenBurns 10s ease-in-out infinite alternate !important;
+  pointer-events: none !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile Arch Frame (Phones < 768px): Fully responsive, expanded coverage */
+.invite-arch-frame {
+  display: block !important;
+  content: url(../assets/invite/pn-inv-fr-card-m-v01.webp) !important;
+  width: clamp(360px, 98vw, 520px) !important;
+  height: clamp(660px, 96svh, 900px) !important;
+  max-width: 100vw !important;
+  max-height: 98svh !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 32px rgba(216,169,87,.5)) drop-shadow(0 0 12px rgba(166,56,79,.3)) !important;
+}
+
+/* Mobile Typography (< 768px): Proportioned so text sits comfortably inside the arch */
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(340px, 78vw) !important;
+  max-height: min(74svh, 560px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+.inv-blessing-alt {
+  margin-bottom: 2px !important;
+  padding-bottom: 2px !important;
+  border-bottom: 1px solid rgba(119,40,58,.15) !important;
+  width: 86% !important;
+}
+
+.inv-blessing-alt-line1 {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.68rem, 1.95vw, 0.8rem) !important;
+  color: var(--ink) !important;
+  opacity: 0.88 !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+
+.inv-kicker {
+  font-family: var(--display) !important;
+  font-size: clamp(0.56rem, 1.6vw, 0.68rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--rose-dark) !important;
+  opacity: 0.82 !important;
+  margin: 2px 0 !important;
+}
+
+.inv-lotus-div {
+  display: block !important;
+  width: clamp(38px, 10vw, 54px) !important;
+  height: auto !important;
+  margin: 1px auto !important;
+  opacity: 0.75 !important;
+}
+
+.inv-names {
+  font-family: var(--display) !important;
+  font-size: clamp(2.3rem, 7vw, 3.4rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: var(--rose-dark) !important;
+  line-height: 1.02 !important;
+  letter-spacing: 0.02em !important;
+  margin: 2px 0 !important;
+}
+
+.inv-parents {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 2px !important;
+  margin: 2px auto !important;
+  width: 96% !important;
+  max-width: 360px !important;
+}
+
+.inv-parent-line {
+  font-family: var(--display) !important;
+  font-size: clamp(0.68rem, 1.9vw, 0.8rem) !important;
+  font-style: italic !important;
+  color: var(--ink) !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  letter-spacing: 0.015em !important;
+}
+
+.inv-parent-strong {
+  font-weight: 600 !important;
+  color: var(--rose-dark) !important;
+  font-style: normal !important;
+}
+
+.inv-occasion {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.72rem, 2vw, 0.82rem) !important;
+  color: var(--ink) !important;
+  opacity: 0.85 !important;
+  margin: 2px 0 !important;
+}
+
+.inv-meta {
+  padding-top: 2px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  width: 90% !important;
+}
+
+.inv-date {
+  font-family: var(--display) !important;
+  font-size: clamp(1.05rem, 3.2vw, 1.35rem) !important;
+  font-weight: 500 !important;
+  color: var(--rose-dark) !important;
+  letter-spacing: 0.04em !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+}
+
+.inv-venue {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.72rem, 2vw, 0.84rem) !important;
+  color: var(--ink) !important;
+  opacity: 0.85 !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. IPAD & TABLETS (768px to 1024px in portrait / landscape):
+      Keeps rich mobile floral background & mobile vertical arch card,
+      scaled gracefully for iPad screens!
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .invite-bg {
+    background-image: url(../assets/invite/pn-inv-bg-panel-m-v01.webp) !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+  
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-m-v01.webp) !important;
+    width: clamp(480px, 78vw, 680px) !important;
+    height: min(92svh, 920px) !important;
+    max-height: 94svh !important;
+    max-width: 90vw !important;
+    object-fit: contain !important;
+  }
+  
+  .invite-text-content {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(440px, 70vw) !important;
+    max-height: min(76svh, 640px) !important;
+    padding: 8px 14px !important;
+    gap: 2px !important;
+  }
+  
+  .inv-blessing-alt {
+    width: 80% !important;
+    margin-bottom: 4px !important;
+  }
+  .inv-blessing-alt-line1 {
+    font-size: clamp(0.82rem, 1.5vw, 0.98rem) !important;
+    line-height: 1.35 !important;
+  }
+  .inv-kicker {
+    font-size: clamp(0.68rem, 1.2vw, 0.82rem) !important;
+    letter-spacing: 0.24em !important;
+    margin: 3px 0 !important;
+  }
+  .inv-lotus-div {
+    width: clamp(48px, 8vw, 64px) !important;
+    margin: 2px auto !important;
+  }
+  .inv-names {
+    font-size: clamp(3.2rem, 5.5vw, 4.4rem) !important;
+    line-height: 1.05 !important;
+    margin: 4px 0 !important;
+  }
+  .inv-parents {
+    gap: 3px !important;
+    margin: 4px auto !important;
+    max-width: 440px !important;
+  }
+  .inv-parent-line {
+    font-size: clamp(0.84rem, 1.4vw, 1.02rem) !important;
+    line-height: 1.35 !important;
+  }
+  .inv-occasion {
+    font-size: clamp(0.88rem, 1.5vw, 1.05rem) !important;
+    margin: 4px 0 !important;
+  }
+  .inv-meta {
+    padding-top: 4px !important;
+    gap: 2px !important;
+    width: 85% !important;
+  }
+  .inv-date {
+    font-size: clamp(1.3rem, 2.2vw, 1.65rem) !important;
+    line-height: 1.15 !important;
+  }
+  .inv-venue {
+    font-size: clamp(0.88rem, 1.5vw, 1.1rem) !important;
+    line-height: 1.25 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   3. DESKTOP WIDESCREEN (min-width: 1025px and landscape):
+      Uses desktop landscape background & landscape card
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (min-width: 1025px) and (orientation: landscape) {
+  .invite-bg {
+    background-image: url(../assets/invite/pn-inv-bg-panel-d-v01.webp) !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+  
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(820px, 78vw, 1080px) !important;
+    height: auto !important;
+    max-width: 90vw !important;
+    max-height: 92svh !important;
+    object-fit: contain !important;
+  }
+  
+  .invite-text-content {
+    top: 53% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(580px, 56vw) !important;
+    max-width: 580px !important;
+    max-height: min(410px, 45svh) !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .inv-blessing-alt {
+    margin-bottom: 2px !important;
+    padding-bottom: 2px !important;
+    border-bottom: 1px solid rgba(119,40,58,.15) !important;
+    width: 65% !important;
+  }
+  
+  .inv-blessing-alt-line1 {
+    font-size: clamp(0.72rem, 0.95vw, 0.84rem) !important;
+    line-height: 1.25 !important;
+  }
+  
+  .inv-kicker {
+    font-size: clamp(0.56rem, 0.78vw, 0.66rem) !important;
+    letter-spacing: 0.22em !important;
+    margin: 2px 0 !important;
+  }
+  
+  .inv-lotus-div {
+    width: clamp(34px, 3.6vw, 44px) !important;
+    margin: 1px auto !important;
+  }
+  
+  .inv-names {
+    font-size: clamp(2.4rem, 3.8vw, 3.4rem) !important;
+    line-height: 1.0 !important;
+    margin: 2px 0 3px !important;
+  }
+  
+  .inv-parents {
+    gap: 2px !important;
+    margin: 2px auto !important;
+    max-width: 500px !important;
+  }
+  
+  .inv-parent-line {
+    font-size: clamp(0.72rem, 0.95vw, 0.84rem) !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.02em !important;
+  }
+  
+  .inv-occasion {
+    font-size: clamp(0.74rem, 0.95vw, 0.85rem) !important;
+    margin: 2px 0 !important;
+  }
+  
+  .inv-meta {
+    padding-top: 3px !important;
+    gap: 1px !important;
+    width: 70% !important;
+  }
+  
+  .inv-date {
+    font-size: clamp(1.1rem, 1.6vw, 1.38rem) !important;
+    line-height: 1.15 !important;
+  }
+  
+  .inv-venue {
+    font-size: clamp(0.76rem, 1vw, 0.88rem) !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   4. EVENTS & VENUE JHOOMERS (LARGE & OPULENT)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.evt-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(130px, 24vw, 210px) !important;
+  pointer-events: none !important;
+}
+
+.venue-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(120px, 22vw, 200px) !important;
+  pointer-events: none !important;
+}
+
+.evt-jhoomer-img,
+.venue-jhoomer-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform-origin: 50% 0 !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(240,200,106,0.4)) !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   5. VENUE SECTION: DARK JHAROKHA WINDOW (STRICT CONTAINMENT)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.venue-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: clamp(65px, 10svh, 110px) 10px clamp(45px, 7svh, 80px) !important;
+  min-height: 90vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ivory) !important;
+}
+
+.venue-content {
+  position: relative !important;
+  z-index: 3 !important;
+  width: 100% !important;
+  max-width: min(580px, 98vw) !important;
+  margin: 0 auto !important;
+}
+
+.venue-jharokha-hero {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+}
+
+.venue-jharokha-frame-wrap {
+  position: relative !important;
+  width: 100% !important;
+  max-width: min(540px, 96vw) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@media (min-width: 768px) {
+  .venue-jharokha-frame-wrap {
+    max-width: 540px !important;
+  }
+}
+
+.venue-jharokha-arch-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  filter: drop-shadow(0 24px 55px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(216,169,87,0.32)) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 2 !important;
+}
+
+.venue-jharokha-window {
+  position: absolute !important;
+  top: 27.5% !important;
+  bottom: 7% !important;
+  left: 15% !important;
+  right: 15% !important;
+  background: radial-gradient(ellipse 95% 95% at 50% 30%, rgba(38, 10, 22, 0.98) 0%, rgba(16, 4, 10, 0.99) 100%) !important;
+  border-radius: 16px 16px 4px 4px !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  box-shadow: inset 0 0 24px rgba(0,0,0,0.85) !important;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 2.5%, 92% 1%, 72% 0%, 50% 0%, 28% 0%, 8% 1%, 0% 2.5%) !important;
+  -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 2.5%, 92% 1%, 72% 0%, 50% 0%, 28% 0%, 8% 1%, 0% 2.5%) !important;
+}
+
+.venue-jharokha-jaali {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: 
+    radial-gradient(circle at center, rgba(216,169,87,0.06) 1.5px, transparent 1.5px),
+    repeating-linear-gradient(45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px) !important;
+  background-size: 18px 18px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.venue-jharokha-body {
+  position: relative !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  padding: clamp(6px, 1.8vw, 14px) clamp(8px, 2.2vw, 16px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.venue-eyebrow {
+  font-family: var(--display) !important;
+  font-size: clamp(0.62rem, 1.8vw, 0.74rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+  margin: 0 0 2px !important;
+}
+
+.venue-title {
+  font-family: var(--display) !important;
+  font-size: clamp(1.75rem, 5vw, 2.6rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #fff8eb !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 2px !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 0 28px rgba(216,169,87,0.35) !important;
+}
+
+.venue-location-sub {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.8rem, 2.2vw, 0.98rem) !important;
+  color: #f0c86a !important;
+  margin: 0 0 3px !important;
+  letter-spacing: 0.02em !important;
+}
+
+.venue-lotus-div {
+  display: block !important;
+  width: clamp(40px, 11vw, 62px) !important;
+  height: auto !important;
+  margin: 1px auto 4px !important;
+  opacity: 0.85 !important;
+}
+
+.venue-desc {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.72rem, 1.9vw, 0.86rem) !important;
+  color: #f7eedc !important;
+  line-height: 1.38 !important;
+  margin: 0 auto 8px !important;
+  max-width: 330px !important;
+}
+
+.venue-details-grid {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(6px, 2vw, 16px) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(216, 169, 87, 0.35) !important;
+  border-radius: 6px !important;
+  padding: 4px 12px !important;
+  margin: 0 auto 8px !important;
+  max-width: 330px !important;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.3) !important;
+}
+
+.venue-info-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+.venue-info-label {
+  font-family: var(--display) !important;
+  font-size: clamp(0.46rem, 1.2vw, 0.54rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+}
+
+.venue-info-val {
+  font-family: var(--display) !important;
+  font-size: clamp(0.72rem, 1.9vw, 0.88rem) !important;
+  font-weight: 600 !important;
+  color: #fff8eb !important;
+  letter-spacing: 0.02em !important;
+}
+
+.venue-info-sep {
+  width: 1px !important;
+  height: 18px !important;
+  background: rgba(216, 169, 87, 0.35) !important;
+}
+
+.venue-actions {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.venue-maps-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, #a6384f 0%, #70202f 100%) !important;
+  color: #fff8eb !important;
+  border: 1px solid rgba(216, 169, 87, 0.65) !important;
+  border-radius: 999px !important;
+  padding: 6px 18px !important;
+  font-family: var(--display) !important;
+  font-size: clamp(0.58rem, 1.6vw, 0.7rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 6px 18px rgba(112, 32, 47, 0.5), 0 0 14px rgba(216, 169, 87, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.venue-maps-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 10px 24px rgba(112, 32, 47, 0.7), 0 0 20px rgba(216, 169, 87, 0.45) !important;
+  background: linear-gradient(135deg, #b83f58 0%, #822738 100%) !important;
+}
+
+.venue-map-pin-icon {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   AUTOMATIC TEXT-WRAP & CONTAINMENT FOR INVITE ARCH FRAME
+   Ensures all text wraps gracefully and remains strictly within the arch frame
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-text-content {
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+  text-align: center !important;
+}
+
+.invite-text-content * {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+.inv-blessing-alt,
+.inv-blessing-alt-line1,
+.inv-kicker,
+.inv-names,
+.inv-parents,
+.inv-parent-line,
+.inv-occasion,
+.inv-meta,
+.inv-date,
+.inv-venue {
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+  text-align: center !important;
+  hyphens: manual !important;
+}
+
+.inv-parent-line {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  text-wrap: balance !important;
+  line-height: 1.3 !important;
+}
+
+.inv-names {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  text-wrap: balance !important;
+  overflow-wrap: break-word !important;
+}
+
+.inv-date {
+  white-space: normal !important;
+  display: block !important;
+  width: 100% !important;
+  text-wrap: balance !important;
+}
+
+.inv-venue {
+  white-space: normal !important;
+  display: block !important;
+  width: 100% !important;
+  text-wrap: balance !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SYMMETRICAL RESPONSIVE FAMILY DETAILS (CONSISTENT ON ALL PHONES)
+   Fixes asymmetrical wrapping across iPhone 12 Pro, Pro Max, Pixel 7-10,
+   Samsung S8+, S20-S24 Ultra, iPad, and Desktop
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.inv-parents {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 5px !important;
+  margin: 3px auto !important;
+  width: 96% !important;
+  max-width: 380px !important;
+}
+
+.inv-parent-row,
+.inv-parent-line {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin: 0 !important;
+  width: 100% !important;
+  gap: 1px !important;
+}
+
+.inv-parent-strong,
+.inv-parent-name {
+  font-family: var(--display) !important;
+  font-size: clamp(0.76rem, 2.1vw, 0.9rem) !important;
+  font-weight: 600 !important;
+  color: var(--rose-dark) !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.inv-parent-sep {
+  display: none !important; /* Stacked cleanly on mobile phones */
+}
+
+.inv-parent-info,
+.inv-parent-rel {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.66rem, 1.85vw, 0.78rem) !important;
+  color: var(--ink) !important;
+  line-height: 1.25 !important;
+  opacity: 0.9 !important;
+  text-align: center !important;
+  text-wrap: balance !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Tablets & Desktop: Symmetrical Inline or Spacious Row */
+@media (min-width: 768px) {
+  .inv-parents {
+    gap: 4px !important;
+    max-width: 540px !important;
+    margin: 4px auto !important;
+  }
+  
+  .inv-parent-row,
+  .inv-parent-line {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+    line-height: 1.3 !important;
+  }
+  
+  .inv-parent-strong,
+  .inv-parent-name {
+    display: inline-block !important;
+    font-size: clamp(0.78rem, 1.1vw, 0.92rem) !important;
+  }
+  
+  .inv-parent-sep {
+    display: inline-block !important;
+    color: var(--rose-dark) !important;
+    opacity: 0.6 !important;
+  }
+  
+  .inv-parent-info,
+  .inv-parent-rel {
+    display: inline-block !important;
+    width: auto !important;
+    font-size: clamp(0.74rem, 1.05vw, 0.88rem) !important;
+  }
+}
