@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ═════════════════════════════════════════════════════════════════════════════
  *  ROYAL PICHWAI WEDDING INVITATION — JAVASCRIPT ENGINE
  * ═════════════════════════════════════════════════════════════════════════════
@@ -179,17 +179,8 @@
     const invParents = document.getElementById("invParents");
     if (invParents && (invite.brideParents || invite.groomParents)) {
       invParents.innerHTML = `
-        <div class="inv-family-person">
-          <p class="inv-person-name">${couple.brideFull || couple.bride}</p>
-          <p class="inv-person-rel">${invite.brideParents || ""}</p>
-          <p class="inv-person-sib">${invite.brideSibling || ""}</p>
-        </div>
-        <div class="inv-family-mid-sep" aria-hidden="true"></div>
-        <div class="inv-family-person">
-          <p class="inv-person-name">${couple.groomFull || couple.groom}</p>
-          <p class="inv-person-rel">${invite.groomParents || ""}</p>
-          <p class="inv-person-sib">${invite.groomSibling || ""}</p>
-        </div>
+        <p class="inv-parent-line"><span class="inv-parent-strong">${couple.brideFull || couple.bride}</span> &middot; ${invite.brideParents || ""} &middot; ${invite.brideSibling || ""}</p>
+        <p class="inv-parent-line"><span class="inv-parent-strong">${couple.groomFull || couple.groom}</span> &middot; ${invite.groomParents || ""} &middot; ${invite.groomSibling || ""}</p>
       `;
     }
 

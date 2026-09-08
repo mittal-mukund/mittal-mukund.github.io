@@ -26,10 +26,10 @@ window.__WEDDING_CONFIG__ = {
     familiesQuote: "Raised with Love. United by Destiny. Together Forever.",
     generalBlessing: "Raised with Love. United by Destiny. Together Forever.",
     kicker: "Together with their families",
-    brideParents: "D/O Smt. Shashi Agrawal & Shri Atul Agrawal",
-    brideSibling: "Sister of Aadya Agrawal",
-    groomParents: "S/O Smt. Anamika Mittal & Shri Pranay Mittal",
-    groomSibling: "Brother of Shivani Mittal",
+    brideParents: "D/O Smt. Shashi & Shri Atul Agrawal",
+    brideSibling: "Sister of Aadya",
+    groomParents: "S/O Smt. Anamika & Shri Pranay Mittal",
+    groomSibling: "Brother of Shivani",
     occasion: "invite you to celebrate their wedding"
   },
 
@@ -149,7 +149,7 @@ window.__WEDDING_CONFIG__ = {
     location: "Malihabad, Lucknow, Uttar Pradesh",
     dates: "26 & 27 January 2027",
     mapUrl: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6",
-    description: "Set amidst the serene natural groves and royal heritage charm of Malihabad, Jashn Wellness Resort welcomes you to celebrate our sacred union across grand palatial courtyards and lush celebration lawns."
+    description: "Set amidst the serene natural mango groves and regal heritage charm of Malihabad, Jashn Wellness Resort welcomes you to celebrate our sacred union across grand palatial courtyards and lush celebration lawns."
   },
 
   // ── 7. THINGS TO KNOW (GUEST ESSENTIALS) ────────────────────────────────────

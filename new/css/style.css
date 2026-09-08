@@ -875,3 +875,1575 @@
   filter: drop-shadow(0 -4px 14px rgba(255,180,60,0.55));
   animation: evtDiyaFlicker 3s ease-in-out infinite;
 }
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. FORMAL INVITATION ARCH â€” VERTICALLY COMPACT RESPONSIVE TYPOGRAPHY
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.invite-card-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: archFloat 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.invite-arch-frame {
+  display: block;
+  height: 216svh;
+  width: auto;
+  max-width: 96vw;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 0 28px rgba(216,169,87,.44)) drop-shadow(0 0 10px rgba(166,56,79,.24));
+}
+
+.invite-text-content {
+  position: absolute;
+  top: 14%;
+  bottom: 14%;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: min(380px, 75vw);
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+  overflow: visible;
+  background: radial-gradient(ellipse 85% 90% at 50% 50%, rgba(247,238,220,.28) 0%, rgba(247,238,220,.12) 55%, transparent 80%);
+  border-radius: 50% 50% 46% 46%/8% 8% 14% 14%;
+}
+
+.inv-parents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 0.12rem auto;
+  width: 100%;
+  max-width: 360px;
+}
+
+.inv-parent-line {
+  font-family: var(--display);
+  font-size: clamp(0.72rem, 2vw, 0.88rem);
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.inv-parent-strong {
+  font-weight: 600;
+  color: var(--rose-dark);
+  font-style: normal;
+}
+
+.inv-names {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 7.6vw, 4.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--rose-dark);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin: 0.12rem 0;
+}
+
+.inv-blessing-alt {
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(119,40,58,.15);
+  width: 85%;
+}
+
+.inv-blessing-alt-line1 {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(0.74rem, 2.1vw, 0.95rem);
+  color: var(--ink);
+  opacity: 0.88;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.inv-kicker {
+  font-family: var(--display);
+  font-size: clamp(0.62rem, 1.8vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose-dark);
+  opacity: 0.82;
+  margin-bottom: 0.12rem;
+}
+
+.inv-lotus-div {
+  display: block;
+  width: clamp(46px, 12vw, 72px);
+  height: auto;
+  margin: 0.08rem auto;
+  opacity: 0.72;
+}
+
+.inv-occasion {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(0.78rem, 2.3vw, 0.96rem);
+  color: var(--ink);
+  opacity: 0.85;
+  margin-bottom: 0.15rem;
+}
+
+.inv-meta {
+  padding-top: 0.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 90%;
+}
+
+.inv-date {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 3.4vw, 1.55rem);
+  font-weight: 500;
+  color: var(--rose-dark);
+  letter-spacing: 0.04em;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.inv-venue {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(0.78rem, 2.2vw, 1.02rem);
+  color: var(--ink);
+  opacity: 0.85;
+  margin: 0;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp);
+    width: clamp(1040px, 172vw, 1320px);
+    height: auto;
+    max-width: none;
+  }
+  .invite-text-content {
+    top: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    max-width: min(500px, 52vw);
+    height: min(490px, 52svh);
+    justify-content: center;
+    padding-top: 0;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. OUR EVENTS SCROLL â€” BILATERAL OUTWARD UNROLLING (NO JUMPING)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.farman-stop {
+  position: relative !important;
+}
+
+.farman-open-wrap {
+  position: relative !important;
+  width: 100% !important;
+  clip-path: inset(50% 0 50% 0 round 2px) !important;
+  -webkit-clip-path: inset(50% 0 50% 0 round 2px) !important;
+  transition: -webkit-clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms, clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms !important;
+  will-change: clip-path;
+  transform: translateZ(0);
+}
+
+.farman-stop.is-unrolling .farman-open-wrap,
+.farman-stop.is-open .farman-open-wrap {
+  clip-path: inset(0% 0 0% 0 round 2px) !important;
+  -webkit-clip-path: inset(0% 0 0% 0 round 2px) !important;
+}
+
+.farman-rolled-wrap {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  transition: opacity 0.5s ease 80ms, transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+}
+
+.farman-stop.is-unrolling .farman-rolled-wrap,
+.farman-stop.is-open .farman-rolled-wrap {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scaleY(0.2) !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   3. DISTINCT DARK JHAROKHA INVITATION CARD (VENUE SECTION)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.venue-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: clamp(70px, 12svh, 120px) 14px clamp(50px, 8svh, 90px) !important;
+  min-height: 90vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ivory) !important;
+}
+
+.venue-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  background: url(../assets/gallery/pn-gal-bg-hanging-courtyard-m-v01.webp) center top / cover no-repeat !important;
+  filter: brightness(0.6) saturate(1.2) !important;
+  transform-origin: center top !important;
+  z-index: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .venue-bg {
+    background-image: url(../assets/gallery/pn-gal-bg-hanging-courtyard-d-v01.webp) !important;
+  }
+}
+
+.venue-bg-vignette {
+  position: absolute !important;
+  inset: 0 !important;
+  background: radial-gradient(ellipse at center, rgba(14, 6, 10, 0.35) 0%, rgba(8, 3, 5, 0.92) 100%),
+              linear-gradient(180deg, rgba(8,3,5,0.85) 0%, transparent 20%, transparent 80%, rgba(8,3,5,0.92) 100%) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.venue-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(70px, 18vw, 96px) !important;
+  pointer-events: none !important;
+}
+
+.venue-jhoomer-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform-origin: 50% 0 !important;
+  animation: evtJhoomerSway 6.8s ease-in-out infinite, evtJhoomerGlow 4.2s ease-in-out infinite !important;
+}
+
+.venue-motif--peacock-l {
+  position: absolute !important;
+  bottom: 8% !important;
+  left: -2% !important;
+  width: clamp(120px, 28vw, 190px) !important;
+  opacity: 0.5 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)) !important;
+  animation: evtMotifDrift 13s ease-in-out 0s infinite !important;
+}
+
+.venue-motif--peacock-r {
+  position: absolute !important;
+  bottom: 8% !important;
+  right: -2% !important;
+  width: clamp(120px, 28vw, 190px) !important;
+  opacity: 0.5 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  transform: scaleX(-1) !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)) !important;
+  animation: evtElephantDrift 14s ease-in-out 1.5s infinite !important;
+}
+
+.venue-content {
+  position: relative !important;
+  z-index: 3 !important;
+  width: min(520px, 94vw) !important;
+  margin: 0 auto !important;
+}
+
+.venue-jharokha-hero {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+}
+
+.venue-jharokha-frame-wrap {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.venue-jharokha-arch-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  filter: drop-shadow(0 24px 55px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(216,169,87,0.32)) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 2 !important;
+}
+
+/* Inner Palatial Velvet Chamber inside the Hanging Arch (Dark Card Background) */
+.venue-jharokha-window {
+  position: absolute !important;
+  top: 24% !important;
+  bottom: 6% !important;
+  left: 14% !important;
+  right: 14% !important;
+  background: radial-gradient(ellipse 95% 95% at 50% 30%, rgba(42, 12, 26, 0.98) 0%, rgba(18, 5, 12, 0.99) 100%) !important;
+  border-radius: 40px 40px 10px 10px !important;
+  border: 1px solid rgba(216, 169, 87, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  box-shadow: inset 0 0 32px rgba(0,0,0,0.75), 0 0 24px rgba(216,169,87,0.18) !important;
+}
+
+.venue-jharokha-jaali {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: 
+    radial-gradient(circle at center, rgba(216,169,87,0.06) 1.5px, transparent 1.5px),
+    repeating-linear-gradient(45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px) !important;
+  background-size: 18px 18px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.venue-jharokha-body {
+  position: relative !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  padding: clamp(12px, 3vw, 24px) clamp(10px, 3vw, 20px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.venue-eyebrow {
+  font-family: var(--display) !important;
+  font-size: clamp(0.66rem, 1.8vw, 0.78rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+  margin: 0 0 4px !important;
+}
+
+.venue-title {
+  font-family: var(--display) !important;
+  font-size: clamp(1.8rem, 5.4vw, 2.7rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #fff8eb !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 2px !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 0 28px rgba(216,169,87,0.35) !important;
+}
+
+.venue-location-sub {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.85rem, 2.3vw, 1.05rem) !important;
+  color: #f0c86a !important;
+  margin: 0 0 6px !important;
+  letter-spacing: 0.03em !important;
+}
+
+.venue-lotus-div {
+  display: block !important;
+  width: clamp(48px, 12vw, 70px) !important;
+  height: auto !important;
+  margin: 4px auto 8px !important;
+  opacity: 0.85 !important;
+}
+
+.venue-desc {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.8rem, 2.2vw, 0.95rem) !important;
+  color: #f7eedc !important;
+  line-height: 1.48 !important;
+  margin: 0 auto 12px !important;
+  max-width: 320px !important;
+}
+
+.venue-details-grid {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(8px, 2.5vw, 18px) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(216, 169, 87, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  margin: 0 auto 14px !important;
+  max-width: 340px !important;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3) !important;
+}
+
+.venue-info-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+.venue-info-label {
+  font-family: var(--display) !important;
+  font-size: clamp(0.5rem, 1.4vw, 0.6rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+}
+
+.venue-info-val {
+  font-family: var(--display) !important;
+  font-size: clamp(0.78rem, 2.1vw, 0.94rem) !important;
+  font-weight: 600 !important;
+  color: #fff8eb !important;
+  letter-spacing: 0.03em !important;
+}
+
+.venue-info-sep {
+  width: 1px !important;
+  height: 22px !important;
+  background: rgba(216, 169, 87, 0.35) !important;
+}
+
+.venue-actions {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.venue-maps-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, #a6384f 0%, #70202f 100%) !important;
+  color: #fff8eb !important;
+  border: 1px solid rgba(216, 169, 87, 0.65) !important;
+  border-radius: 999px !important;
+  padding: 9px 20px !important;
+  font-family: var(--display) !important;
+  font-size: clamp(0.64rem, 1.8vw, 0.76rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 6px 20px rgba(112, 32, 47, 0.5), 0 0 16px rgba(216, 169, 87, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.venue-maps-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 10px 28px rgba(112, 32, 47, 0.7), 0 0 24px rgba(216, 169, 87, 0.45) !important;
+  background: linear-gradient(135deg, #b83f58 0%, #822738 100%) !important;
+}
+
+.venue-map-pin-icon {
+  width: 15px !important;
+  height: 15px !important;
+  flex-shrink: 0 !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. IPHONE & MOBILE ASPECT RATIO FIX: FORMAL INVITATION ARCH CARD
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: Aspect Ratio locked, fits perfectly within viewport without top/bottom cropping */
+.invite-arch-frame {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 90svh !important;
+  max-width: min(94vw, 440px) !important;
+  object-fit: contain !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 28px rgba(216,169,87,.44)) drop-shadow(0 0 10px rgba(166,56,79,.24)) !important;
+}
+
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(340px, 78vw) !important;
+  max-height: min(78svh, 580px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+/* Desktop: Preserves original desktop full arch presentation */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(1000px, 140vw, 1320px) !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(500px, 52vw) !important;
+    height: min(490px, 52svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. OUR EVENTS SCROLL â€” BILATERAL OUTWARD UNROLLING (NO JUMPING)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.farman-stop {
+  position: relative !important;
+}
+
+.farman-open-wrap {
+  position: relative !important;
+  width: 100% !important;
+  clip-path: inset(50% 0 50% 0 round 2px) !important;
+  -webkit-clip-path: inset(50% 0 50% 0 round 2px) !important;
+  transition: -webkit-clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms, clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms !important;
+  will-change: clip-path;
+  transform: translateZ(0);
+}
+
+.farman-stop.is-unrolling .farman-open-wrap,
+.farman-stop.is-open .farman-open-wrap {
+  clip-path: inset(0% 0 0% 0 round 2px) !important;
+  -webkit-clip-path: inset(0% 0 0% 0 round 2px) !important;
+}
+
+.farman-rolled-wrap {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  transition: opacity 0.5s ease 80ms, transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+}
+
+.farman-stop.is-unrolling .farman-rolled-wrap,
+.farman-stop.is-open .farman-rolled-wrap {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scaleY(0.2) !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   3. SPACIOUS DARK JHAROKHA INVITATION CARD (VENUE SECTION)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.venue-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: clamp(65px, 10svh, 110px) 12px clamp(45px, 7svh, 80px) !important;
+  min-height: 90vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ivory) !important;
+}
+
+.venue-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  background: url(../assets/gallery/pn-gal-bg-hanging-courtyard-m-v01.webp) center top / cover no-repeat !important;
+  filter: brightness(0.6) saturate(1.2) !important;
+  transform-origin: center top !important;
+  z-index: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .venue-bg {
+    background-image: url(../assets/gallery/pn-gal-bg-hanging-courtyard-d-v01.webp) !important;
+  }
+}
+
+.venue-bg-vignette {
+  position: absolute !important;
+  inset: 0 !important;
+  background: radial-gradient(ellipse at center, rgba(14, 6, 10, 0.35) 0%, rgba(8, 3, 5, 0.92) 100%),
+              linear-gradient(180deg, rgba(8,3,5,0.85) 0%, transparent 20%, transparent 80%, rgba(8,3,5,0.92) 100%) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+.venue-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(70px, 18vw, 96px) !important;
+  pointer-events: none !important;
+}
+
+.venue-jhoomer-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform-origin: 50% 0 !important;
+  animation: evtJhoomerSway 6.8s ease-in-out infinite, evtJhoomerGlow 4.2s ease-in-out infinite !important;
+}
+
+.venue-motif--peacock-l {
+  position: absolute !important;
+  bottom: 6% !important;
+  left: -2% !important;
+  width: clamp(120px, 26vw, 180px) !important;
+  opacity: 0.48 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)) !important;
+  animation: evtMotifDrift 13s ease-in-out 0s infinite !important;
+}
+
+.venue-motif--peacock-r {
+  position: absolute !important;
+  bottom: 6% !important;
+  right: -2% !important;
+  width: clamp(120px, 26vw, 180px) !important;
+  opacity: 0.48 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  transform: scaleX(-1) !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)) !important;
+  animation: evtElephantDrift 14s ease-in-out 1.5s infinite !important;
+}
+
+.venue-content {
+  position: relative !important;
+  z-index: 3 !important;
+  width: 100% !important;
+  max-width: min(560px, 96vw) !important;
+  margin: 0 auto !important;
+}
+
+.venue-jharokha-hero {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+}
+
+/* Sizing of the Hanging Jharokha Container */
+.venue-jharokha-frame-wrap {
+  position: relative !important;
+  width: 100% !important;
+  max-width: min(520px, 94vw) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@media (min-width: 768px) {
+  .venue-jharokha-frame-wrap {
+    max-width: 540px !important;
+  }
+}
+
+.venue-jharokha-arch-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  filter: drop-shadow(0 24px 55px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(216,169,87,0.32)) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 2 !important;
+}
+
+/* Spacious Inner Chamber: Expanded margins to fit all content comfortably */
+.venue-jharokha-window {
+  position: absolute !important;
+  top: 18% !important;
+  bottom: 4% !important;
+  left: 9% !important;
+  right: 9% !important;
+  background: radial-gradient(ellipse 95% 95% at 50% 30%, rgba(42, 12, 26, 0.98) 0%, rgba(18, 5, 12, 0.99) 100%) !important;
+  border-radius: 40px 40px 10px 10px !important;
+  border: 1px solid rgba(216, 169, 87, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  box-shadow: inset 0 0 32px rgba(0,0,0,0.75), 0 0 24px rgba(216,169,87,0.18) !important;
+}
+
+.venue-jharokha-jaali {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: 
+    radial-gradient(circle at center, rgba(216,169,87,0.06) 1.5px, transparent 1.5px),
+    repeating-linear-gradient(45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px) !important;
+  background-size: 18px 18px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.venue-jharokha-body {
+  position: relative !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  padding: clamp(14px, 3.5vw, 24px) clamp(12px, 3vw, 20px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.venue-eyebrow {
+  font-family: var(--display) !important;
+  font-size: clamp(0.68rem, 1.9vw, 0.8rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+  margin: 0 0 3px !important;
+}
+
+.venue-title {
+  font-family: var(--display) !important;
+  font-size: clamp(1.85rem, 5.2vw, 2.75rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #fff8eb !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 2px !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 0 28px rgba(216,169,87,0.35) !important;
+}
+
+.venue-location-sub {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.86rem, 2.3vw, 1.05rem) !important;
+  color: #f0c86a !important;
+  margin: 0 0 4px !important;
+  letter-spacing: 0.03em !important;
+}
+
+.venue-lotus-div {
+  display: block !important;
+  width: clamp(48px, 12vw, 70px) !important;
+  height: auto !important;
+  margin: 2px auto 6px !important;
+  opacity: 0.85 !important;
+}
+
+.venue-desc {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.8rem, 2.1vw, 0.94rem) !important;
+  color: #f7eedc !important;
+  line-height: 1.45 !important;
+  margin: 0 auto 10px !important;
+  max-width: 360px !important;
+}
+
+.venue-details-grid {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(8px, 2.5vw, 18px) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(216, 169, 87, 0.35) !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  margin: 0 auto 12px !important;
+  max-width: 360px !important;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3) !important;
+}
+
+.venue-info-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+.venue-info-label {
+  font-family: var(--display) !important;
+  font-size: clamp(0.5rem, 1.4vw, 0.6rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+}
+
+.venue-info-val {
+  font-family: var(--display) !important;
+  font-size: clamp(0.78rem, 2.1vw, 0.94rem) !important;
+  font-weight: 600 !important;
+  color: #fff8eb !important;
+  letter-spacing: 0.03em !important;
+}
+
+.venue-info-sep {
+  width: 1px !important;
+  height: 22px !important;
+  background: rgba(216, 169, 87, 0.35) !important;
+}
+
+.venue-actions {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.venue-maps-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, #a6384f 0%, #70202f 100%) !important;
+  color: #fff8eb !important;
+  border: 1px solid rgba(216, 169, 87, 0.65) !important;
+  border-radius: 999px !important;
+  padding: 8px 22px !important;
+  font-family: var(--display) !important;
+  font-size: clamp(0.64rem, 1.8vw, 0.76rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 6px 20px rgba(112, 32, 47, 0.5), 0 0 16px rgba(216, 169, 87, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.venue-maps-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 10px 28px rgba(112, 32, 47, 0.7), 0 0 24px rgba(216, 169, 87, 0.45) !important;
+  background: linear-gradient(135deg, #b83f58 0%, #822738 100%) !important;
+}
+
+.venue-map-pin-icon {
+  width: 15px !important;
+  height: 15px !important;
+  flex-shrink: 0 !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. ENLARGED MOBILE INTRO INVITATION CARD FRAME
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: Enlarged to comfortably fit all text with zero distortion or crop */
+.invite-arch-frame {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  max-height: 94svh !important;
+  max-width: min(96vw, 460px) !important;
+  object-fit: contain !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 28px rgba(216,169,87,.44)) drop-shadow(0 0 10px rgba(166,56,79,.24)) !important;
+}
+
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(350px, 82vw) !important;
+  max-height: min(84svh, 600px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(1000px, 140vw, 1320px) !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(500px, 52vw) !important;
+    height: min(490px, 52svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. ENLARGED & PERFECTLY CONTAINED JHAROKHA VENUE CONTAINER
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.venue-section {
+  position: relative !important;
+  overflow: hidden !important;
+  padding: clamp(65px, 10svh, 110px) 10px clamp(45px, 7svh, 80px) !important;
+  min-height: 90vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ivory) !important;
+}
+
+.venue-content {
+  position: relative !important;
+  z-index: 3 !important;
+  width: 100% !important;
+  max-width: min(580px, 98vw) !important;
+  margin: 0 auto !important;
+}
+
+.venue-jharokha-hero {
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+}
+
+/* Enlarged frame container on mobile */
+.venue-jharokha-frame-wrap {
+  position: relative !important;
+  width: 100% !important;
+  max-width: min(540px, 96vw) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@media (min-width: 768px) {
+  .venue-jharokha-frame-wrap {
+    max-width: 540px !important;
+  }
+}
+
+.venue-jharokha-arch-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  filter: drop-shadow(0 24px 55px rgba(0,0,0,0.9)) drop-shadow(0 0 35px rgba(216,169,87,0.32)) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  z-index: 2 !important;
+}
+
+/* Strict containment: Window is positioned precisely inside the carved frame opening */
+.venue-jharokha-window {
+  position: absolute !important;
+  top: 27.5% !important;
+  bottom: 7% !important;
+  left: 15% !important;
+  right: 15% !important;
+  background: radial-gradient(ellipse 95% 95% at 50% 30%, rgba(38, 10, 22, 0.98) 0%, rgba(16, 4, 10, 0.99) 100%) !important;
+  border-radius: 16px 16px 4px 4px !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  box-shadow: inset 0 0 24px rgba(0,0,0,0.85) !important;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 2.5%, 92% 1%, 72% 0%, 50% 0%, 28% 0%, 8% 1%, 0% 2.5%) !important;
+  -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 2.5%, 92% 1%, 72% 0%, 50% 0%, 28% 0%, 8% 1%, 0% 2.5%) !important;
+}
+
+.venue-jharokha-jaali {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: 
+    radial-gradient(circle at center, rgba(216,169,87,0.06) 1.5px, transparent 1.5px),
+    repeating-linear-gradient(45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px),
+    repeating-linear-gradient(-45deg, rgba(216,169,87,0.02) 0, rgba(216,169,87,0.02) 1px, transparent 1px, transparent 18px) !important;
+  background-size: 18px 18px !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.venue-jharokha-body {
+  position: relative !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  padding: clamp(6px, 1.8vw, 14px) clamp(8px, 2.2vw, 16px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.venue-eyebrow {
+  font-family: var(--display) !important;
+  font-size: clamp(0.62rem, 1.8vw, 0.74rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+  margin: 0 0 2px !important;
+}
+
+.venue-title {
+  font-family: var(--display) !important;
+  font-size: clamp(1.75rem, 5vw, 2.6rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: #fff8eb !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 0 2px !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 0 28px rgba(216,169,87,0.35) !important;
+}
+
+.venue-location-sub {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.8rem, 2.2vw, 0.98rem) !important;
+  color: #f0c86a !important;
+  margin: 0 0 3px !important;
+  letter-spacing: 0.02em !important;
+}
+
+.venue-lotus-div {
+  display: block !important;
+  width: clamp(40px, 11vw, 62px) !important;
+  height: auto !important;
+  margin: 1px auto 4px !important;
+  opacity: 0.85 !important;
+}
+
+.venue-desc {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.72rem, 1.9vw, 0.86rem) !important;
+  color: #f7eedc !important;
+  line-height: 1.38 !important;
+  margin: 0 auto 8px !important;
+  max-width: 330px !important;
+}
+
+.venue-details-grid {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(6px, 2vw, 16px) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(216, 169, 87, 0.35) !important;
+  border-radius: 6px !important;
+  padding: 4px 12px !important;
+  margin: 0 auto 8px !important;
+  max-width: 330px !important;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.3) !important;
+}
+
+.venue-info-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1px !important;
+}
+
+.venue-info-label {
+  font-family: var(--display) !important;
+  font-size: clamp(0.46rem, 1.2vw, 0.54rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: #f5d78e !important;
+}
+
+.venue-info-val {
+  font-family: var(--display) !important;
+  font-size: clamp(0.72rem, 1.9vw, 0.88rem) !important;
+  font-weight: 600 !important;
+  color: #fff8eb !important;
+  letter-spacing: 0.02em !important;
+}
+
+.venue-info-sep {
+  width: 1px !important;
+  height: 18px !important;
+  background: rgba(216, 169, 87, 0.35) !important;
+}
+
+.venue-actions {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.venue-maps-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: linear-gradient(135deg, #a6384f 0%, #70202f 100%) !important;
+  color: #fff8eb !important;
+  border: 1px solid rgba(216, 169, 87, 0.65) !important;
+  border-radius: 999px !important;
+  padding: 6px 18px !important;
+  font-family: var(--display) !important;
+  font-size: clamp(0.58rem, 1.6vw, 0.7rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: 0 6px 18px rgba(112, 32, 47, 0.5), 0 0 14px rgba(216, 169, 87, 0.25) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.venue-maps-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 10px 24px rgba(112, 32, 47, 0.7), 0 0 20px rgba(216, 169, 87, 0.45) !important;
+  background: linear-gradient(135deg, #b83f58 0%, #822738 100%) !important;
+}
+
+.venue-map-pin-icon {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ENLARGED IMMERSIVE MOBILE INVITATION CARD FRAME (MAX COVERAGE & FIT)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: Further enlarged to cover more of the screen while preserving aspect ratio */
+.invite-arch-frame {
+  display: block !important;
+  width: clamp(360px, 98vw, 540px) !important;
+  height: clamp(580px, 96svh, 860px) !important;
+  max-width: 99vw !important;
+  max-height: 97svh !important;
+  object-fit: contain !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 32px rgba(216,169,87,.48)) drop-shadow(0 0 12px rgba(166,56,79,.28)) !important;
+}
+
+/* Spacious text container perfectly nested inside the enlarged arch */
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(390px, 86vw) !important;
+  max-height: min(88svh, 740px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 2px !important;
+  padding: 8px 12px !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+.inv-blessing-alt {
+  margin-bottom: 4px !important;
+  padding-bottom: 4px !important;
+  border-bottom: 1px solid rgba(119,40,58,.18) !important;
+  width: 92% !important;
+}
+
+.inv-blessing-alt-line1 {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.76rem, 2.3vw, 0.98rem) !important;
+  color: var(--ink) !important;
+  opacity: 0.88 !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+}
+
+.inv-kicker {
+  font-family: var(--display) !important;
+  font-size: clamp(0.66rem, 1.9vw, 0.8rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: var(--rose-dark) !important;
+  opacity: 0.82 !important;
+  margin-bottom: 0.15rem !important;
+}
+
+.inv-lotus-div {
+  display: block !important;
+  width: clamp(50px, 14vw, 76px) !important;
+  height: auto !important;
+  margin: 0.12rem auto !important;
+  opacity: 0.75 !important;
+}
+
+.inv-names {
+  font-family: var(--display) !important;
+  font-size: clamp(2.8rem, 8.2vw, 4.6rem) !important;
+  font-weight: 300 !important;
+  font-style: italic !important;
+  color: var(--rose-dark) !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0.15rem 0 !important;
+}
+
+.inv-parents {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 0.18rem auto !important;
+  width: 96% !important;
+  max-width: 400px !important;
+}
+
+.inv-parent-line {
+  font-family: var(--display) !important;
+  font-size: clamp(0.76rem, 2.2vw, 0.92rem) !important;
+  font-style: italic !important;
+  color: var(--ink) !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.inv-parent-strong {
+  font-weight: 600 !important;
+  color: var(--rose-dark) !important;
+  font-style: normal !important;
+}
+
+.inv-occasion {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.82rem, 2.4vw, 1rem) !important;
+  color: var(--ink) !important;
+  opacity: 0.85 !important;
+  margin-bottom: 0.18rem !important;
+}
+
+.inv-meta {
+  padding-top: 0.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  width: 92% !important;
+}
+
+.inv-date {
+  font-family: var(--display) !important;
+  font-size: clamp(1.22rem, 3.8vw, 1.65rem) !important;
+  font-weight: 500 !important;
+  color: var(--rose-dark) !important;
+  letter-spacing: 0.04em !important;
+  margin: 0 !important;
+  line-height: 1.15 !important;
+}
+
+.inv-venue {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.82rem, 2.4vw, 1.05rem) !important;
+  color: var(--ink) !important;
+  opacity: 0.85 !important;
+  margin: 0 !important;
+  line-height: 1.25 !important;
+}
+
+/* Desktop: Preserves original widescreen majestic proportions */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(1000px, 140vw, 1320px) !important;
+    height: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(500px, 52vw) !important;
+    height: min(490px, 52svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   1. MOBILE INVITE ARCH: EXTRA LARGE COVERAGE (ASPECT RATIO PRESERVED)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.invite-section {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.invite-card-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: archFloat 7s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
+/* Mobile: Maximized width & height covering almost the entire mobile viewport */
+.invite-arch-frame {
+  display: block !important;
+  width: 98vw !important;
+  max-width: min(98vw, 560px) !important;
+  height: 98svh !important;
+  max-height: 98svh !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  position: relative !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: drop-shadow(0 0 36px rgba(216,169,87,.55)) drop-shadow(0 0 14px rgba(166,56,79,.32)) !important;
+}
+
+.invite-text-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(390px, 86vw) !important;
+  max-height: min(90svh, 760px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 2px !important;
+  padding: 8px 12px !important;
+  z-index: 3 !important;
+  background: none !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   2. DESKTOP WIDESCREEN: DECREASED CARD WIDTH & LOWER TEXT POSITION
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    width: clamp(740px, 72vw, 980px) !important;
+    height: auto !important;
+    max-width: 88vw !important;
+    max-height: 94svh !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 57% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(480px, 48vw) !important;
+    height: min(480px, 50svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   3. LARGER ROYAL HANGING JHOOMERS (EVENTS & VENUE SECTIONS)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* Events section jhoomer */
+.evt-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(140px, 24vw, 220px) !important;
+  pointer-events: none !important;
+}
+
+/* Venue section jhoomer */
+.venue-jhoomer-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  z-index: 4 !important;
+  width: clamp(130px, 22vw, 210px) !important;
+  pointer-events: none !important;
+}
+
+.evt-jhoomer-img,
+.venue-jhoomer-img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  transform-origin: 50% 0 !important;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.7)) drop-shadow(0 0 20px rgba(240,200,106,0.4)) !important;
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   INCREASED VERTICAL HEIGHT FOR DESKTOP WIDESCREEN INVITE ARCH FRAME
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+@media (min-width: 768px) {
+  .invite-arch-frame {
+    content: url(../assets/invite/pn-inv-fr-card-d-v01.webp) !important;
+    height: clamp(700px, 98svh, 1150px) !important;
+    width: auto !important;
+    max-width: 94vw !important;
+    max-height: 99svh !important;
+    object-fit: contain !important;
+  }
+  .invite-text-content {
+    top: 55% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: min(520px, 50vw) !important;
+    height: min(520px, 56svh) !important;
+    max-height: none !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+}
