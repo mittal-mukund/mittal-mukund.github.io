@@ -3351,3 +3351,139 @@
     line-height: 1.25 !important;
   }
 }
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   EXACT RESPONSIVE CENTERING FOR RSVP COUNTDOWN TIMER
+   Ensures the countdown timer is 100% mathematically centered on all
+   phones (320px - 430px), tablets, and desktop monitors with zero right shift
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.rsvp-section {
+  width: 100% !important;
+  max-width: 100vw !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.rsvp-content {
+  width: 100% !important;
+  max-width: min(540px, 100vw) !important;
+  margin: 0 auto !important;
+  padding: clamp(20px, 4svh, 40px) 14px clamp(48px, 10svh, 96px) !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.rsvp-countdown-wrap {
+  position: relative !important;
+  z-index: 5 !important;
+  width: 100% !important;
+  max-width: min(420px, calc(100vw - 28px)) !important;
+  margin: 20px auto 28px !important;
+  padding: 18px 12px 14px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  background: radial-gradient(ellipse 90% 100% at 50% 50%, rgba(30, 14, 22, 0.88) 0%, rgba(12, 6, 9, 0.94) 100%) !important;
+  border: 1px solid rgba(216, 169, 87, 0.38) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), inset 0 0 24px rgba(216,169,87,0.08) !important;
+}
+
+.rsvp-cd-ornament {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: min(160px, 50vw) !important;
+  margin: 0 auto 8px !important;
+}
+
+.rsvp-cd-label {
+  font-family: var(--display) !important;
+  font-size: clamp(0.7rem, 2.1vw, 0.84rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #f7eedc !important;
+  margin: 0 auto 12px !important;
+  text-align: center !important;
+}
+
+.rsvp-cd-grid {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(4px, 1.8vw, 10px) !important;
+  margin: 0 auto 10px !important;
+  box-sizing: border-box !important;
+}
+
+.rsvp-cd-box {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  max-width: 72px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(216, 169, 87, 0.22) !important;
+  border-radius: 10px !important;
+  padding: 8px 2px 6px !important;
+  box-sizing: border-box !important;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.4) !important;
+}
+
+.rsvp-cd-num {
+  font-family: var(--display) !important;
+  font-size: clamp(1.4rem, 5.2vw, 2.2rem) !important;
+  font-weight: 500 !important;
+  color: #fce7ba !important;
+  line-height: 1 !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(240, 200, 106, 0.45) !important;
+  text-align: center !important;
+}
+
+.rsvp-cd-unit {
+  font-family: var(--display) !important;
+  font-size: clamp(0.52rem, 1.6vw, 0.66rem) !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #e9d7b8a8 !important;
+  margin-top: 3px !important;
+  text-align: center !important;
+}
+
+.rsvp-cd-sep {
+  font-family: var(--display) !important;
+  font-size: clamp(1.1rem, 3.8vw, 1.6rem) !important;
+  color: rgba(216, 169, 87, 0.6) !important;
+  line-height: 1 !important;
+  margin-top: -8px !important;
+  flex-shrink: 0 !important;
+  text-align: center !important;
+}
+
+.rsvp-cd-target {
+  font-family: var(--display) !important;
+  font-style: italic !important;
+  font-size: clamp(0.74rem, 2.2vw, 0.88rem) !important;
+  color: #f7eedca6 !important;
+  letter-spacing: 0.05em !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
