@@ -627,18 +627,46 @@
       }, 2800);
     }
 
-    // Pointer Events for Smooth Drag
+            // Immediate audio startup engine for mobile and touch devices
+    function startMusicImmediate() {
+      const bgMusic = document.getElementById("bgMusic");
+      const musicToggle = document.getElementById("musicToggle");
+      if (bgMusic) {
+        bgMusic.volume = 0.8;
+        const p = bgMusic.play();
+        if (p !== undefined) {
+          p.then(() => {
+            if (musicToggle) musicToggle.classList.add("is-playing");
+          }).catch((err) => {
+            console.log("[Audio] Attempt:", err);
+          });
+        }
+      }
+      if (Sound && Sound.ctx && Sound.ctx.state === "suspended") {
+        Sound.ctx.resume().catch(() => {});
+      }
+    }
+
+    // Touch & Pointer Events with instant audio playback on rope touch
+    ropeBtn.addEventListener("touchstart", (e) => {
+      startMusicImmediate();
+    }, { passive: true });
+
     ropeBtn.addEventListener("pointerdown", (e) => {
+      startMusicImmediate();
       if (triggered) return;
       isDragging = true;
-      dragStartY = e.clientY;
+      dragStartY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
       ropeBtn.classList.add("is-pulling");
-      ropeBtn.setPointerCapture(e.pointerId);
+      if (ropeBtn.setPointerCapture) {
+        try { ropeBtn.setPointerCapture(e.pointerId); } catch (_) {}
+      }
     });
 
     ropeBtn.addEventListener("pointermove", (e) => {
       if (!isDragging || triggered) return;
-      const deltaY = Math.max(0, e.clientY - dragStartY);
+      const currentY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : dragStartY);
+      const deltaY = Math.max(0, currentY - dragStartY);
       const stretch = 1 + Math.min(0.5, deltaY / 180);
       ropeBtn.style.transform = `translateX(-50%) translateY(${deltaY * 0.5}px)`;
       if (ropeImg) ropeImg.style.transform = `scaleY(${stretch})`;
@@ -646,6 +674,7 @@
       if (deltaY >= PULL_THRESHOLD) {
         isDragging = false;
         triggerIntro();
+        startMusicImmediate();
       }
     });
 
@@ -661,21 +690,46 @@
 
     ropeBtn.addEventListener("pointerup", stopDrag);
     ropeBtn.addEventListener("pointercancel", stopDrag);
+    ropeBtn.addEventListener("touchend", (e) => {
+      startMusicImmediate();
+      if (!triggered && isDragging) {
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (touch && (touch.clientY - dragStartY >= PULL_THRESHOLD)) {
+          triggerIntro();
+        } else {
+          stopDrag();
+        }
+      }
+    });
+
     ropeBtn.addEventListener("click", () => {
+      startMusicImmediate();
       if (!triggered) triggerIntro();
     });
 
     // Lotus Button Action (Enter Site)
     if (lotusBtn) {
-      lotusBtn.addEventListener("click", () => {
+      const handleLotusTap = () => {
+        startMusicImmediate();
         Sound.lotus();
         lotusBtn.classList.add("is-open");
         setTimeout(revealMainSite, 800);
-      });
+      };
+      lotusBtn.addEventListener("touchstart", () => { startMusicImmediate(); }, { passive: true });
+      lotusBtn.addEventListener("pointerdown", () => { startMusicImmediate(); }, { passive: true });
+      lotusBtn.addEventListener("click", handleLotusTap);
     }
 
+    // Skip Intro Button Action (Instant Music & Site Reveal)
     if (skipBtn) {
-      skipBtn.addEventListener("click", revealMainSite);
+      const handleSkipTap = () => {
+        startMusicImmediate();
+        playBackgroundMusic();
+        revealMainSite();
+      };
+      skipBtn.addEventListener("touchstart", () => { startMusicImmediate(); }, { passive: true });
+      skipBtn.addEventListener("pointerdown", () => { startMusicImmediate(); }, { passive: true });
+      skipBtn.addEventListener("click", handleSkipTap);
     }
 
     // Waiting cue timeout
@@ -690,6 +744,8 @@
     const introEl = document.getElementById("intro");
     const floatingMenu = document.getElementById("floatingMenu");
     const inviteSection = document.getElementById("invite");
+
+    playBackgroundMusic();
 
     if (introEl) introEl.classList.add("is-complete");
     document.body.classList.remove("intro-active");
@@ -1020,11 +1076,27 @@
     if (!bgMusic) return;
 
     bgMusic.volume = 0.8;
-    bgMusic.play().then(() => {
+    if (bgMusic.paused) {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          if (musicToggle) musicToggle.classList.add("is-playing");
+        }).catch(() => {
+          // If browser policy deferred it, attach one-time resume on next touch
+          const resumeOnTouch = () => {
+            bgMusic.play().then(() => {
+              if (musicToggle) musicToggle.classList.add("is-playing");
+            }).catch(() => {});
+            window.removeEventListener("touchstart", resumeOnTouch);
+            window.removeEventListener("pointerdown", resumeOnTouch);
+          };
+          window.addEventListener("touchstart", resumeOnTouch, { passive: true });
+          window.addEventListener("pointerdown", resumeOnTouch, { passive: true });
+        });
+      }
+    } else {
       if (musicToggle) musicToggle.classList.add("is-playing");
-    }).catch(() => {
-      console.log("[Music] Auto-playback requires user interaction.");
-    });
+    }
   }
 
   function initMusicAndMenu() {
