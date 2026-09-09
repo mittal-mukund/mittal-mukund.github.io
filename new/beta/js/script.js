@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ═════════════════════════════════════════════════════════════════════════════
  *  ROYAL PICHWAI WEDDING INVITATION — JAVASCRIPT ENGINE
  * ═════════════════════════════════════════════════════════════════════════════
@@ -365,7 +365,7 @@
     eventsList.forEach((evt, idx) => {
       const article = document.createElement("article");
       const isLeft = idx % 2 === 0;
-      const isMain = evt.id === "baraat" || evt.id === "jaimaal" || evt.id === "phere";
+      const isMain = evt.id === "baraat-reception" || evt.id === "phere" || evt.id === "ring-sangeet";
       article.className = `farman-stop ${isLeft ? "farman-left" : "farman-right"}${isMain ? " farman-stop--main" : ""}`;
       article.setAttribute("role", "listitem");
       article.setAttribute("data-event", evt.id);
@@ -894,7 +894,7 @@
     requestAnimationFrame(draw);
   }
 
-  // High-Density Royal Fireworks Engine
+  // High-Density Royal Fireworks Engine (Lag-Free with Visibility Change & Max Particle Cap)
   function initFireworks() {
     const canvas = document.getElementById("rsvpFireworksCanvas");
     if (!canvas || rmq) return;
@@ -910,6 +910,7 @@
     }, { passive: true });
 
     const particles = [];
+    const MAX_PARTICLES = 350;
     const colorThemes = [
       ["rgba(240, 200, 106,", "rgba(255, 230, 140,", "rgba(216, 169, 87,"], // Royal Gold
       ["rgba(235, 90, 120,", "rgba(255, 140, 165,", "rgba(180, 50, 80,"],   // Pichwai Crimson Rose
@@ -918,13 +919,32 @@
       ["rgba(195, 165, 250,", "rgba(220, 190, 255,", "rgba(160, 120, 230,"] // Royal Violet
     ];
 
+    let fireworkTimer = null;
+    let pendingBurstTimers = [];
+
+    function clearAllTimers() {
+      if (fireworkTimer) {
+        clearTimeout(fireworkTimer);
+        fireworkTimer = null;
+      }
+      pendingBurstTimers.forEach(id => clearTimeout(id));
+      pendingBurstTimers = [];
+    }
+
     function createSingleBurst(customX, customY, type = "peony") {
+      if (document.hidden) return; // Never spawn particles when tab is in background
+
+      if (particles.length > MAX_PARTICLES) {
+        particles.splice(0, particles.length - (MAX_PARTICLES - 80));
+      }
+
       const cx = customX !== undefined ? customX : w * (0.12 + Math.random() * 0.76);
       const cy = customY !== undefined ? customY : h * (0.08 + Math.random() * 0.38);
       const theme = colorThemes[Math.floor(Math.random() * colorThemes.length)];
-      const count = type === "grand" ? 140 : (85 + Math.floor(Math.random() * 45));
+      const count = type === "grand" ? 120 : (70 + Math.floor(Math.random() * 40));
 
       for (let i = 0; i < count; i++) {
+        if (particles.length >= MAX_PARTICLES + 60) break;
         const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.35;
         const spd = (type === "grand" ? 1.8 : 1.2) + Math.random() * (type === "grand" ? 3.6 : 2.8);
         const col = theme[Math.floor(Math.random() * theme.length)];
@@ -948,19 +968,25 @@
 
     // Volley of multiple fireworks across sky
     function launchVolley() {
+      if (document.hidden) return;
       createSingleBurst(w * 0.22, h * 0.18, "peony");
-      setTimeout(() => createSingleBurst(w * 0.78, h * 0.15, "peony"), 180);
-      setTimeout(() => createSingleBurst(w * 0.50, h * 0.24, "grand"), 420);
-      setTimeout(() => createSingleBurst(w * 0.35, h * 0.12, "willow"), 700);
-      setTimeout(() => createSingleBurst(w * 0.65, h * 0.28, "peony"), 950);
+      const t1 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.78, h * 0.15, "peony"); }, 180);
+      const t2 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.50, h * 0.24, "grand"); }, 420);
+      const t3 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.35, h * 0.12, "willow"); }, 700);
+      const t4 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.65, h * 0.28, "peony"); }, 950);
+      pendingBurstTimers.push(t1, t2, t3, t4);
     }
 
     // Rapid, continuous celebratory launches
-    let fireworkTimer = null;
     function scheduleNextBurst() {
+      if (document.hidden || !isRsvpActive) return;
+
       createSingleBurst();
       if (Math.random() > 0.65) {
-        setTimeout(() => createSingleBurst(), 140);
+        const tExtra = setTimeout(() => {
+          if (!document.hidden && isRsvpActive) createSingleBurst();
+        }, 140);
+        pendingBurstTimers.push(tExtra);
       }
       const nextDelay = 450 + Math.random() * 700;
       fireworkTimer = setTimeout(scheduleNextBurst, nextDelay);
@@ -975,19 +1001,51 @@
         entries.forEach((e) => {
           if (e.isIntersecting && !isRsvpActive) {
             isRsvpActive = true;
-            launchVolley();
-            scheduleNextBurst();
+            if (!document.hidden) {
+              launchVolley();
+              scheduleNextBurst();
+            }
           } else if (!e.isIntersecting && isRsvpActive) {
             isRsvpActive = false;
-            if (fireworkTimer) clearTimeout(fireworkTimer);
+            clearAllTimers();
+            particles.length = 0;
           }
         });
       }, { threshold: 0.08 }).observe(rsvpSec);
     }
 
+    // Tab / Screen visibility change handler: prevent backlog when switching tabs or apps
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearAllTimers();
+        particles.length = 0;
+      } else {
+        particles.length = 0;
+        if (isRsvpActive) {
+          launchVolley();
+          scheduleNextBurst();
+        }
+      }
+    });
+
     function animate() {
+      if (document.hidden) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, w, h);
+
+      if (particles.length === 0) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.globalCompositeOperation = "lighter";
+
+      if (particles.length > MAX_PARTICLES) {
+        particles.splice(0, particles.length - MAX_PARTICLES);
+      }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];

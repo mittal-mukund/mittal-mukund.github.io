@@ -49,45 +49,25 @@ window.__WEDDING_CONFIG__ = {
     tags: ["#SHIfoUNDlove", "Travel & Wellness", "Heart & Logic", "Kindred Spirits"]
   },
 
-  // ── 5. CELEBRATION EVENTS (9 CEREMONIES ACROSS 26, 27 & 28 JAN) ────────────
+  // ── 5. CELEBRATION EVENTS (6 SPECIFIC CEREMONIAL SCROLLS) ────────────
   events: [
-    {
-      id: "god-bharayi",
-      name: "God Bharayi",
-      date: "26 Jan 2027",
-      time: "6:00 PM",
-      venue: "Jashn Wellness Resort, Lucknow",
-      note: "Auspicious blessings & sacred beginnings",
-      icon: "assets/shared/pn-shr-mot-lotus-flower-x-v01.webp",
-      map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
-    },
     {
       id: "tilak",
       name: "Tilak Ceremony",
       date: "26 Jan 2027",
       time: "7:00 PM",
-      venue: "Jashn Wellness Resort, Lucknow",
+      venue: "Jashn Banquet",
       note: "Traditional auspicious Tilak ceremony",
       icon: "assets/shared/Diya.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
     },
     {
-      id: "ring-ceremony",
-      name: "Ring Ceremony",
+      id: "ring-sangeet",
+      name: "Ring Ceremony & Sangeet",
       date: "26 Jan 2027",
-      time: "8:00 PM",
-      venue: "Jashn Wellness Resort, Lucknow",
-      note: "Exchange of rings & celebrations",
-      icon: "assets/shared/pn-shr-mot-peacock-main-x-v01.webp",
-      map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
-    },
-    {
-      id: "sangeet",
-      name: "Sangeet",
-      date: "26 Jan 2027",
-      time: "9:00 PM",
-      venue: "Jashn Wellness Resort, Lucknow",
-      note: "An electrifying evening of music & dance",
+      time: "8:00 PM onwards",
+      venue: "Gulzar Bagh",
+      note: "Exchange of rings, musical harmony & celebration",
       icon: "assets/event/pn-evt-ico-sangeet-x-v01.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
     },
@@ -96,29 +76,19 @@ window.__WEDDING_CONFIG__ = {
       name: "Haldi Ceremony",
       date: "27 Jan 2027",
       time: "10:00 AM",
-      venue: "Jashn Wellness Resort, Lucknow",
+      venue: "Poolside Courtyard",
       note: "A splash of turmeric, sunshine & joy",
       icon: "assets/event/pn-evt-ico-haldi-x-v01.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
     },
     {
-      id: "baraat",
-      name: "Baraat",
+      id: "baraat-reception",
+      name: "Baraat Reception",
       date: "27 Jan 2027",
       time: "7:00 PM",
-      venue: "Jashn Wellness Resort, Lucknow",
-      note: "The royal procession arrives with pomp & melody",
+      venue: "Jashn Bagh",
+      note: "The royal procession arrives with pomp & grand reception",
       icon: "assets/shared/pn-shr-mot-elephant-main-x-v01.webp",
-      map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
-    },
-    {
-      id: "jaimaal",
-      name: "Jaimaal Ceremony",
-      date: "27 Jan 2027",
-      time: "9:00 PM",
-      venue: "Jashn Wellness Resort, Lucknow",
-      note: "Sacred exchange of floral garlands",
-      icon: "assets/event/pn-evt-ico-shaadi-x-v01.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
     },
     {
@@ -126,9 +96,9 @@ window.__WEDDING_CONFIG__ = {
       name: "Phere Ceremony",
       date: "28 Jan 2027",
       time: "12:00 AM (Midnight)",
-      venue: "Jashn Wellness Resort, Lucknow",
+      venue: "Neer Bagh",
       note: "Seven sacred vows around the holy agni",
-      icon: "assets/shared/pn-shr-mot-chhatri-ornate-x-v01.webp",
+      icon: "assets/event/pn-evt-ico-shaadi-x-v01.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
     },
     {
@@ -136,7 +106,7 @@ window.__WEDDING_CONFIG__ = {
       name: "Vidaayi",
       date: "28 Jan 2027",
       time: "6:00 AM",
-      venue: "Jashn Wellness Resort, Lucknow",
+      venue: "Jashn Courtyard",
       note: "“Not a goodbye, but the beginning of forever.”",
       icon: "assets/event/pn-evt-ico-vidaai-x-v01.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
