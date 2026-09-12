@@ -175,19 +175,19 @@
       invBlessingAlt.textContent = `“${invite.familiesQuote || invite.generalBlessing}”`;
     }
 
-    // Family Details (Parents and Siblings)
+    // Family Details (Bride & Groom, Parents, Siblings - 3 distinct lines)
     const invParents = document.getElementById("invParents");
     if (invParents && (invite.brideParents || invite.groomParents)) {
       invParents.innerHTML = `
-        <div class="inv-parent-row">
+        <div class="inv-parent-block">
           <span class="inv-parent-name">${couple.brideFull || couple.bride}</span>
-          <span class="inv-parent-sep" aria-hidden="true">&middot;</span>
-          <span class="inv-parent-info">${invite.brideParents || ""} &middot; ${invite.brideSibling || ""}</span>
+          <span class="inv-parent-parents">${invite.brideParents || ""}</span>
+          <span class="inv-parent-sibling">${invite.brideSibling || ""}</span>
         </div>
-        <div class="inv-parent-row">
+        <div class="inv-parent-block">
           <span class="inv-parent-name">${couple.groomFull || couple.groom}</span>
-          <span class="inv-parent-sep" aria-hidden="true">&middot;</span>
-          <span class="inv-parent-info">${invite.groomParents || ""} &middot; ${invite.groomSibling || ""}</span>
+          <span class="inv-parent-parents">${invite.groomParents || ""}</span>
+          <span class="inv-parent-sibling">${invite.groomSibling || ""}</span>
         </div>
       `;
     }
@@ -565,7 +565,7 @@
   let isDragging = false;
   let dragStartY = 0;
   let triggered = false;
-  const PULL_THRESHOLD = 90;
+  const PULL_THRESHOLD = 75;
 
   function initIntro() {
     const introEl = document.getElementById("intro");
@@ -656,18 +656,21 @@
       startMusicImmediate();
       if (triggered) return;
       isDragging = true;
-      dragStartY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+      dragStartY = e.clientY;
       ropeBtn.classList.add("is-pulling");
+      ropeBtn.style.transition = "none";
+      if (ropeImg) ropeImg.style.transition = "none";
       if (ropeBtn.setPointerCapture) {
         try { ropeBtn.setPointerCapture(e.pointerId); } catch (_) {}
       }
     });
 
-    ropeBtn.addEventListener("pointermove", (e) => {
+    const handleDragMove = (clientY) => {
       if (!isDragging || triggered) return;
-      const currentY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : dragStartY);
-      const deltaY = Math.max(0, currentY - dragStartY);
-      const stretch = 1 + Math.min(0.5, deltaY / 180);
+      const deltaY = Math.max(0, clientY - dragStartY);
+      const stretch = 1 + Math.min(0.4, deltaY / 200);
+      ropeBtn.style.transition = "none";
+      if (ropeImg) ropeImg.style.transition = "none";
       ropeBtn.style.transform = `translateX(-50%) translateY(${deltaY * 0.5}px)`;
       if (ropeImg) ropeImg.style.transform = `scaleY(${stretch})`;
 
@@ -676,15 +679,34 @@
         triggerIntro();
         startMusicImmediate();
       }
+    };
+
+    ropeBtn.addEventListener("pointermove", (e) => {
+      handleDragMove(e.clientY);
     });
+
+    ropeBtn.addEventListener("touchmove", (e) => {
+      if (!isDragging || triggered) return;
+      if (e.cancelable) e.preventDefault();
+      const touch = e.touches && e.touches[0];
+      if (touch) handleDragMove(touch.clientY);
+    }, { passive: false });
 
     const stopDrag = () => {
       if (!isDragging) return;
       isDragging = false;
       if (!triggered && ropeBtn) {
         ropeBtn.classList.remove("is-pulling");
+        ropeBtn.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
         ropeBtn.style.transform = "translateX(-50%)";
-        if (ropeImg) ropeImg.style.transform = "scaleY(1)";
+        if (ropeImg) {
+          ropeImg.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
+          ropeImg.style.transform = "scaleY(1)";
+        }
+        setTimeout(() => {
+          if (ropeBtn) ropeBtn.style.transition = "";
+          if (ropeImg) ropeImg.style.transition = "";
+        }, 350);
       }
     };
 
@@ -695,6 +717,7 @@
       if (!triggered && isDragging) {
         const touch = e.changedTouches && e.changedTouches[0];
         if (touch && (touch.clientY - dragStartY >= PULL_THRESHOLD)) {
+          isDragging = false;
           triggerIntro();
         } else {
           stopDrag();
@@ -702,9 +725,32 @@
       }
     });
 
-    ropeBtn.addEventListener("click", () => {
+    // Simple click without dragging gives an interactive spring tug hint and does NOT open website
+    ropeBtn.addEventListener("click", (e) => {
       startMusicImmediate();
-      if (!triggered) triggerIntro();
+      if (!triggered && !isDragging) {
+        // Physical tug & release animation to guide the user to pull down
+        ropeBtn.style.transition = "transform 0.18s cubic-bezier(0.25, 1, 0.5, 1)";
+        ropeBtn.style.transform = "translateX(-50%) translateY(16px)";
+        if (ropeImg) {
+          ropeImg.style.transition = "transform 0.18s cubic-bezier(0.25, 1, 0.5, 1)";
+          ropeImg.style.transform = "scaleY(1.05)";
+        }
+        setTimeout(() => {
+          if (!triggered && !isDragging) {
+            ropeBtn.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
+            ropeBtn.style.transform = "translateX(-50%)";
+            if (ropeImg) {
+              ropeImg.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
+              ropeImg.style.transform = "scaleY(1)";
+            }
+            setTimeout(() => {
+              if (ropeBtn) ropeBtn.style.transition = "";
+              if (ropeImg) ropeImg.style.transition = "";
+            }, 350);
+          }
+        }, 180);
+      }
     });
 
     // Lotus Button Action (Enter Site)
