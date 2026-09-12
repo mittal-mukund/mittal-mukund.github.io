@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mukund &amp; Yashi's Wedding | #SHIfoUNDlove</title>
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="intro-active">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     1. INTRO / CURTAIN DROP (ROPE PULL RITUAL)
+═══════════════════════════════════════════════════════════════════ -->
+<section class="intro" id="intro" aria-label="Opening scene">
+
+  <!-- Background layers -->
+  <img class="intro-bg intro-bg-dark" id="introBgDark" src="assets/hero/pn-hro-bg-courtyard-dark-m-v03.webp" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
+  <img class="intro-bg intro-bg-lit"  id="introBgLit"  src="assets/hero/pn-hro-bg-courtyard-lit-m-v03.webp" alt="" aria-hidden="true" decoding="async">
+
+  <!-- Glow & Lighting overlays -->
+  <div class="intro-vignette"      aria-hidden="true"></div>
+  <div class="intro-dark-vignette" aria-hidden="true"></div>
+  <div class="intro-warm-glow"     aria-hidden="true"></div>
+  <div class="intro-jhoomer-glow"  aria-hidden="true"></div>
+  <div class="intro-rose-scatter"  aria-hidden="true"></div>
+
+  <!-- Particle systems -->
+  <div class="intro-dust"   id="introDust"   aria-hidden="true"></div>
+  <div class="intro-petals" id="introPetals" aria-hidden="true"></div>
+
+  <!-- Pichwai Corner Florals -->
+  <img class="intro-floral-left"  id="introFloralLeft"  src="assets/hero/pn-shr-mot-floral-bush-cluster-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+  <img class="intro-floral-right" id="introFloralRight" src="assets/hero/pn-shr-mot-floral-bush-cluster-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+
+  <!-- Glowing Diyas -->
+  <div class="diya-wrap diya-left" id="diyaWrapLeft">
+    <img class="diya-img" id="introDiyaLeft" src="assets/hero/pn-shr-mot-diya-glow-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+    <div class="diya-floor-glow"></div>
+  </div>
+  <div class="diya-wrap diya-right" id="diyaWrapRight">
+    <img class="diya-img" id="introDiyaRight" src="assets/hero/pn-shr-mot-diya-glow-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+    <div class="diya-floor-glow"></div>
+  </div>
+
+  <!-- Royal Hanging Jhoomer -->
+  <img class="intro-jhoomer" id="introJhoomer" src="assets/shared/pn-shr-mot-jhoomer-hanging-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+
+  <div class="rope-anchor-glow" aria-hidden="true"></div>
+
+  <!-- Drag-to-pull Hero Rope -->
+  <button class="rope-button" id="ropeButton" type="button" aria-label="Pull the rope to light our celebration">
+    <img class="rope-img" id="ropeImg" src="assets/hero/pn-hro-el-rope-hemp-pull-x-v01.webp" alt="" aria-hidden="true" draggable="false">
+    <span class="rope-halo" aria-hidden="true"></span>
+  </button>
+
+  <!-- Interactive Instruction Cue -->
+  <div class="intro-instruction" id="introInstruction" aria-hidden="true">
+    <div class="pull-ritual-cue"></div>
+    <span class="pull-label">Pull to light us up</span>
+  </div>
+  <div class="pull-feedback" id="pullFeedback" aria-hidden="true">A little deeper to wake the lights</div>
+
+  <!-- Text reveal (Couple Names, Date, Venue) -->
+  <div class="intro-reveal" id="introReveal" aria-live="polite">
+    <h1 class="names intro-reveal-item" id="introNames">
+      <span class="word">Mukund</span> <span class="word amp-wrap"><span class="amp">&amp;</span></span><br><span class="word">Yashi</span>
+    </h1>
+    <div class="ornament intro-reveal-item" id="introOrnament">
+      <span></span><i></i><span></span>
+    </div>
+    <p class="date  intro-reveal-item" id="introDate">26 · 27 January 2027</p>
+    <p class="venue intro-reveal-item" id="introVenue">Jashn Wellness Resort, Malihabad, Lucknow</p>
+  </div>
+
+  <!-- Lotus Entrance CTA Button -->
+  <div class="lotus-cta-group" id="lotusCTAGroup">
+    <button class="lotus-button" id="lotusButton" type="button" aria-label="Tap the lotus to enter">
+      <img class="lotus-glow-burst" id="lotusGlowBurst" src="assets/hero/pn-fx-ovl-lotus-glow-burst-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+      <img class="lotus-icon-img"   id="lotusIconImg"   src="assets/hero/pn-rvl-btn-lotus-closed-x-v01.webp" alt="" aria-hidden="true" draggable="false">
+      <img class="lotus-open-img"   id="lotusOpenImg"   src="assets/hero/pn-rvl-btn-lotus-open-x-v01.webp" alt="" aria-hidden="true" draggable="false">
+    </button>
+    <p class="lotus-cta-label" id="lotusButtonText" aria-hidden="true">Tap the lotus to enter</p>
+  </div>
+
+  <button class="skip-intro" id="skipIntro" type="button">skip intro</button>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     MAIN PAGE CONTENT
+═══════════════════════════════════════════════════════════════════ -->
+<main class="page-shell">
+
+  <!-- ── 2. FORMAL INVITATION ARCH ─────────────────────────────────── -->
+  <section class="section invite-section" id="invite" aria-labelledby="inviteTitle">
+    <div class="invite-bg" aria-hidden="true"></div>
+    <div class="invite-vignette" aria-hidden="true"></div>
+
+    <!-- Rose petal canvas shower -->
+    <canvas class="invite-petals" id="invitePetals" aria-hidden="true"></canvas>
+
+    <!-- Flying birds spritesheet animation -->
+    <div class="invite-birds" id="inviteBirds" aria-hidden="true">
+      <div class="inv-bird inv-bird--a" id="invBirdA"></div>
+      <div class="inv-bird inv-bird--b" id="invBirdB"></div>
+    </div>
+
+    <!-- Ornate Arch Frame (Enlarged for Mobile with Perfect Proportions) -->
+    <div class="invite-card-wrap">
+      <img class="invite-arch-frame" src="assets/invite/pn-inv-fr-card-m-v01.webp" alt="" aria-hidden="true" decoding="async" draggable="false">
+    </div>
+
+    <!-- Invitation Card Typography (Vertically Compressed to perfectly fit all screens) -->
+    <div class="invite-text-content">
+      <div class="inv-blessing-alt">
+        <p class="inv-blessing-alt-line1">“Raised with Love. United by Destiny. Together Forever.”</p>
+      </div>
+
+      <p class="inv-kicker">Together with their families</p>
+
+      <img class="inv-lotus-div" src="assets/invite/pn-inv-div-lotus-divider-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+
+      <h2 class="inv-names" id="inviteTitle">Mukund <span class="inv-amp">&amp;</span> Yashi</h2>
+
+      <img class="inv-lotus-div" src="assets/invite/pn-inv-div-lotus-divider-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+
+      <div class="inv-parents" id="invParents">
+        <div class="inv-parent-block">
+          <span class="inv-parent-name">Yashi Agrawal</span>
+          <span class="inv-parent-parents">D/O Smt. Shashi &amp; Shri Atul Agrawal</span>
+          <span class="inv-parent-sibling">Sister of Aadya</span>
+        </div>
+        <div class="inv-parent-block">
+          <span class="inv-parent-name">Mukund Mittal</span>
+          <span class="inv-parent-parents">S/O Smt. Anamika &amp; Shri Pranay Mittal</span>
+          <span class="inv-parent-sibling">Brother of Shivani</span>
+        </div>
+      </div>
+
+      <p class="inv-occasion">invite you to celebrate their wedding</p>
+
+      <div class="inv-meta">
+        <p class="inv-date">26 &amp; 27 January 2027</p>
+        <p class="inv-venue">Jashn Wellness Resort, Malihabad, Lucknow</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. CELEBRATION EVENTS (JOURNEY) ───────────────────────────── -->
+  <section class="section events-section" id="events" aria-labelledby="evtTitle">
+    <div class="evt-bg" aria-hidden="true"></div>
+    <div class="evt-tex-overlay" aria-hidden="true"></div>
+    <canvas class="evt-stars" id="evtStars" aria-hidden="true"></canvas>
+    <div class="evt-bg-vignette" aria-hidden="true"></div>
+    <div class="evt-birds" id="evtBirds" aria-hidden="true"></div>
+
+    <div class="evt-jhoomer-wrap" aria-hidden="true">
+      <div class="evt-jhoomer-inner">
+        <img class="evt-jhoomer-img" src="assets/shared/pn-shr-mot-jhoomer-hanging-x-v01.webp" alt="" decoding="async" loading="lazy" draggable="false">
+      </div>
+    </div>
+
+    <img class="evt-corner evt-corner--tl" src="assets/shared/pn-shr-div-floral-corner-top-left-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-corner evt-corner--tr" src="assets/shared/pn-shr-div-floral-corner-top-right-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+
+    <div class="evt-floral-border evt-floral-border--bot" aria-hidden="true">
+      <img src="assets/shared/pn-shr-div-floral-border-horizontal-x-v01.webp" alt="" decoding="async" loading="lazy">
+    </div>
+
+    <div class="evt-glow-mid" aria-hidden="true"></div>
+
+    <!-- Pichwai Cultural Motifs -->
+    <img class="evt-bananaleaf" src="assets/shared/Banaleaf.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-peacock" id="evtPeacock" src="assets/shared/pn-shr-mot-peacock-main-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-diya evt-diya--l" src="assets/shared/Diya.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-chhatri" src="assets/shared/pn-shr-mot-chhatri-ornate-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-elephant" id="evtElephant" src="assets/shared/pn-shr-mot-elephant-main-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-diya evt-diya--r" src="assets/shared/Diya.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-cow" src="assets/shared/pn-shr-mot-cow-main-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-lotus evt-lotus--1" src="assets/shared/pn-shr-mot-lotus-flower-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="evt-lotus evt-lotus--2" src="assets/shared/pn-shr-mot-lotus-flower-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+
+    <div class="evt-header reveal-item" id="evtHeader">
+      <p class="evt-eyebrow">Celebration Journey</p>
+      <h2 class="evt-title" id="evtTitle">Our Events</h2>
+      <img class="evt-divider" src="assets/event/pn-evt-div-lotus-vine-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+    </div>
+
+    <div class="evt-journey">
+      <div class="evt-stops" id="evtStops" role="list"></div>
+    </div>
+  </section>
+
+  <!-- ── 4. MEET THE COUPLE (SECRET GARDEN) ────────────────────────── -->
+  <section class="section cpl-section" id="couple" aria-labelledby="cplTitle">
+    <div class="cpl-bg" aria-hidden="true"></div>
+    <div class="cpl-vignette" aria-hidden="true"></div>
+
+    <!-- Tree curtains that part on scroll -->
+    <div class="cpl-tree cpl-tree--left" id="cplTreeLeft" aria-hidden="true">
+      <img src="assets/meet_the_couple/pn-cpl-ovl-tree-left-m-v01.webp" alt="" decoding="async" draggable="false">
+    </div>
+    <div class="cpl-tree cpl-tree--right" id="cplTreeRight" aria-hidden="true">
+      <img src="assets/meet_the_couple/pn-cpl-ovl-tree-right-m-v01.webp" alt="" decoding="async" draggable="false">
+    </div>
+
+    <div class="cpl-content" id="cplContent">
+      <div class="cpl-header reveal-item">
+        <p class="cpl-eyebrow">A love story</p>
+        <h2 class="cpl-title" id="cplTitle">Meet the Couple</h2>
+        <div class="cpl-ornament" aria-hidden="true">
+          <span></span>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="11" cy="8" rx="2.8" ry="5.8" fill="rgba(216,169,87,.78)" transform="rotate(0 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.8" ry="5.8" fill="rgba(216,169,87,.58)" transform="rotate(60 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.8" ry="5.8" fill="rgba(216,169,87,.58)" transform="rotate(-60 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.2" ry="4.8" fill="rgba(216,169,87,.38)" transform="rotate(120 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.2" ry="4.8" fill="rgba(216,169,87,.38)" transform="rotate(-120 11 11)"/>
+            <ellipse cx="11" cy="8" rx="1.8" ry="4.2" fill="rgba(216,169,87,.26)" transform="rotate(180 11 11)"/>
+            <circle cx="11" cy="11" r="2.0" fill="rgba(216,169,87,.88)"/>
+          </svg>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="cpl-story reveal-item">
+        <p class="cpl-story-body">
+          What began as a quiet conversation introduced through family quickly unfolded into a rare and kindred bond. Along the way, even as life presented its gentle tests and changing winds, their conviction remained unspoken yet steadfast—they simply knew they were meant to be. They are each other’s perfect counterpoint: her wholehearted warmth and emotional soul balanced by his steady logic and devoted care. Bound by a shared wanderlust for new places, a mutual love for good food paired with fitness, and a youthful spark that never takes life too seriously, Mukund &amp; Yashi celebrate a friendship that became their greatest journey.
+        </p>
+        <div class="cpl-tags" id="cplTags" aria-hidden="true">
+          <span class="cpl-tag-chip">#SHIfoUNDlove</span>
+          <span class="cpl-tag-chip">Travel &amp; Wellness</span>
+          <span class="cpl-tag-chip">Heart &amp; Logic</span>
+          <span class="cpl-tag-chip">Kindred Spirits</span>
+        </div>
+        <p class="cpl-story-htag" id="cplHashtag">#SHIfoUNDlove</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. THE ROYAL VENUE (DARK JHAROKHA INVITATION CARD STYLE) ───── -->
+  <section class="section venue-section" id="venue" aria-labelledby="venueTitle">
+    <div class="venue-bg" aria-hidden="true"></div>
+    <div class="venue-bg-vignette" aria-hidden="true"></div>
+
+    <!-- Hanging Jhoomer Accent -->
+    <div class="venue-jhoomer-wrap" aria-hidden="true">
+      <img class="venue-jhoomer-img" src="assets/shared/pn-shr-mot-jhoomer-hanging-x-v01.webp" alt="" decoding="async" loading="lazy">
+    </div>
+
+    <!-- Symmetrical Guardians & Motifs -->
+    <img class="venue-motif venue-motif--peacock-l" src="assets/shared/pn-shr-mot-peacock-main-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+    <img class="venue-motif venue-motif--peacock-r" src="assets/shared/pn-shr-mot-peacock-main-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+
+    <div class="venue-content reveal-item">
+      <!-- Distinct Royal Palace Hanging Jharokha Container -->
+      <div class="venue-jharokha-hero">
+        <div class="venue-jharokha-frame-wrap">
+          <!-- The Carved Rajasthani Jharokha Arch Frame (Dark carved brass/sandstone) -->
+          <img class="venue-jharokha-arch-img" src="assets/gallery/pn-gal-fr-hanging-hero-arch-x-v01.webp" alt="" aria-hidden="true" draggable="false">
+
+          <!-- Inner Palatial Velvet & Gold Chamber (Perfect containment with zero overflow) -->
+          <div class="venue-jharokha-window">
+            <div class="venue-jharokha-jaali" aria-hidden="true"></div>
+
+            <div class="venue-jharokha-body">
+              <p class="venue-eyebrow">The Royal Destination</p>
+              <h2 class="venue-title" id="venueTitle">Jashn Wellness Resort</h2>
+              <p class="venue-location-sub">Malihabad, Lucknow, Uttar Pradesh</p>
+
+              <img class="venue-lotus-div" src="assets/invite/pn-inv-div-lotus-divider-x-v01.webp" alt="" aria-hidden="true" decoding="async">
+
+              <p class="venue-desc">
+                Set amidst the serene natural mango groves and regal heritage charm of Malihabad, Jashn Wellness Resort welcomes you to celebrate our sacred union across grand palatial courtyards and lush celebration lawns.
+              </p>
+
+              <div class="venue-details-grid">
+                <div class="venue-info-item">
+                  <span class="venue-info-label">CELEBRATION DATES</span>
+                  <span class="venue-info-val">26 &amp; 27 January 2027</span>
+                </div>
+                <div class="venue-info-sep" aria-hidden="true"></div>
+                <div class="venue-info-item">
+                  <span class="venue-info-label">DESTINATION</span>
+                  <span class="venue-info-val">Lucknow, Uttar Pradesh</span>
+                </div>
+              </div>
+
+              <div class="venue-actions">
+                <a class="venue-maps-btn" href="https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6" target="_blank" rel="noopener noreferrer" aria-label="Open Jashn Wellness Resort in Google Maps">
+                  <svg class="venue-map-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                    <circle cx="12" cy="9" r="2.5" fill="currentColor"/>
+                  </svg>
+                  <span>GET DIRECTIONS ON GOOGLE MAPS</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. THINGS TO KNOW (GUEST ESSENTIALS) ──────────────────────── -->
+  <section class="section ttk-section" id="things" aria-labelledby="ttkTitle">
+    <div class="ttk-border-top" aria-hidden="true"></div>
+    <div class="ttk-border-bot" aria-hidden="true"></div>
+
+    <div class="ttk-motif-layer" aria-hidden="true">
+      <img class="ttk-motif ttk-motif--peacock" src="assets/shared/pn-shr-mot-peacock-main-x-v01.webp" alt="" draggable="false">
+      <img class="ttk-motif ttk-motif--elephant ttk-motif--elephant-l" src="assets/shared/pn-shr-mot-elephant-main-x-v01.webp" alt="" draggable="false">
+      <img class="ttk-motif ttk-motif--elephant ttk-motif--elephant-r" src="assets/shared/pn-shr-mot-elephant-main-x-v01.webp" alt="" draggable="false">
+      <img class="ttk-motif ttk-motif--cow" src="assets/shared/pn-shr-mot-cow-main-x-v01.webp" alt="" draggable="false">
+    </div>
+
+    <div class="ttk-inner">
+      <div class="ttk-header reveal-item">
+        <span class="ttk-eyebrow">Guest Essentials</span>
+        <h2 class="ttk-heading" id="ttkTitle">Things to Know</h2>
+        <div class="ttk-ornament" aria-hidden="true">
+          <span></span><i></i>
+          <img class="ttk-lotus-divider" src="assets/invite/pn-inv-div-lotus-divider-x-v01.webp" alt="" draggable="false" width="36" height="36">
+          <i></i><span></span>
+        </div>
+        <p class="ttk-subline">A few thoughtful details to help you celebrate in ease.</p>
+      </div>
+      <div class="ttk-grid" id="ttkGrid" role="list" aria-label="Guest information cards"></div>
+    </div>
+  </section>
+
+  <!-- ── 7. RSVP & FINALE ──────────────────────────────────────────── -->
+  <section class="section rsvp-section" id="rsvp" aria-labelledby="rsvpHeadline">
+    <div class="rsvp-bg" aria-hidden="true"></div>
+    <div class="rsvp-veil" aria-hidden="true"></div>
+
+    <!-- Live HTML5 Fireworks Canvas -->
+    <canvas class="rsvp-fireworks-canvas" id="rsvpFireworksCanvas" aria-hidden="true"></canvas>
+
+    <div class="rsvp-lamp-glows" aria-hidden="true">
+      <span class="rsvp-lamp rsvp-lamp--l"></span>
+      <span class="rsvp-lamp rsvp-lamp--r"></span>
+      <span class="rsvp-lamp rsvp-lamp--cl"></span>
+      <span class="rsvp-lamp rsvp-lamp--cr"></span>
+    </div>
+
+    <div class="rsvp-lotus-top" aria-hidden="true">
+      <img src="assets/rsvp/pn-rsvp-div-finale-lotus-x-v01.webp" alt="" decoding="async" loading="lazy">
+    </div>
+
+    <div class="rsvp-content">
+      <p class="rsvp-eyebrow rsvp-reveal" aria-hidden="true">JOIN THE CELEBRATION</p>
+      <h2 class="rsvp-headline rsvp-reveal" id="rsvpHeadline">
+        <span class="rsvp-hl-will">Will you</span>
+        <span class="rsvp-hl-join">JOIN US?</span>
+      </h2>
+      <p class="rsvp-deadline-badge rsvp-reveal" id="rsvpDeadline">Kindly RSVP by 15 January 2027</p>
+      <p class="rsvp-body rsvp-reveal">
+        We've saved a seat for you — at our table, in our hearts, and under the royal sky. Come celebrate with us as we begin this new chapter together.
+      </p>
+
+      <!-- Live Countdown Widget -->
+      <div class="rsvp-countdown-wrap rsvp-reveal" id="rsvpCountdown">
+        <div class="rsvp-cd-ornament" aria-hidden="true">
+          <span></span><i></i><span></span>
+        </div>
+        <p class="rsvp-cd-label" id="rsvpCdLabel">COUNTDOWN TO BARAAT</p>
+        <div class="rsvp-cd-grid">
+          <div class="rsvp-cd-box">
+            <span class="rsvp-cd-num" id="cdDays">00</span>
+            <span class="rsvp-cd-unit">Days</span>
+          </div>
+          <div class="rsvp-cd-sep">:</div>
+          <div class="rsvp-cd-box">
+            <span class="rsvp-cd-num" id="cdHours">00</span>
+            <span class="rsvp-cd-unit">Hours</span>
+          </div>
+          <div class="rsvp-cd-sep">:</div>
+          <div class="rsvp-cd-box">
+            <span class="rsvp-cd-num" id="cdMins">00</span>
+            <span class="rsvp-cd-unit">Mins</span>
+          </div>
+          <div class="rsvp-cd-sep">:</div>
+          <div class="rsvp-cd-box">
+            <span class="rsvp-cd-num" id="cdSecs">00</span>
+            <span class="rsvp-cd-unit">Secs</span>
+          </div>
+        </div>
+        <p class="rsvp-cd-target" id="rsvpCdTarget">27 January 2027 · 7:00 PM IST</p>
+      </div>
+
+      <!-- WhatsApp RSVP Button -->
+      <div class="rsvp-cta-wrap rsvp-reveal">
+        <a class="rsvp-btn-primary" id="rsvpWhatsappBtn" href="https://wa.me/919876543210?text=Hello%20Mukund%20%26%20Yashi%2C%20I%20am%20delighted%20to%20attend%20your%20wedding." target="_blank" rel="noreferrer" aria-label="RSVP on WhatsApp">
+          <span class="rsvp-btn-inner">YES, I'LL BE THERE</span>
+        </a>
+        <p class="rsvp-helper">You'll be redirected to WhatsApp to confirm your attendance.</p>
+      </div>
+
+      <!-- Calendar Save the Date -->
+      <div class="rsvp-std rsvp-reveal">
+        <p class="rsvp-std-heading">SAVE THE DATE</p>
+        <div class="rsvp-std-btns">
+          <a class="rsvp-cal-btn" id="rsvpGcalBtn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mukund%20%26%20Yashi%20Wedding%20%23SHIfoUNDlove&dates=20270126/20270128&location=Jashn%20Wellness%20Resort%2C%20Malihabad%2C%20Lucknow&details=Wedding%20celebrations%20of%20Mukund%20Mittal%20%26%20Yashi%20Agrawal." target="_blank" rel="noreferrer" aria-label="Add to Google Calendar">
+            <svg class="rsvp-cal-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="2" y="3" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M7 1v4M13 1v4M2 8h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Add to Google Calendar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 8. CLOSING LOVE NOTE ──────────────────────────────────────── -->
+  <section class="section closing-section" id="closing" aria-labelledby="closingTitle">
+    <div class="closing-bg" aria-hidden="true"></div>
+    <div class="closing-veil" aria-hidden="true"></div>
+
+    <div class="closing-content reveal-item">
+      <div class="rsvp-closing-frame">
+        <span class="rsvp-corner rsvp-corner--tr" aria-hidden="true"></span>
+        <span class="rsvp-corner rsvp-corner--bl" aria-hidden="true"></span>
+
+        <img class="closing-lotus" src="assets/invite/pn-inv-div-lotus-divider-x-v01.webp" alt="" aria-hidden="true" decoding="async" loading="lazy">
+
+        <p class="closing-eyebrow">With all our love</p>
+        <h2 class="closing-names" id="closingTitle">Mukund &amp; Yashi</h2>
+
+        <div class="closing-ornament" aria-hidden="true">
+          <span></span>
+          <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="11" cy="8" rx="2.8" ry="5.8" fill="rgba(216,169,87,.72)" transform="rotate(0 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.8" ry="5.8" fill="rgba(216,169,87,.52)" transform="rotate(60 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.8" ry="5.8" fill="rgba(216,169,87,.52)" transform="rotate(-60 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.2" ry="4.8" fill="rgba(216,169,87,.34)" transform="rotate(120 11 11)"/>
+            <ellipse cx="11" cy="8" rx="2.2" ry="4.8" fill="rgba(216,169,87,.34)" transform="rotate(-120 11 11)"/>
+            <ellipse cx="11" cy="8" rx="1.8" ry="4.2" fill="rgba(216,169,87,.22)" transform="rotate(180 11 11)"/>
+            <circle cx="11" cy="11" r="2.0" fill="rgba(216,169,87,.85)"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <p class="closing-quote-text" id="closingQuote">“Every love story is beautiful, but ours is our favourite.”</p>
+        <p class="closing-date">26 · 27 January 2027</p>
+        <p class="closing-hashtag" id="closingHashtag">#SHIfoUNDlove</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" style="text-align:center;padding:28px 16px 36px;background:#0a0908;color:rgba(216,169,87,.72);letter-spacing:.08em;font-size:.78rem;">
+  <p class="ft-credit" style="margin:0;">Made with &hearts; for Mukund &amp; Yashi · #SHIfoUNDlove</p>
+</footer>
+
+<!-- Floating Navigation Compass & Music Button -->
+<nav class="floating-menu" id="floatingMenu" aria-label="Navigation">
+  <div class="menu-panel" id="menuPanel" role="dialog" aria-label="Site navigation">
+    <div class="menu-bg-circle">
+      <img class="menu-bg-img" src="assets/shared/Menu_background.webp" alt="" aria-hidden="true" draggable="false">
+    </div>
+    <div class="menu-nav-header" aria-hidden="true">Navigation</div>
+    <div class="menu-lotus-top" aria-hidden="true">
+      <svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="28">
+        <ellipse cx="16" cy="14" rx="6" ry="5" fill="#d8a957" opacity=".7"/>
+        <ellipse cx="8"  cy="12" rx="5" ry="4" fill="#d8a957" opacity=".5"/>
+        <ellipse cx="24" cy="12" rx="5" ry="4" fill="#d8a957" opacity=".5"/>
+      </svg>
+    </div>
+    <nav class="menu-links" aria-label="Page sections">
+      <a class="menu-link" href="#" id="menuHome">Home</a>
+      <div class="menu-divider" aria-hidden="true"></div>
+      <a class="menu-link" href="#invite">Invite</a>
+      <div class="menu-divider" aria-hidden="true"></div>
+      <a class="menu-link" href="#events">Events</a>
+      <div class="menu-divider" aria-hidden="true"></div>
+      <a class="menu-link" href="#couple">Meet the Couple</a>
+      <div class="menu-divider" aria-hidden="true"></div>
+      <a class="menu-link" href="#venue">Venue</a>
+      <div class="menu-divider" aria-hidden="true"></div>
+      <a class="menu-link" href="#things">Things to Know</a>
+      <div class="menu-divider" aria-hidden="true"></div>
+      <a class="menu-link" href="#rsvp">RSVP</a>
+    </nav>
+  </div>
+
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Play music" aria-pressed="false">
+    <img class="music-icon-img" src="assets/shared/music_icon.webp" alt="" aria-hidden="true" draggable="false">
+  </button>
+
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+    <img class="compass-img" src="assets/shared/compass.webp" alt="Navigation compass" draggable="false">
+  </button>
+</nav>
+
+<!-- Background Music Track -->
+<audio id="bgMusic" src="assets/song/Template_09.mp3" loop preload="auto" playsinline></audio>
+
+<!-- Configuration and Main Scripts -->
+<script src="js/config.js"></script>
+<script src="js/script.js"></script>
+<script>
+// Smooth scroll for anchor navigation
+document.addEventListener('click', function(e) {
+  if (e.defaultPrevented) return;
+  var link = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+  if (!link) return;
+  var href = link.getAttribute('href') || '';
+  if (!href || href === '#') return;
+  var id = href.slice(1);
+  try { id = decodeURIComponent(id); } catch (_) {}
+  var target = document.getElementById(id);
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
+</body>
+</html>
