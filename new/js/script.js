@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ═════════════════════════════════════════════════════════════════════════════
  *  ROYAL PICHWAI WEDDING INVITATION — JAVASCRIPT ENGINE
  * ═════════════════════════════════════════════════════════════════════════════
@@ -175,12 +175,20 @@
       invBlessingAlt.textContent = `“${invite.familiesQuote || invite.generalBlessing}”`;
     }
 
-    // Family Details (Parents and Siblings)
+    // Family Details (Bride & Groom, Parents, Siblings - 3 distinct lines)
     const invParents = document.getElementById("invParents");
     if (invParents && (invite.brideParents || invite.groomParents)) {
       invParents.innerHTML = `
-        <p class="inv-parent-line"><span class="inv-parent-strong">${couple.brideFull || couple.bride}</span> &middot; ${invite.brideParents || ""} &middot; ${invite.brideSibling || ""}</p>
-        <p class="inv-parent-line"><span class="inv-parent-strong">${couple.groomFull || couple.groom}</span> &middot; ${invite.groomParents || ""} &middot; ${invite.groomSibling || ""}</p>
+        <div class="inv-parent-block">
+          <span class="inv-parent-name">${couple.brideFull || couple.bride}</span>
+          <span class="inv-parent-parents">${invite.brideParents || ""}</span>
+          <span class="inv-parent-sibling">${invite.brideSibling || ""}</span>
+        </div>
+        <div class="inv-parent-block">
+          <span class="inv-parent-name">${couple.groomFull || couple.groom}</span>
+          <span class="inv-parent-parents">${invite.groomParents || ""}</span>
+          <span class="inv-parent-sibling">${invite.groomSibling || ""}</span>
+        </div>
       `;
     }
 
@@ -216,12 +224,16 @@
       rsvpDeadline.textContent = rsvp.deadline;
     }
 
-    // WhatsApp RSVP Button
+    // RSVP Button (Google Form)
     const rsvpWhatsappBtn = document.getElementById("rsvpWhatsappBtn");
-    if (rsvpWhatsappBtn && couple.whatsapp) {
-      const cleanPhone = couple.whatsapp.replace(/\D/g, "");
-      const msg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom} & ${couple.bride}, I am delighted to attend your wedding.`);
-      rsvpWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
+    if (rsvpWhatsappBtn) {
+      if (rsvp.googleFormUrl) {
+        rsvpWhatsappBtn.href = rsvp.googleFormUrl;
+      } else if (couple.whatsapp) {
+        const cleanPhone = couple.whatsapp.replace(/\D/g, "");
+        const msg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom} & ${couple.bride}, I am delighted to attend your wedding.`);
+        rsvpWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
+      }
       const btnInner = rsvpWhatsappBtn.querySelector(".rsvp-btn-inner");
       if (btnInner && rsvp.btnText) btnInner.textContent = rsvp.btnText;
     }
@@ -271,7 +283,7 @@
     if (!cdWrap) return;
 
     const countdownData = config.countdown || {};
-    const targetDateStr = countdownData.targetDate || "2027-01-27T19:00:00+05:30";
+    const targetDateStr = countdownData.targetDate || "2027-01-26T17:00:00+05:30";
     const targetTime = new Date(targetDateStr).getTime();
 
     const cdDays = document.getElementById("cdDays");
@@ -284,8 +296,12 @@
     if (cdTarget && countdownData.displayTarget) {
       cdTarget.textContent = countdownData.displayTarget;
     }
-    if (cdLabel && countdownData.targetName) {
-      cdLabel.textContent = `COUNTDOWN TO ${countdownData.targetName.toUpperCase()}`;
+    if (cdLabel) {
+      if (countdownData.label) {
+        cdLabel.textContent = countdownData.label;
+      } else if (countdownData.targetName) {
+        cdLabel.textContent = `COUNTDOWN TO ${countdownData.targetName.toUpperCase()}`;
+      }
     }
 
     function updateTimer() {
@@ -357,7 +373,7 @@
     eventsList.forEach((evt, idx) => {
       const article = document.createElement("article");
       const isLeft = idx % 2 === 0;
-      const isMain = evt.id === "baraat" || evt.id === "jaimaal" || evt.id === "phere";
+      const isMain = evt.id === "baraat-reception" || evt.id === "phere" || evt.id === "ring-sangeet";
       article.className = `farman-stop ${isLeft ? "farman-left" : "farman-right"}${isMain ? " farman-stop--main" : ""}`;
       article.setAttribute("role", "listitem");
       article.setAttribute("data-event", evt.id);
@@ -557,7 +573,7 @@
   let isDragging = false;
   let dragStartY = 0;
   let triggered = false;
-  const PULL_THRESHOLD = 90;
+  const PULL_THRESHOLD = 75;
 
   function initIntro() {
     const introEl = document.getElementById("intro");
@@ -619,55 +635,155 @@
       }, 2800);
     }
 
-    // Pointer Events for Smooth Drag
+            // Immediate audio startup engine for mobile and touch devices
+    function startMusicImmediate() {
+      const bgMusic = document.getElementById("bgMusic");
+      const musicToggle = document.getElementById("musicToggle");
+      if (bgMusic) {
+        bgMusic.volume = 0.8;
+        const p = bgMusic.play();
+        if (p !== undefined) {
+          p.then(() => {
+            if (musicToggle) musicToggle.classList.add("is-playing");
+          }).catch((err) => {
+            console.log("[Audio] Attempt:", err);
+          });
+        }
+      }
+      if (Sound && Sound.ctx && Sound.ctx.state === "suspended") {
+        Sound.ctx.resume().catch(() => {});
+      }
+    }
+
+    // Touch & Pointer Events with instant audio playback on rope touch
+    ropeBtn.addEventListener("touchstart", (e) => {
+      startMusicImmediate();
+    }, { passive: true });
+
     ropeBtn.addEventListener("pointerdown", (e) => {
+      startMusicImmediate();
       if (triggered) return;
       isDragging = true;
       dragStartY = e.clientY;
       ropeBtn.classList.add("is-pulling");
-      ropeBtn.setPointerCapture(e.pointerId);
+      ropeBtn.style.transition = "none";
+      if (ropeImg) ropeImg.style.transition = "none";
+      if (ropeBtn.setPointerCapture) {
+        try { ropeBtn.setPointerCapture(e.pointerId); } catch (_) {}
+      }
     });
 
-    ropeBtn.addEventListener("pointermove", (e) => {
+    const handleDragMove = (clientY) => {
       if (!isDragging || triggered) return;
-      const deltaY = Math.max(0, e.clientY - dragStartY);
-      const stretch = 1 + Math.min(0.5, deltaY / 180);
+      const deltaY = Math.max(0, clientY - dragStartY);
+      const stretch = 1 + Math.min(0.4, deltaY / 200);
+      ropeBtn.style.transition = "none";
+      if (ropeImg) ropeImg.style.transition = "none";
       ropeBtn.style.transform = `translateX(-50%) translateY(${deltaY * 0.5}px)`;
       if (ropeImg) ropeImg.style.transform = `scaleY(${stretch})`;
 
       if (deltaY >= PULL_THRESHOLD) {
         isDragging = false;
         triggerIntro();
+        startMusicImmediate();
       }
+    };
+
+    ropeBtn.addEventListener("pointermove", (e) => {
+      handleDragMove(e.clientY);
     });
+
+    ropeBtn.addEventListener("touchmove", (e) => {
+      if (!isDragging || triggered) return;
+      if (e.cancelable) e.preventDefault();
+      const touch = e.touches && e.touches[0];
+      if (touch) handleDragMove(touch.clientY);
+    }, { passive: false });
 
     const stopDrag = () => {
       if (!isDragging) return;
       isDragging = false;
       if (!triggered && ropeBtn) {
         ropeBtn.classList.remove("is-pulling");
+        ropeBtn.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
         ropeBtn.style.transform = "translateX(-50%)";
-        if (ropeImg) ropeImg.style.transform = "scaleY(1)";
+        if (ropeImg) {
+          ropeImg.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
+          ropeImg.style.transform = "scaleY(1)";
+        }
+        setTimeout(() => {
+          if (ropeBtn) ropeBtn.style.transition = "";
+          if (ropeImg) ropeImg.style.transition = "";
+        }, 350);
       }
     };
 
     ropeBtn.addEventListener("pointerup", stopDrag);
     ropeBtn.addEventListener("pointercancel", stopDrag);
-    ropeBtn.addEventListener("click", () => {
-      if (!triggered) triggerIntro();
+    ropeBtn.addEventListener("touchend", (e) => {
+      startMusicImmediate();
+      if (!triggered && isDragging) {
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (touch && (touch.clientY - dragStartY >= PULL_THRESHOLD)) {
+          isDragging = false;
+          triggerIntro();
+        } else {
+          stopDrag();
+        }
+      }
+    });
+
+    // Simple click without dragging gives an interactive spring tug hint and does NOT open website
+    ropeBtn.addEventListener("click", (e) => {
+      startMusicImmediate();
+      if (!triggered && !isDragging) {
+        // Physical tug & release animation to guide the user to pull down
+        ropeBtn.style.transition = "transform 0.18s cubic-bezier(0.25, 1, 0.5, 1)";
+        ropeBtn.style.transform = "translateX(-50%) translateY(16px)";
+        if (ropeImg) {
+          ropeImg.style.transition = "transform 0.18s cubic-bezier(0.25, 1, 0.5, 1)";
+          ropeImg.style.transform = "scaleY(1.05)";
+        }
+        setTimeout(() => {
+          if (!triggered && !isDragging) {
+            ropeBtn.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
+            ropeBtn.style.transform = "translateX(-50%)";
+            if (ropeImg) {
+              ropeImg.style.transition = "transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)";
+              ropeImg.style.transform = "scaleY(1)";
+            }
+            setTimeout(() => {
+              if (ropeBtn) ropeBtn.style.transition = "";
+              if (ropeImg) ropeImg.style.transition = "";
+            }, 350);
+          }
+        }, 180);
+      }
     });
 
     // Lotus Button Action (Enter Site)
     if (lotusBtn) {
-      lotusBtn.addEventListener("click", () => {
+      const handleLotusTap = () => {
+        startMusicImmediate();
         Sound.lotus();
         lotusBtn.classList.add("is-open");
         setTimeout(revealMainSite, 800);
-      });
+      };
+      lotusBtn.addEventListener("touchstart", () => { startMusicImmediate(); }, { passive: true });
+      lotusBtn.addEventListener("pointerdown", () => { startMusicImmediate(); }, { passive: true });
+      lotusBtn.addEventListener("click", handleLotusTap);
     }
 
+    // Skip Intro Button Action (Instant Music & Site Reveal)
     if (skipBtn) {
-      skipBtn.addEventListener("click", revealMainSite);
+      const handleSkipTap = () => {
+        startMusicImmediate();
+        playBackgroundMusic();
+        revealMainSite();
+      };
+      skipBtn.addEventListener("touchstart", () => { startMusicImmediate(); }, { passive: true });
+      skipBtn.addEventListener("pointerdown", () => { startMusicImmediate(); }, { passive: true });
+      skipBtn.addEventListener("click", handleSkipTap);
     }
 
     // Waiting cue timeout
@@ -682,6 +798,8 @@
     const introEl = document.getElementById("intro");
     const floatingMenu = document.getElementById("floatingMenu");
     const inviteSection = document.getElementById("invite");
+
+    playBackgroundMusic();
 
     if (introEl) introEl.classList.add("is-complete");
     document.body.classList.remove("intro-active");
@@ -830,7 +948,7 @@
     requestAnimationFrame(draw);
   }
 
-  // High-Density Royal Fireworks Engine
+  // High-Density Royal Fireworks Engine (Lag-Free with Visibility Change & Max Particle Cap)
   function initFireworks() {
     const canvas = document.getElementById("rsvpFireworksCanvas");
     if (!canvas || rmq) return;
@@ -846,6 +964,7 @@
     }, { passive: true });
 
     const particles = [];
+    const MAX_PARTICLES = 350;
     const colorThemes = [
       ["rgba(240, 200, 106,", "rgba(255, 230, 140,", "rgba(216, 169, 87,"], // Royal Gold
       ["rgba(235, 90, 120,", "rgba(255, 140, 165,", "rgba(180, 50, 80,"],   // Pichwai Crimson Rose
@@ -854,13 +973,32 @@
       ["rgba(195, 165, 250,", "rgba(220, 190, 255,", "rgba(160, 120, 230,"] // Royal Violet
     ];
 
+    let fireworkTimer = null;
+    let pendingBurstTimers = [];
+
+    function clearAllTimers() {
+      if (fireworkTimer) {
+        clearTimeout(fireworkTimer);
+        fireworkTimer = null;
+      }
+      pendingBurstTimers.forEach(id => clearTimeout(id));
+      pendingBurstTimers = [];
+    }
+
     function createSingleBurst(customX, customY, type = "peony") {
+      if (document.hidden) return; // Never spawn particles when tab is in background
+
+      if (particles.length > MAX_PARTICLES) {
+        particles.splice(0, particles.length - (MAX_PARTICLES - 80));
+      }
+
       const cx = customX !== undefined ? customX : w * (0.12 + Math.random() * 0.76);
       const cy = customY !== undefined ? customY : h * (0.08 + Math.random() * 0.38);
       const theme = colorThemes[Math.floor(Math.random() * colorThemes.length)];
-      const count = type === "grand" ? 140 : (85 + Math.floor(Math.random() * 45));
+      const count = type === "grand" ? 120 : (70 + Math.floor(Math.random() * 40));
 
       for (let i = 0; i < count; i++) {
+        if (particles.length >= MAX_PARTICLES + 60) break;
         const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.35;
         const spd = (type === "grand" ? 1.8 : 1.2) + Math.random() * (type === "grand" ? 3.6 : 2.8);
         const col = theme[Math.floor(Math.random() * theme.length)];
@@ -884,19 +1022,25 @@
 
     // Volley of multiple fireworks across sky
     function launchVolley() {
+      if (document.hidden) return;
       createSingleBurst(w * 0.22, h * 0.18, "peony");
-      setTimeout(() => createSingleBurst(w * 0.78, h * 0.15, "peony"), 180);
-      setTimeout(() => createSingleBurst(w * 0.50, h * 0.24, "grand"), 420);
-      setTimeout(() => createSingleBurst(w * 0.35, h * 0.12, "willow"), 700);
-      setTimeout(() => createSingleBurst(w * 0.65, h * 0.28, "peony"), 950);
+      const t1 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.78, h * 0.15, "peony"); }, 180);
+      const t2 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.50, h * 0.24, "grand"); }, 420);
+      const t3 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.35, h * 0.12, "willow"); }, 700);
+      const t4 = setTimeout(() => { if (!document.hidden && isRsvpActive) createSingleBurst(w * 0.65, h * 0.28, "peony"); }, 950);
+      pendingBurstTimers.push(t1, t2, t3, t4);
     }
 
     // Rapid, continuous celebratory launches
-    let fireworkTimer = null;
     function scheduleNextBurst() {
+      if (document.hidden || !isRsvpActive) return;
+
       createSingleBurst();
       if (Math.random() > 0.65) {
-        setTimeout(() => createSingleBurst(), 140);
+        const tExtra = setTimeout(() => {
+          if (!document.hidden && isRsvpActive) createSingleBurst();
+        }, 140);
+        pendingBurstTimers.push(tExtra);
       }
       const nextDelay = 450 + Math.random() * 700;
       fireworkTimer = setTimeout(scheduleNextBurst, nextDelay);
@@ -911,19 +1055,51 @@
         entries.forEach((e) => {
           if (e.isIntersecting && !isRsvpActive) {
             isRsvpActive = true;
-            launchVolley();
-            scheduleNextBurst();
+            if (!document.hidden) {
+              launchVolley();
+              scheduleNextBurst();
+            }
           } else if (!e.isIntersecting && isRsvpActive) {
             isRsvpActive = false;
-            if (fireworkTimer) clearTimeout(fireworkTimer);
+            clearAllTimers();
+            particles.length = 0;
           }
         });
       }, { threshold: 0.08 }).observe(rsvpSec);
     }
 
+    // Tab / Screen visibility change handler: prevent backlog when switching tabs or apps
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearAllTimers();
+        particles.length = 0;
+      } else {
+        particles.length = 0;
+        if (isRsvpActive) {
+          launchVolley();
+          scheduleNextBurst();
+        }
+      }
+    });
+
     function animate() {
+      if (document.hidden) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, w, h);
+
+      if (particles.length === 0) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.globalCompositeOperation = "lighter";
+
+      if (particles.length > MAX_PARTICLES) {
+        particles.splice(0, particles.length - MAX_PARTICLES);
+      }
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
@@ -1012,11 +1188,27 @@
     if (!bgMusic) return;
 
     bgMusic.volume = 0.8;
-    bgMusic.play().then(() => {
+    if (bgMusic.paused) {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          if (musicToggle) musicToggle.classList.add("is-playing");
+        }).catch(() => {
+          // If browser policy deferred it, attach one-time resume on next touch
+          const resumeOnTouch = () => {
+            bgMusic.play().then(() => {
+              if (musicToggle) musicToggle.classList.add("is-playing");
+            }).catch(() => {});
+            window.removeEventListener("touchstart", resumeOnTouch);
+            window.removeEventListener("pointerdown", resumeOnTouch);
+          };
+          window.addEventListener("touchstart", resumeOnTouch, { passive: true });
+          window.addEventListener("pointerdown", resumeOnTouch, { passive: true });
+        });
+      }
+    } else {
       if (musicToggle) musicToggle.classList.add("is-playing");
-    }).catch(() => {
-      console.log("[Music] Auto-playback requires user interaction.");
-    });
+    }
   }
 
   function initMusicAndMenu() {
