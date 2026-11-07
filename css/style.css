@@ -3935,13 +3935,42 @@
   display: block !important;
 }
 
-/* 3. Off-screen content rendering deferral: prevents mobile tab memory exhaustion & crashes */
-.cpl-section,
-.venue-section,
-.ttk-section,
-.closing-section {
-  content-visibility: auto;
-  contain-intrinsic-size: 1000px;
+/* 3. Mobile WebKit Performance Shield: eliminates GPU memory exhaustion, scroll lag, and tab crashes */
+@media (max-width: 767px) {
+  /* Stop continuous background motif drift animations that burn GPU VRAM during scroll */
+  .evt-peacock,
+  .evt-elephant,
+  .evt-cow,
+  .evt-chhatri,
+  .evt-diya,
+  .venue-motif,
+  .ttk-motif {
+    animation: none !important;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4)) !important;
+    will-change: auto !important;
+  }
+
+  /* Disable continuous floating on the heavy palace arch container on mobile */
+  .venue-jharokha-hero {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .venue-jharokha-arch-img {
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.75)) !important;
+  }
+
+  /* Disable continuous flying bird sprite cycles on mobile */
+  .inv-bird,
+  .evt-birds {
+    display: none !important;
+  }
+
+  /* Clean up tree curtains compositor layer on mobile */
+  .cpl-tree {
+    will-change: auto !important;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -4008,4 +4037,20 @@
     padding-top: clamp(200px, 16vw, 250px) !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   5. OFF-SCREEN ANIMATION MECHANICS SUSPENSION
+   Halts all CSS animation clocks and rendering passes for elements whose
+   parent section has scrolled out of the active screen viewport.
+   ══════════════════════════════════════════════════════════════════════════════ */
+.section.is-offscreen,
+.section.is-offscreen * {
+  animation-play-state: paused !important;
+}
+
+body.page-hidden,
+body.page-hidden * {
+  animation-play-state: paused !important;
+}
+
 

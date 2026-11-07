@@ -305,6 +305,7 @@
     }
 
     function updateTimer() {
+      if (document.hidden) return;
       const now = new Date().getTime();
       const difference = targetTime - now;
 
@@ -384,13 +385,13 @@
 
       article.innerHTML = `
         <div class="farman-rolled-wrap" aria-hidden="true">
-          <img class="farman-rolled-img" src="assets/event/pn-evt-farman-rolled-x-v01.webp" alt="" draggable="false" decoding="async">
+          <img class="farman-rolled-img" src="assets/event/pn-evt-farman-rolled-x-v01.webp" alt="" draggable="false" decoding="async" loading="lazy">
         </div>
         <div class="farman-open-wrap">
-          <img class="farman-parchment-img" src="assets/event/pn-evt-farman-open-x-v01.webp" alt="" aria-hidden="true" draggable="false" decoding="async">
+          <img class="farman-parchment-img" src="assets/event/pn-evt-farman-open-x-v01.webp" alt="" aria-hidden="true" draggable="false" decoding="async" loading="lazy">
           <div class="farman-dust-layer" aria-hidden="true"></div>
           <div class="farman-content" aria-label="${evt.name} details">
-            <img class="farman-motif" src="${evt.icon}" alt="${evt.name} motif" decoding="async">
+            <img class="farman-motif" src="${evt.icon}" alt="${evt.name} motif" decoding="async" loading="lazy">
             <h3 class="farman-name">${evt.name}</h3>
             <div class="farman-rule" aria-hidden="true"></div>
             <p class="farman-datetime">${evt.date}${evt.time ? ` &middot; ${evt.time}` : ""}</p>
@@ -995,7 +996,7 @@
     }, { passive: true });
 
     const particles = [];
-    const MAX_PARTICLES = 160; // Mobile-safe particle budget
+    const MAX_PARTICLES = isDesktop() ? 120 : 50; // Optimized mobile particle budget to prevent GPU spikes
     const colorThemes = [
       ["rgba(240, 200, 106,", "rgba(255, 230, 140,", "rgba(216, 169, 87,"], // Royal Gold
       ["rgba(235, 90, 120,", "rgba(255, 140, 165,", "rgba(180, 50, 80,"],   // Pichwai Crimson Rose
@@ -1022,13 +1023,13 @@
       if (document.hidden || !isRsvpActive) return;
 
       if (particles.length > MAX_PARTICLES) {
-        particles.splice(0, particles.length - (MAX_PARTICLES - 50));
+        particles.splice(0, particles.length - Math.max(10, MAX_PARTICLES - 25));
       }
 
       const cx = customX !== undefined ? customX : w * (0.15 + Math.random() * 0.70);
       const cy = customY !== undefined ? customY : h * (0.10 + Math.random() * 0.35);
       const theme = colorThemes[Math.floor(Math.random() * colorThemes.length)];
-      const count = type === "grand" ? 60 : (35 + Math.floor(Math.random() * 25));
+      const count = type === "grand" ? (isDesktop() ? 50 : 25) : (isDesktop() ? 30 : 16);
 
       for (let i = 0; i < count; i++) {
         if (particles.length >= MAX_PARTICLES) break;
@@ -1180,8 +1181,9 @@
     const treeR = document.getElementById("cplTreeRight");
     if (!coupleSec || !treeL || !treeR || rmq) return;
 
-    treeL.style.transition = "transform 0.12s ease-out";
-    treeR.style.transition = "transform 0.12s ease-out";
+    // Use direct RAF-driven transform without CSS transition fighting the scroll loop
+    treeL.style.transition = "none";
+    treeR.style.transition = "none";
 
     let isTicking = false;
     let isNearCouple = false;
@@ -1292,7 +1294,40 @@
     }
   }
 
-  // ── 12. BOOTSTRAP INITIALIZATION ───────────────────────────────────────────
+  // ── 12. OFF-SCREEN ANIMATION MECHANICS CONTROLLER ──────────────────────────
+  // Automatically halts all CSS animation mechanics when sections scroll out of view,
+  // releasing GPU compositing threads and preserving 60fps scrolling and memory headroom.
+  function initOffscreenAnimationMechanics() {
+    const sections = document.querySelectorAll("section.section");
+    if (!sections.length) return;
+
+    const offscreenObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const sec = entry.target;
+        if (entry.isIntersecting) {
+          sec.classList.remove("is-offscreen");
+        } else {
+          sec.classList.add("is-offscreen");
+        }
+      });
+    }, {
+      // 120px buffer so animations are seamlessly active right before coming into view
+      rootMargin: "120px 0px 120px 0px",
+      threshold: 0
+    });
+
+    sections.forEach((sec) => offscreenObserver.observe(sec));
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        document.body.classList.add("page-hidden");
+      } else {
+        document.body.classList.remove("page-hidden");
+      }
+    });
+  }
+
+  // ── 13. BOOTSTRAP INITIALIZATION ───────────────────────────────────────────
   function init() {
     applyConfigToPage();
     initIntro();
@@ -1303,6 +1338,7 @@
     initStarfield();
     initFireworks();
     initMusicAndMenu();
+    initOffscreenAnimationMechanics();
 
     document.querySelectorAll(".reveal-item").forEach(el => generalObserver.observe(el));
     const rsvpSec = document.getElementById("rsvp");
