@@ -16,8 +16,7 @@ window.__WEDDING_CONFIG__ = {
     displayDate: "26 · 27 January 2027",
     venue: "Jashn Wellness Resort, Malihabad, Lucknow",
     venueMapsUrl: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6",
-    hashtag: "#SHIfoUNDlove",
-    whatsapp: "919876543210" // WhatsApp RSVP (+91 98765 43210)
+    hashtag: "#SHIfoUNDlove"
   },
 
   // ── 2. FAMILY BLESSINGS & DETAILS ──────────────────────────────────────────
@@ -35,9 +34,10 @@ window.__WEDDING_CONFIG__ = {
 
   // ── 3. LIVE COUNTDOWN CONFIGURATION ────────────────────────────────────────
   countdown: {
-    targetName: "Baraat",
-    targetDate: "2027-01-27T19:00:00+05:30", // 27 January 2027, 7:00 PM IST
-    displayTarget: "27 January 2027 · 7:00 PM IST"
+    label: "Celebrations begin In",
+    targetName: "Celebrations",
+    targetDate: "2027-01-26T17:00:00+05:30", // 26 January 2027, 5:00 PM IST
+    displayTarget: "26 January 2027 · 5:00 PM IST"
   },
 
   // ── 4. LOVE STORY (MEET THE COUPLE) ────────────────────────────────────────
@@ -53,11 +53,11 @@ window.__WEDDING_CONFIG__ = {
   events: [
     {
       id: "tilak",
-      name: "Tilak Ceremony",
+      name: "God Bharaayi and Tilak Ceremony",
       date: "26 Jan 2027",
-      time: "7:00 PM",
+      time: "5:00 PM",
       venue: "Jashn Banquet",
-      note: "Traditional auspicious Tilak ceremony",
+      note: "Auspicious Blessings to the Bride and Groom",
       icon: "assets/shared/Diya.webp",
       map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
     },
@@ -160,7 +160,7 @@ window.__WEDDING_CONFIG__ = {
     deadline: "Kindly RSVP by 15 January 2027",
     subtext: "We've saved a seat for you — at our table, in our hearts, and under the royal sky. Come celebrate with us as we begin this new chapter together.",
     btnText: "YES, I'LL BE THERE",
-    whatsappMessage: "Hello Mukund & Yashi, I am delighted to attend your wedding.",
+    googleFormUrl: "https://tinyurl.com/yashimukund2627",
     calendarEvent: {
       title: "Mukund & Yashi's Wedding (#SHIfoUNDlove)",
       startDate: "20270126",
