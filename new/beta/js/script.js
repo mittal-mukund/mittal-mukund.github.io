@@ -995,7 +995,7 @@
     }, { passive: true });
 
     const particles = [];
-    const MAX_PARTICLES = 160; // Mobile-safe particle budget
+    const MAX_PARTICLES = isDesktop() ? 120 : 50; // Optimized mobile particle budget to prevent GPU spikes
     const colorThemes = [
       ["rgba(240, 200, 106,", "rgba(255, 230, 140,", "rgba(216, 169, 87,"], // Royal Gold
       ["rgba(235, 90, 120,", "rgba(255, 140, 165,", "rgba(180, 50, 80,"],   // Pichwai Crimson Rose
@@ -1022,13 +1022,13 @@
       if (document.hidden || !isRsvpActive) return;
 
       if (particles.length > MAX_PARTICLES) {
-        particles.splice(0, particles.length - (MAX_PARTICLES - 50));
+        particles.splice(0, particles.length - Math.max(10, MAX_PARTICLES - 25));
       }
 
       const cx = customX !== undefined ? customX : w * (0.15 + Math.random() * 0.70);
       const cy = customY !== undefined ? customY : h * (0.10 + Math.random() * 0.35);
       const theme = colorThemes[Math.floor(Math.random() * colorThemes.length)];
-      const count = type === "grand" ? 60 : (35 + Math.floor(Math.random() * 25));
+      const count = type === "grand" ? (isDesktop() ? 50 : 25) : (isDesktop() ? 30 : 16);
 
       for (let i = 0; i < count; i++) {
         if (particles.length >= MAX_PARTICLES) break;
@@ -1180,8 +1180,9 @@
     const treeR = document.getElementById("cplTreeRight");
     if (!coupleSec || !treeL || !treeR || rmq) return;
 
-    treeL.style.transition = "transform 0.12s ease-out";
-    treeR.style.transition = "transform 0.12s ease-out";
+    // Use direct RAF-driven transform without CSS transition fighting the scroll loop
+    treeL.style.transition = "none";
+    treeR.style.transition = "none";
 
     let isTicking = false;
     let isNearCouple = false;
