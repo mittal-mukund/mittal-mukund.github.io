@@ -422,7 +422,7 @@
     });
   }
 
-  // Slower, smoother, and delayed unrolling observer for events
+  // Slower, smoother, and delayed unrolling observer for events with fast-scroll protection
   const farmanObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -432,17 +432,29 @@
       // 1. Show rolled scroll smoothly first
       el.classList.add("is-entering");
 
-      // 2. Start unrolling later and deliberately (650ms delay)
+      const isMobile = window.innerWidth <= 767;
+      const unrollDelay = isMobile ? 260 : 600;
+      const openDelay = isMobile ? 950 : 2200;
+
+      // 2. Start unrolling later and deliberately
       setTimeout(() => {
+        // Fast-scroll defense: If element has already scrolled far above or below active viewport,
+        // bypass heavy clip-path transition and set to opened directly.
+        const rect = el.getBoundingClientRect();
+        const winH = window.innerHeight || 800;
+        if (rect.bottom < -100 || rect.top > winH + 100) {
+          el.classList.add("is-unrolling", "is-open");
+          return;
+        }
         el.classList.add("is-unrolling");
-      }, 650);
+      }, unrollDelay);
 
       // 3. Mark as fully open after slow animation completes
       setTimeout(() => {
         el.classList.add("is-open");
-      }, 2300);
+      }, openDelay);
     });
-  }, { threshold: 0.28, rootMargin: "0px 0px -8% 0px" });
+  }, { threshold: 0.18, rootMargin: "50px 0px 50px 0px" });
 
   // ── 6. GALLERY WALL & LIGHTBOX ───────────────────────────────────────────────
   let lbPhotos = [];
@@ -1187,18 +1199,32 @@
 
     let isTicking = false;
     let isNearCouple = false;
+    let cachedCoupleTop = 0;
+    let lastOffset = "";
+
+    function measureCouple() {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      cachedCoupleTop = coupleSec.getBoundingClientRect().top + scrollY;
+    }
+
+    measureCouple();
+    window.addEventListener("resize", measureCouple, { passive: true });
 
     // Only listen to tree scroll calculations when near the couple section!
     new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         isNearCouple = e.isIntersecting;
-        if (isNearCouple) updateTrees();
+        if (isNearCouple) {
+          measureCouple();
+          updateTrees();
+        }
       });
     }, { rootMargin: "250px 0px 250px 0px" }).observe(coupleSec);
 
     function updateTrees() {
       if (!isNearCouple) return;
-      const rect = coupleSec.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const rectTop = cachedCoupleTop - scrollY;
       const winH = window.innerHeight || 800;
 
       // Keep trees closed until scrolled into upper half of screen
@@ -1206,16 +1232,19 @@
       const endThreshold = -winH * 0.20;
 
       let progress = 0;
-      if (rect.top <= startThreshold) {
-        progress = Math.max(0, Math.min(1, (startThreshold - rect.top) / (startThreshold - endThreshold)));
+      if (rectTop <= startThreshold) {
+        progress = Math.max(0, Math.min(1, (startThreshold - rectTop) / (startThreshold - endThreshold)));
       }
 
       const eased = Math.sin((progress * Math.PI) / 2);
       const maxOffset = isDesktop() ? 120 : 110;
       const offset = (eased * maxOffset).toFixed(1);
 
-      treeL.style.transform = `translateX(-${offset}%)`;
-      treeR.style.transform = `translateX(${offset}%)`;
+      if (offset !== lastOffset) {
+        lastOffset = offset;
+        treeL.style.transform = `translateX(-${offset}%)`;
+        treeR.style.transform = `translateX(${offset}%)`;
+      }
     }
 
     function onScroll() {
@@ -1229,7 +1258,6 @@
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", () => { updateTrees(); }, { passive: true });
     updateTrees();
   }
 

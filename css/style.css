@@ -18,8 +18,8 @@
   clip-path: inset(0 0 100% 0 round 2px) !important;
   -webkit-clip-path: inset(0 0 100% 0 round 2px) !important;
   transition: -webkit-clip-path 1.6s cubic-bezier(0.22, 1, 0.36, 1) 120ms, clip-path 1.6s cubic-bezier(0.22, 1, 0.36, 1) 120ms !important;
-  will-change: clip-path;
-  transform: translateZ(0);
+  will-change: auto;
+  transform: none;
 }
 
 .farman-stop.is-unrolling .farman-open-wrap,
@@ -1074,8 +1074,8 @@
   clip-path: inset(50% 0 50% 0 round 2px) !important;
   -webkit-clip-path: inset(50% 0 50% 0 round 2px) !important;
   transition: -webkit-clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms, clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms !important;
-  will-change: clip-path;
-  transform: translateZ(0);
+  will-change: auto;
+  transform: none;
 }
 
 .farman-stop.is-unrolling .farman-open-wrap,
@@ -1481,8 +1481,8 @@
   clip-path: inset(50% 0 50% 0 round 2px) !important;
   -webkit-clip-path: inset(50% 0 50% 0 round 2px) !important;
   transition: -webkit-clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms, clip-path 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) 100ms !important;
-  will-change: clip-path;
-  transform: translateZ(0);
+  will-change: auto;
+  transform: none;
 }
 
 .farman-stop.is-unrolling .farman-open-wrap,
@@ -3961,10 +3961,48 @@
     filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.75)) !important;
   }
 
-  /* Disable continuous flying bird sprite cycles on mobile */
-  .inv-bird,
-  .evt-birds {
-    display: none !important;
+  /* Ensure invitation birds are visible and fly smoothly on mobile */
+  .invite-birds {
+    display: block !important;
+  }
+  .inv-bird {
+    display: block !important;
+  }
+
+  /* Farman mobile unrolling optimization: smooth 0.7s bezier without GPU backing store exhaustion */
+  .farman-open-wrap {
+    will-change: auto !important;
+    transform: none !important;
+    transition: -webkit-clip-path 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) 60ms, clip-path 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) 60ms !important;
+  }
+  .farman-parchment-img {
+    will-change: auto !important;
+    transform: none !important;
+  }
+
+  /* Prevent concurrent infinite animation loops from overloading mobile WebKit during scroll */
+  .gal-frame-inner {
+    animation: none !important;
+  }
+  .ttk-card-icon {
+    animation: none !important;
+  }
+  .ttk-card-icon-wrap:before {
+    animation: none !important;
+  }
+  .farman-stop.is-unrolling .farman-motif,
+  .farman-stop.is-open .farman-motif {
+    animation: farmanMotifIn .4s cubic-bezier(.4,0,.2,1) .15s both !important;
+  }
+  .farman-stop.is-entering .farman-rolled-wrap {
+    animation: none !important;
+  }
+  .closing-lotus {
+    animation: inkSettle 1s cubic-bezier(.16,1,.3,1) 0ms both !important;
+  }
+  .closing-names {
+    animation: none !important;
+    text-shadow: 0 2px 24px rgba(0,0,0,.65), 0 0 40px rgba(216,169,87,.3) !important;
   }
 
   /* Clean up tree curtains compositor layer on mobile */
