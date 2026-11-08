@@ -1,0 +1,40 @@
+/* ── Core Web Fonts: Guaranteed Unconditional Latin Fallback ── */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../assets/fonts/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(../assets/fonts/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/E21i_d3kivvAkxhLEVZpQyhwDw.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(../assets/fonts/SlGUmQSNjdsmc35JDF1K5GR1SDk.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(../assets/fonts/SlGWmQSNjdsmc35JDF1K5GRweDs1Zw.woff2) format('woff2');
+}
