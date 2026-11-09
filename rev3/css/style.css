@@ -4164,14 +4164,34 @@ body.page-hidden * {
 /* 2. Things to Know: Guaranteed 2x2 portrait layout & rich ivory card background */
 .ttk-grid {
   display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: clamp(10px, 3vw, 16px) !important;
   width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-.ttk-card {
+@media (min-width: 1024px) {
+  .ttk-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: clamp(16px, 1.8vw, 24px) !important;
+  }
+}
+
+.ttk-card,
+.ttk-grid > .ttk-card,
+.ttk-grid > article,
+.ttk-card:nth-child(n),
+.ttk-card:last-child,
+.ttk-card:first-child,
+.ttk-card--last-odd {
+  grid-column: span 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
   opacity: 1 !important;
   transform: none !important;
   visibility: visible !important;
@@ -4187,6 +4207,7 @@ body.page-hidden * {
   box-shadow: 0 1px #ffffffe6, 0 3px #d8a9572e, 0 8px 24px rgba(62, 43, 34, 0.22), inset 0 0 0 1px #ffffff8c !important;
   color-scheme: light !important;
   forced-color-adjust: none !important;
+  justify-self: stretch !important;
 }
 
 .ttk-card-icon {

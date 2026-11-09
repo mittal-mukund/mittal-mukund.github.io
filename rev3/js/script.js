@@ -569,11 +569,20 @@
       return;
     }
 
-    // If grid already contains pre-rendered cards in HTML, preserve them & ensure in-view
+    grid.style.display = "grid";
+    grid.style.gridTemplateColumns = "repeat(2, minmax(0, 1fr))";
+    grid.style.gap = "clamp(10px, 3vw, 16px)";
+    grid.style.width = "100%";
+
+    // If grid already contains pre-rendered cards in HTML, preserve them & ensure in-view & 1-column span
     const existingCards = grid.querySelectorAll(".ttk-card");
     if (existingCards.length > 0) {
       existingCards.forEach((c) => {
         c.classList.add("in-view");
+        c.style.gridColumn = "span 1";
+        c.style.width = "100%";
+        c.style.maxWidth = "100%";
+        c.style.boxSizing = "border-box";
         generalObserver.observe(c);
       });
       return;
@@ -584,6 +593,14 @@
       const card = document.createElement("article");
       card.className = "ttk-card in-view";
       card.setAttribute("role", "listitem");
+      card.style.gridColumn = "span 1";
+      card.style.width = "100%";
+      card.style.maxWidth = "100%";
+      card.style.boxSizing = "border-box";
+      card.style.backgroundColor = "#fbf5e8";
+      card.style.background = "#fbf5e8 linear-gradient(170deg, #fffcf6 0%, #f8eedd 55%, #ede0c2 100%)";
+      card.style.border = "1.5px solid rgba(216, 169, 87, 0.6)";
+      card.style.color = "#3e2b22";
       card.style.transitionDelay = `${idx * 80}ms`;
 
       card.innerHTML = `
