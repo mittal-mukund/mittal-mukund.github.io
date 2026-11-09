@@ -558,6 +558,7 @@
   function renderTTK() {
     const grid = document.getElementById("ttkGrid");
     if (!grid) return;
+    grid.innerHTML = "";
 
     const items = (config.thingsToKnow && config.thingsToKnow.length > 0)
       ? config.thingsToKnow.filter(i => i.enabled !== false)
@@ -569,43 +570,15 @@
       return;
     }
 
-    grid.style.display = "grid";
-    grid.style.gridTemplateColumns = "repeat(2, minmax(0, 1fr))";
-    grid.style.gap = "clamp(10px, 3vw, 16px)";
-    grid.style.width = "100%";
-
-    // If grid already contains pre-rendered cards in HTML, preserve them & ensure in-view & 1-column span
-    const existingCards = grid.querySelectorAll(".ttk-card");
-    if (existingCards.length > 0) {
-      existingCards.forEach((c) => {
-        c.classList.add("in-view");
-        c.style.gridColumn = "span 1";
-        c.style.width = "100%";
-        c.style.maxWidth = "100%";
-        c.style.boxSizing = "border-box";
-        generalObserver.observe(c);
-      });
-      return;
-    }
-
-    grid.innerHTML = "";
     items.forEach((item, idx) => {
       const card = document.createElement("article");
-      card.className = "ttk-card in-view";
+      card.className = "ttk-card";
       card.setAttribute("role", "listitem");
-      card.style.gridColumn = "span 1";
-      card.style.width = "100%";
-      card.style.maxWidth = "100%";
-      card.style.boxSizing = "border-box";
-      card.style.backgroundColor = "#fbf5e8";
-      card.style.background = "#fbf5e8 linear-gradient(170deg, #fffcf6 0%, #f8eedd 55%, #ede0c2 100%)";
-      card.style.border = "1.5px solid rgba(216, 169, 87, 0.6)";
-      card.style.color = "#3e2b22";
       card.style.transitionDelay = `${idx * 80}ms`;
 
       card.innerHTML = `
         <div class="ttk-card-icon-wrap">
-          <img class="ttk-card-icon" src="${item.icon}" alt="" aria-hidden="true" decoding="async">
+          <img class="ttk-card-icon" src="${item.icon}" alt="" aria-hidden="true" decoding="async" loading="lazy">
         </div>
         <div class="ttk-card-rule" aria-hidden="true"></div>
         <h3 class="ttk-card-title">${item.title}</h3>
@@ -1227,22 +1200,33 @@
     const coupleSec = document.getElementById("couple");
     const treeL = document.getElementById("cplTreeLeft");
     const treeR = document.getElementById("cplTreeRight");
-    if (!coupleSec || !treeL || !treeR) return;
+    if (!coupleSec || !treeL || !treeR || rmq) return;
 
+    // Use direct RAF-driven transform without CSS transition fighting the scroll loop
     treeL.style.transition = "none";
     treeR.style.transition = "none";
 
     let isTicking = false;
+    let isNearCouple = false;
     let lastOffset = "";
 
+    // Only listen to tree scroll calculations when near the couple section!
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        isNearCouple = e.isIntersecting;
+        if (isNearCouple) {
+          updateTrees();
+        }
+      });
+    }, { rootMargin: "350px 0px 350px 0px" }).observe(coupleSec);
+
     function updateTrees() {
+      if (!isNearCouple) return;
       const rect = coupleSec.getBoundingClientRect();
       const winH = window.innerHeight || 800;
 
-      // Quick return if section is far offscreen
-      if (rect.bottom < -200 || rect.top > winH + 300) return;
-
-      const startThreshold = winH * 0.50;
+      // Keep trees closed until scrolled into upper half of screen
+      const startThreshold = winH * 0.45;
       const endThreshold = -winH * 0.20;
 
       let progress = 0;
@@ -1262,7 +1246,7 @@
     }
 
     function onScroll() {
-      if (!isTicking) {
+      if (!isTicking && isNearCouple) {
         isTicking = true;
         requestAnimationFrame(() => {
           updateTrees();
@@ -1272,9 +1256,8 @@
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", updateTrees, { passive: true });
+    window.addEventListener("resize", () => { if (isNearCouple) updateTrees(); }, { passive: true });
     updateTrees();
-    document.addEventListener("click", () => { setTimeout(updateTrees, 100); }, { once: true });
   }
 
   // ── 11. BACKGROUND MUSIC & NAVIGATION COMPASS ───────────────────────────────
