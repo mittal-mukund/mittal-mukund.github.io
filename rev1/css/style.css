@@ -4009,6 +4009,95 @@
   .cpl-tree {
     will-change: auto !important;
   }
+
+  /* Mobile WebKit GPU Protection: Stop infinite text-shadow blurs, multi-layered filters and blend-modes */
+  .intro.is-lit .intro-bg-lit {
+    animation: none !important;
+    opacity: 1 !important;
+    transition: opacity 0.8s ease !important;
+  }
+  .intro.show-names .names {
+    animation: none !important;
+    text-shadow: 0 1px 0 rgba(255,240,200,.22), 0 2px 4px rgba(0,0,0,.96), 0 4px 16px rgba(0,0,0,.82), 0 0 20px rgba(216,169,87,.45) !important;
+  }
+  .intro-warm-glow,
+  .intro-jhoomer-glow,
+  .intro-rose-scatter {
+    mix-blend-mode: normal !important;
+    will-change: auto !important;
+  }
+  .intro.is-lit .intro-warm-glow,
+  .intro.is-lit .intro-jhoomer-glow {
+    animation: none !important;
+  }
+  .intro.is-lit .intro-floral-left,
+  .intro.is-lit .intro-floral-right,
+  .intro.is-lit .diya-wrap.diya-left,
+  .intro.is-lit .diya-wrap.diya-right {
+    animation: none !important;
+  }
+  .rope-button {
+    filter: drop-shadow(0 12px 20px rgba(0,0,0,.5)) !important;
+  }
+  .rope-button.is-pulling {
+    filter: drop-shadow(0 16px 24px rgba(0,0,0,.6)) !important;
+  }
+  .intro-jhoomer,
+  .intro.is-lit .intro-jhoomer {
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,.45)) !important;
+    animation: none !important;
+  }
+  .invite-card-wrap {
+    animation: none !important;
+  }
+  .invite-bg {
+    animation: none !important;
+  }
+  .invite-arch-frame {
+    filter: drop-shadow(0 0 16px rgba(216,169,87,.35)) !important;
+  }
+  .invite-section.invite-active .inv-names {
+    animation: nameReveal 1.2s cubic-bezier(.16,1,.3,1) .55s both !important;
+  }
+  .invite-section.invite-active .inv-date,
+  .invite-section.invite-active .inv-venue,
+  .invite-section.invite-active .inv-amp {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Mobile Lotus Opening Optimizations (Eliminates GPU Dropshadow Spikes & Memory Crashes) */
+  .lotus-icon-img {
+    animation: lotusSacredTurn 16s linear infinite !important;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,.32)) drop-shadow(0 0 14px rgba(223,162,168,.5)) !important;
+  }
+  .lotus-cta-label {
+    animation: none !important;
+    opacity: 0.95 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 2px 10px rgba(0,0,0,.7) !important;
+  }
+  .lotus-cta-group:before {
+    display: none !important;
+  }
+  .lotus-glow-burst {
+    display: none !important;
+  }
+  .lotus-open-img {
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,.25)) drop-shadow(0 0 16px rgba(223,162,168,.65)) !important;
+  }
+  .lotus-button.is-open .lotus-icon-img {
+    transform: scale(1.15) !important;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,.2)) !important;
+  }
+  .lotus-button.is-open .lotus-open-img {
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,.25)) drop-shadow(0 0 16px rgba(223,162,168,.65)) !important;
+  }
+}
+
+/* Instantly stop all animation clocks on the intro section the moment lotus is clicked */
+.intro.is-complete,
+.intro.is-complete * {
+  animation: none !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -4108,32 +4197,107 @@ body.page-hidden * {
    6. BRAVE & WEBKIT CROSS-BROWSER STYLING GUARANTEES
    ══════════════════════════════════════════════════════════════════════════════ */
 
-/* 1. Meet the Couple: Guaranteed background rendering in Brave & Safari */
-.cpl-section {
-  position: relative !important;
-  overflow: hidden !important;
-  color: var(--ink) !important;
-  background-image: url(../assets/meet_the_couple/pn-cpl-bg-secret-garden-m-v01.webp) !important;
-  background-position: center top !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
+/* 0. Cross-Browser Light Color-Scheme Guarantee (Prevents Brave Night Mode from inverting ivory colors) */
+:root,
+html,
+body {
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  -webkit-print-color-adjust: exact !important;
 }
 
-.cpl-bg {
+/* 1. Meet the Couple: Guaranteed background rendering in Brave & Safari */
+.couple-bg-picture {
   position: absolute !important;
   inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   z-index: 0 !important;
-  background-image: url(../assets/meet_the_couple/pn-cpl-bg-secret-garden-m-v01.webp) !important;
-  background-position: center top !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
   display: block !important;
+  background: transparent !important;
 }
 
-@media (min-width: 1024px) {
+.couple-bg-img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  display: block !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+
+.cpl-section,
+.couple-section {
+  position: relative !important;
+  overflow: hidden !important;
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  color: #3e2b22 !important;
+  background-color: #f7eedc !important;
+}
+
+.cpl-vignette,
+.couple-vignette {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background-color: transparent !important;
+  mix-blend-mode: normal !important;
+  background-blend-mode: normal !important;
+  background: linear-gradient(180deg, rgba(247,238,220,0.05) 0%, transparent 15%, transparent 65%, rgba(247,238,220,0.85) 100%) !important;
+}
+
+.cpl-content:before {
+  background-color: transparent !important;
+}
+
+.cpl-eyebrow {
+  color: #b37e22 !important;
+  -webkit-text-fill-color: #b37e22 !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+}
+
+.cpl-title {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+}
+
+.cpl-story-body {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+}
+
+.cpl-tag-chip {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  forced-color-adjust: none !important;
+  background-color: #f4e8cf !important;
+  border-color: rgba(216,169,87,.6) !important;
+}
+
+@media (min-width: 768px) {
   .cpl-section,
+  .couple-section,
+  .couple-bg,
   .cpl-bg {
-    background-image: url(../assets/meet_the_couple/pn-cpl-bg-secret-garden-d-v01.webp) !important;
+    background-image: url(../assets/meet_the_couple/garden-bg-desktop.webp) !important;
   }
 }
 
@@ -4144,11 +4308,16 @@ body.page-hidden * {
   }
 }
 
-/* 2. Things to Know: Guaranteed 100% visible styling on all 4 cards */
+/* 2. Things to Know: Guaranteed 100% visible ivory styling on all 4 cards in Brave & Safari */
 .ttk-card {
   opacity: 1 !important;
   transform: none !important;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,240,210,.6) 0%, transparent 70%), linear-gradient(170deg, #fef9f0, #f8ecd6 55%, #f1e0c2) !important;
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  background-color: #fcf6ea !important;
+  background-image: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,240,210,.6) 0%, transparent 70%), linear-gradient(170deg, #fef9f0, #f8ecd6 55%, #f1e0c2) !important;
+  background-blend-mode: normal !important;
+  mix-blend-mode: normal !important;
   border: 1.5px solid rgba(216,169,87,.52) !important;
   box-shadow: 0 1px #ffffffe6, 0 3px #d8a9572e, 0 10px 28px #3e2b2233, inset 0 0 0 1px #ffffff8c !important;
 }
@@ -4168,17 +4337,106 @@ body.page-hidden * {
   opacity: 1 !important;
   transform: none !important;
   color: #8b2a3d !important;
+  -webkit-text-fill-color: #8b2a3d !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
 }
 
 .ttk-card-body {
-  opacity: 0.88 !important;
+  opacity: 0.95 !important;
   transform: none !important;
   color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
 }
 
 .ttk-card-icon-wrap:before {
   opacity: 1 !important;
   transform: scale(1) !important;
+}
+
+/* 2B. Hero Arch Invitation Typography: Guaranteed Light-Theme Contrast & Halo Removal */
+.invite-text-content,
+.inv-blessing,
+.inv-blessing-alt,
+.inv-blessing-alt-line1,
+.inv-kicker,
+.inv-names,
+.inv-parents,
+.inv-parent-block,
+.inv-parent-name,
+.inv-parent-parents,
+.inv-parent-sibling,
+.inv-occasion,
+.inv-meta,
+.inv-date,
+.inv-venue {
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.inv-blessing-alt-line1 {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+.inv-kicker {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+.inv-names {
+  color: #a6384f !important;
+  -webkit-text-fill-color: #a6384f !important;
+  text-shadow: none !important;
+}
+
+.inv-names .inv-amp {
+  color: #c8902a !important;
+  -webkit-text-fill-color: #c8902a !important;
+  text-shadow: none !important;
+}
+
+.inv-parent-name {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+.inv-parent-parents {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+.inv-parent-sibling {
+  color: #8c2f42 !important;
+  -webkit-text-fill-color: #8c2f42 !important;
+  text-shadow: none !important;
+}
+
+.inv-occasion {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+.inv-date {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+.inv-venue {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
 }
 
 /* 3. Intro Reveal: Guaranteed Mukund & Yashi styling, typography & centering */
@@ -4190,13 +4448,20 @@ body.page-hidden * {
   color: #fcf1dafc !important;
   line-height: 1.05 !important;
   letter-spacing: .012em !important;
-  text-shadow: 0 1px 0 rgba(255,240,200,.22), 0 2px 4px rgba(0,0,0,.96), 0 6px 32px rgba(0,0,0,.82), 0 0 60px rgba(216,169,87,.55), 0 0 120px rgba(216,169,87,.28) !important;
+  text-shadow: 0 1px 0 rgba(255,240,200,.25), 0 2px 4px rgba(0,0,0,.95), 0 4px 14px rgba(0,0,0,.85), 0 0 18px rgba(216,169,87,.5) !important;
   display: block !important;
   text-align: center !important;
   width: min(800px, 94vw) !important;
   max-width: 96vw !important;
   margin: 0 auto !important;
   pointer-events: none !important;
+  animation: none !important;
+}
+
+@media (min-width: 768px) {
+  .intro-reveal .names {
+    text-shadow: 0 1px 0 rgba(255,240,200,.22), 0 2px 4px rgba(0,0,0,.96), 0 6px 32px rgba(0,0,0,.82), 0 0 40px rgba(216,169,87,.45) !important;
+  }
 }
 
 .names .amp {
@@ -4206,7 +4471,8 @@ body.page-hidden * {
   color: #f0c46cfc !important;
   display: inline-block !important;
   margin: 0 .06em !important;
-  text-shadow: 0 0 10px rgba(255,220,120,.6), 0 0 28px rgba(216,169,87,.55), 0 0 60px rgba(216,169,87,.32), 0 3px 20px rgba(0,0,0,.52) !important;
+  text-shadow: 0 0 8px rgba(255,220,120,.5), 0 0 16px rgba(216,169,87,.4), 0 2px 10px rgba(0,0,0,.6) !important;
+  animation: none !important;
 }
 
 .names .word {
@@ -4240,6 +4506,133 @@ body.page-hidden * {
   color: #ffe08a;
   opacity: 0.95;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   7. NIGHT MODE DETECTION & COMMAND TEXT STYLE RESET (iOS BRAVE / DARK READER)
+   Triggered dynamically when browser Night Mode tries to override dark text
+   to light colors over light-themed art (Arch, Meet the Couple, Info Cards).
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.night-mode-detected #couple .cpl-eyebrow {
+  color: #b37e22 !important;
+  -webkit-text-fill-color: #b37e22 !important;
+  --darkreader-inline-color: #b37e22 !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #couple .cpl-title {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  --darkreader-inline-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #couple .cpl-story-body,
+html.night-mode-detected #couple .cpl-tag-chip {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  --darkreader-inline-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #couple .cpl-story-htag {
+  color: #9b6a16 !important;
+  -webkit-text-fill-color: #9b6a16 !important;
+  --darkreader-inline-color: #9b6a16 !important;
+}
+
+html.night-mode-detected #invite .inv-blessing-alt-line1,
+html.night-mode-detected #invite .inv-parent-parents,
+html.night-mode-detected #invite .inv-occasion,
+html.night-mode-detected #invite .inv-venue {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  --darkreader-inline-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #invite .inv-kicker,
+html.night-mode-detected #invite .inv-parent-name,
+html.night-mode-detected #invite .inv-date {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  --darkreader-inline-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #invite .inv-names {
+  color: #a6384f !important;
+  -webkit-text-fill-color: #a6384f !important;
+  --darkreader-inline-color: #a6384f !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #invite .inv-names .inv-amp {
+  color: #c8902a !important;
+  -webkit-text-fill-color: #c8902a !important;
+  --darkreader-inline-color: #c8902a !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #invite .inv-parent-sibling {
+  color: #8c2f42 !important;
+  -webkit-text-fill-color: #8c2f42 !important;
+  --darkreader-inline-color: #8c2f42 !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #things .ttk-card {
+  background-color: #fcf6ea !important;
+  --darkreader-inline-bgcolor: #fcf6ea !important;
+}
+
+html.night-mode-detected #things .ttk-card-title {
+  color: #8b2a3d !important;
+  -webkit-text-fill-color: #8b2a3d !important;
+  --darkreader-inline-color: #8b2a3d !important;
+  text-shadow: none !important;
+}
+
+html.night-mode-detected #things .ttk-card-body {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  --darkreader-inline-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+/* Fallback Luminance Counter-Filter: Used if isolated WebKit Night Mode script
+   overrides author CSS colors to light grey over light backgrounds */
+html.night-mode-invert-couple #couple .cpl-header,
+html.night-mode-invert-couple #couple .cpl-story {
+  -webkit-filter: invert(1) hue-rotate(180deg) !important;
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+html.night-mode-invert-invite #invite .inv-blessing-alt,
+html.night-mode-invert-invite #invite .inv-kicker,
+html.night-mode-invert-invite #invite .inv-names,
+html.night-mode-invert-invite #invite .inv-parents,
+html.night-mode-invert-invite #invite .inv-occasion,
+html.night-mode-invert-invite #invite .inv-meta {
+  -webkit-filter: invert(1) hue-rotate(180deg) !important;
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+html.night-mode-invert-ttk-card #things .ttk-card {
+  -webkit-filter: invert(1) hue-rotate(180deg) !important;
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+html.night-mode-invert-ttk-card #things .ttk-card-icon {
+  -webkit-filter: invert(1) hue-rotate(180deg) !important;
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+html.night-mode-invert-ttk-text #things .ttk-card-title,
+html.night-mode-invert-ttk-text #things .ttk-card-body {
+  -webkit-filter: invert(1) hue-rotate(180deg) !important;
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
 
 
 

@@ -575,14 +575,16 @@
       card.className = "ttk-card";
       card.setAttribute("role", "listitem");
       card.style.transitionDelay = `${idx * 80}ms`;
+      card.style.backgroundColor = "#fcf6ea";
+      card.style.colorScheme = "light";
 
       card.innerHTML = `
         <div class="ttk-card-icon-wrap">
           <img class="ttk-card-icon" src="${item.icon}" alt="" aria-hidden="true" decoding="async" loading="lazy">
         </div>
         <div class="ttk-card-rule" aria-hidden="true"></div>
-        <h3 class="ttk-card-title">${item.title}</h3>
-        <p class="ttk-card-body">${item.description}</p>
+        <h3 class="ttk-card-title" style="color: #8b2a3d; -webkit-text-fill-color: #8b2a3d;">${item.title}</h3>
+        <p class="ttk-card-body" style="color: #3e2b22; -webkit-text-fill-color: #3e2b22;">${item.description}</p>
       `;
 
       grid.appendChild(card);
@@ -757,9 +759,16 @@
       const handleLotusTap = () => {
         Sound.lotus();
         lotusBtn.classList.add("is-open");
-        // Start background music now that rope animation is complete and website is entered
-        playBackgroundMusic();
-        setTimeout(revealMainSite, 800);
+
+        // Immediately purge ambient particles to free GPU memory for the lotus bloom
+        const dust = document.getElementById("introDust");
+        if (dust) dust.innerHTML = "";
+        const petals = document.getElementById("introPetals");
+        if (petals) petals.innerHTML = "";
+
+        // Snappy transition for mobile to avoid GPU frame stalls
+        const delay = window.innerWidth <= 767 ? 500 : 750;
+        setTimeout(revealMainSite, delay);
       };
       lotusBtn.addEventListener("click", handleLotusTap);
     }
@@ -786,15 +795,22 @@
     const floatingMenu = document.getElementById("floatingMenu");
     const inviteSection = document.getElementById("invite");
 
+    // Clean up intro particle elements immediately to free GPU memory
+    const dust = document.getElementById("introDust");
+    if (dust) dust.innerHTML = "";
+    const petals = document.getElementById("introPetals");
+    if (petals) petals.innerHTML = "";
+
     // Start background website music now that website is revealed!
     playBackgroundMusic();
 
     if (introEl) {
       introEl.classList.add("is-complete");
-      // Completely hide intro from DOM and compositor after fade transition
+      // On mobile WebKit, hide intro quickly to free GPU textures before invitation renders
+      const hideDelay = window.innerWidth <= 767 ? 150 : 600;
       setTimeout(() => {
         introEl.style.display = "none";
-      }, 1300);
+      }, hideDelay);
     }
     document.body.classList.remove("intro-active");
     if (floatingMenu) floatingMenu.classList.add("is-visible");
@@ -810,7 +826,8 @@
   function buildIntroDust() {
     const container = document.getElementById("introDust");
     if (!container) return;
-    for (let i = 0; i < 30; i++) {
+    const count = window.innerWidth <= 767 ? 4 : 24;
+    for (let i = 0; i < count; i++) {
       const dot = document.createElement("div");
       dot.className = "dust-particle";
       const sz = 1.5 + Math.random() * 2.5;
@@ -829,7 +846,8 @@
   function buildIntroPetals() {
     const container = document.getElementById("introPetals");
     if (!container) return;
-    for (let i = 0; i < 16; i++) {
+    const count = window.innerWidth <= 767 ? 3 : 14;
+    for (let i = 0; i < count; i++) {
       const petal = document.createElement("div");
       petal.className = "petal";
       const w = 6 + Math.random() * 8;
@@ -868,7 +886,8 @@
     petalImg.src = ASSETS.petal;
 
     const petals = [];
-    for (let i = 0; i < 16; i++) {
+    const count = window.innerWidth <= 767 ? 5 : 16;
+    for (let i = 0; i < count; i++) {
       petals.push({
         x: Math.random() * width,
         y: Math.random() * height * 0.5,
@@ -1358,7 +1377,192 @@
     });
   }
 
-  // ── 13. BOOTSTRAP INITIALIZATION ───────────────────────────────────────────
+  // ── 13. NIGHT MODE DETECTION & COMMAND TEXT STYLE RESET ────────────────────
+  // Detects Brave Night Mode / Dark Reader color inversion on light surfaces
+  // (Meet the Couple, Hero Arch, Things to Know Cards) and triggers command
+  // styling to reset colors back to their original crisp dark ink/maroon.
+  function initNightModeProtection() {
+    const htmlEl = document.documentElement;
+    if (!htmlEl || !document.body) return;
+
+    function getLuminance(colorStr) {
+      if (!colorStr) return null;
+      const m = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/i);
+      if (!m) return null;
+      if (m[4] !== undefined && parseFloat(m[4]) === 0) return null;
+      const r = Number(m[1]), g = Number(m[2]), b = Number(m[3]);
+      return (r * 299 + g * 587 + b * 114) / 1000;
+    }
+
+    // Hidden color probe with original dark ink text on warm cream card color
+    let probe = document.getElementById("bwNightProbe");
+    if (!probe) {
+      probe = document.createElement("span");
+      probe.id = "bwNightProbe";
+      probe.setAttribute("aria-hidden", "true");
+      probe.textContent = ".";
+      probe.style.cssText = "position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;color:rgb(62,43,34);background-color:rgb(252,246,234);";
+      document.body.appendChild(probe);
+    }
+
+    let timerId = null;
+
+    function clearResetClasses() {
+      htmlEl.classList.remove(
+        "night-mode-detected",
+        "night-mode-invert-couple",
+        "night-mode-invert-invite",
+        "night-mode-invert-ttk-card",
+        "night-mode-invert-ttk-text"
+      );
+    }
+
+    function checkAndResetNightMode() {
+      const pStyle = window.getComputedStyle(probe);
+      const pTextLum = getLuminance(pStyle.color);
+      const pBgLum = getLuminance(pStyle.backgroundColor);
+
+      const probeInverted =
+        (pTextLum !== null && pTextLum > 125) ||
+        (pBgLum !== null && pBgLum < 170);
+
+      const hasDarkReaderDom =
+        !!htmlEl.getAttribute("data-darkreader-mode") ||
+        !!document.querySelector('style.darkreader, style[class*="darkreader"]');
+
+      const cplBody = document.querySelector("#couple .cpl-story-body");
+      const invBody = document.querySelector("#invite .inv-parent-parents");
+      const ttkCard = document.querySelector("#things .ttk-card");
+      const ttkTitle = document.querySelector("#things .ttk-card-title");
+
+      const cplLum = cplBody ? getLuminance(window.getComputedStyle(cplBody).color) : null;
+      const invLum = invBody ? getLuminance(window.getComputedStyle(invBody).color) : null;
+      const ttkBgLum = ttkCard ? getLuminance(window.getComputedStyle(ttkCard).backgroundColor) : null;
+      const ttkTitleLum = ttkTitle ? getLuminance(window.getComputedStyle(ttkTitle).color) : null;
+
+      const nightModeActive =
+        probeInverted ||
+        hasDarkReaderDom ||
+        (cplLum !== null && cplLum > 125) ||
+        (invLum !== null && invLum > 125) ||
+        (ttkBgLum !== null && ttkBgLum < 150) ||
+        (ttkTitleLum !== null && ttkTitleLum > 125);
+
+      if (!nightModeActive) {
+        clearResetClasses();
+        return;
+      }
+
+      // 1. Disable any DOM-injected Dark Reader stylesheets
+      document.querySelectorAll('style.darkreader, style[class*="darkreader"]').forEach((s) => {
+        s.disabled = true;
+      });
+
+      // 2. Activate CSS reset class (applies !important original dark colors & --darkreader-inline-color)
+      htmlEl.classList.add("night-mode-detected");
+
+      const colorMap = [
+        ["#couple .cpl-eyebrow", "#b37e22"],
+        ["#couple .cpl-title", "#77283a"],
+        ["#couple .cpl-story-body, #couple .cpl-tag-chip", "#3e2b22"],
+        ["#couple .cpl-story-htag", "#9b6a16"],
+        ["#invite .inv-blessing-alt-line1, #invite .inv-parent-parents, #invite .inv-occasion, #invite .inv-venue", "#3e2b22"],
+        ["#invite .inv-kicker, #invite .inv-parent-name, #invite .inv-date", "#77283a"],
+        ["#invite .inv-names", "#a6384f"],
+        ["#invite .inv-names .inv-amp", "#c8902a"],
+        ["#invite .inv-parent-sibling", "#8c2f42"],
+        ["#things .ttk-card-title", "#8b2a3d"],
+        ["#things .ttk-card-body", "#3e2b22"]
+      ];
+
+      colorMap.forEach(([sel, hex]) => {
+        document.querySelectorAll(sel).forEach((el) => {
+          el.style.setProperty("color", hex, "important");
+          el.style.setProperty("-webkit-text-fill-color", hex, "important");
+          el.style.setProperty("--darkreader-inline-color", hex, "important");
+        });
+      });
+
+      document.querySelectorAll("#things .ttk-card").forEach((card) => {
+        card.style.setProperty("background-color", "#fcf6ea", "important");
+        card.style.setProperty("--darkreader-inline-bgcolor", "#fcf6ea", "important");
+      });
+
+      // 3. Verify after next style recalculation frame whether isolated WebKit
+      //    Night Mode still forced light colors onto any element
+      requestAnimationFrame(() => {
+        const cplLumAfter = cplBody ? getLuminance(window.getComputedStyle(cplBody).color) : null;
+        if (cplLumAfter !== null && cplLumAfter > 125) {
+          htmlEl.classList.add("night-mode-invert-couple");
+        } else {
+          htmlEl.classList.remove("night-mode-invert-couple");
+        }
+
+        const invLumAfter = invBody ? getLuminance(window.getComputedStyle(invBody).color) : null;
+        if (invLumAfter !== null && invLumAfter > 125) {
+          htmlEl.classList.add("night-mode-invert-invite");
+        } else {
+          htmlEl.classList.remove("night-mode-invert-invite");
+        }
+
+        if (ttkCard && ttkTitle) {
+          const ttkBgAfter = getLuminance(window.getComputedStyle(ttkCard).backgroundColor);
+          const ttkTitleAfter = getLuminance(window.getComputedStyle(ttkTitle).color);
+
+          if (ttkBgAfter !== null && ttkBgAfter < 150) {
+            if (ttkTitleAfter !== null && ttkTitleAfter > 125) {
+              // Both card bg darkened & text lightened -> invert card back to ivory + dark text
+              htmlEl.classList.add("night-mode-invert-ttk-card");
+              htmlEl.classList.remove("night-mode-invert-ttk-text");
+            } else {
+              // Card bg stayed dark olive while text stayed dark -> flip text light so it remains legible
+              htmlEl.classList.remove("night-mode-invert-ttk-card");
+              htmlEl.classList.add("night-mode-invert-ttk-text");
+            }
+          } else {
+            htmlEl.classList.remove("night-mode-invert-ttk-card");
+            if (ttkTitleAfter !== null && ttkTitleAfter > 125) {
+              // Card bg stayed cream while text turned light grey -> flip text back to dark maroon/brown
+              htmlEl.classList.add("night-mode-invert-ttk-text");
+            } else {
+              htmlEl.classList.remove("night-mode-invert-ttk-text");
+            }
+          }
+        }
+      });
+    }
+
+    function scheduleCheck() {
+      if (timerId) clearTimeout(timerId);
+      timerId = setTimeout(checkAndResetNightMode, 80);
+    }
+
+    // Immediate and staggered checks to catch async WKUserScript / Dark Reader injection
+    checkAndResetNightMode();
+    setTimeout(checkAndResetNightMode, 180);
+    setTimeout(checkAndResetNightMode, 650);
+    setTimeout(checkAndResetNightMode, 1500);
+
+    if (window.matchMedia) {
+      try {
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", scheduleCheck);
+      } catch (_) {}
+    }
+
+    if (typeof MutationObserver !== "undefined") {
+      try {
+        const obs = new MutationObserver((mutations) => {
+          // Ignore mutations caused by our own reset stylesheet if any
+          const hasRelevant = mutations.some((m) => m.attributeName !== "class");
+          if (hasRelevant) scheduleCheck();
+        });
+        if (document.head) obs.observe(document.head, { childList: true });
+        obs.observe(htmlEl, { attributes: true, attributeFilter: ["data-darkreader-mode", "data-darkreader-scheme", "style"] });
+      } catch (_) {}
+    }
+  }
+
+  // ── 14. BOOTSTRAP INITIALIZATION ───────────────────────────────────────────
   function init() {
     applyConfigToPage();
     initIntro();
@@ -1370,6 +1574,7 @@
     initFireworks();
     initMusicAndMenu();
     initOffscreenAnimationMechanics();
+    initNightModeProtection();
 
     document.querySelectorAll(".reveal-item").forEach(el => generalObserver.observe(el));
     const rsvpSec = document.getElementById("rsvp");
