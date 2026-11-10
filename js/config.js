@@ -12,6 +12,7 @@ window.__WEDDING_CONFIG__ = {
     bride: "Yashi",
     groomFull: "Mukund Mittal",
     brideFull: "Yashi Agrawal",
+    whatsapp: "+917755063467",
     date: "2027-01-27",
     displayDate: "26 · 27 January 2027",
     venue: "Jashn Wellness Resort, Malihabad, Lucknow",
@@ -161,6 +162,8 @@ window.__WEDDING_CONFIG__ = {
     subtext: "We've saved a seat for you — at our table, in our hearts, and under the royal sky. Come celebrate with us as we begin this new chapter together.",
     btnText: "YES, I'LL BE THERE",
     googleFormUrl: "https://tinyurl.com/yashimukund2627",
+    whatsappFallback: "+917755063467",
+    whatsappMessage: "Hello Mukund & Yashi, I am delighted to attend your wedding.",
     calendarEvent: {
       title: "Mukund & Yashi's Wedding (#SHIfoUNDlove)",
       startDate: "20270126",
