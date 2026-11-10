@@ -759,9 +759,16 @@
       const handleLotusTap = () => {
         Sound.lotus();
         lotusBtn.classList.add("is-open");
-        // Start background music now that rope animation is complete and website is entered
-        playBackgroundMusic();
-        setTimeout(revealMainSite, 800);
+
+        // Immediately purge ambient particles to free GPU memory for the lotus bloom
+        const dust = document.getElementById("introDust");
+        if (dust) dust.innerHTML = "";
+        const petals = document.getElementById("introPetals");
+        if (petals) petals.innerHTML = "";
+
+        // Snappy transition for mobile to avoid GPU frame stalls
+        const delay = window.innerWidth <= 767 ? 500 : 750;
+        setTimeout(revealMainSite, delay);
       };
       lotusBtn.addEventListener("click", handleLotusTap);
     }
