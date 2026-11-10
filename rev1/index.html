@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Mukund &amp; Yashi's Wedding | #SHIfoUNDlove</title>
 
-  <!-- Google Web Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Parisienne&display=swap" rel="stylesheet">
+  <!-- Self-Hosted Web Fonts (Zero External Network Requests) -->
+  <link rel="stylesheet" href="css/fonts.css?v=2.7">
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2.7">
 
   <!-- Preload Critical Reveal Arch Frames for Instant Display -->
   <link rel="preload" as="image" href="assets/invite/pn-inv-fr-card-m-v01.webp" media="(max-width: 767px)">
@@ -401,6 +399,7 @@
           <span class="rsvp-btn-inner">YES, I'LL BE THERE</span>
         </a>
         <p class="rsvp-helper">You'll be redirected to Google Form to confirm your attendance.</p>
+        <p class="rsvp-fallback-wrap">Having trouble with the form? <a class="rsvp-fallback-link" id="rsvpFallbackLink" href="https://wa.me/917755063467?text=Hello%20Mukund%20%26%20Yashi%2C%20I%20am%20delighted%20to%20attend%20your%20wedding." target="_blank" rel="noreferrer" aria-label="RSVP via WhatsApp fallback">RSVP via WhatsApp (+91 77550 63467)</a></p>
       </div>
 
       <!-- Calendar Save the Date -->
@@ -504,8 +503,8 @@
 <audio id="bgMusic" src="assets/song/Template_09.mp3" loop preload="none" playsinline></audio>
 
 <!-- Configuration and Main Scripts -->
-<script src="js/config.js"></script>
-<script src="js/script.js"></script>
+<script src="js/config.js?v=2.7"></script>
+<script src="js/script.js?v=2.7"></script>
 <script>
 // Smooth scroll for anchor navigation
 document.addEventListener('click', function(e) {

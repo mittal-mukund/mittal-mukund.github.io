@@ -575,14 +575,16 @@
       card.className = "ttk-card";
       card.setAttribute("role", "listitem");
       card.style.transitionDelay = `${idx * 80}ms`;
+      card.style.backgroundColor = "#fcf6ea";
+      card.style.colorScheme = "light";
 
       card.innerHTML = `
         <div class="ttk-card-icon-wrap">
           <img class="ttk-card-icon" src="${item.icon}" alt="" aria-hidden="true" decoding="async" loading="lazy">
         </div>
         <div class="ttk-card-rule" aria-hidden="true"></div>
-        <h3 class="ttk-card-title">${item.title}</h3>
-        <p class="ttk-card-body">${item.description}</p>
+        <h3 class="ttk-card-title" style="color: #8b2a3d; -webkit-text-fill-color: #8b2a3d;">${item.title}</h3>
+        <p class="ttk-card-body" style="color: #3e2b22; -webkit-text-fill-color: #3e2b22;">${item.description}</p>
       `;
 
       grid.appendChild(card);
@@ -786,15 +788,22 @@
     const floatingMenu = document.getElementById("floatingMenu");
     const inviteSection = document.getElementById("invite");
 
+    // Clean up intro particle elements immediately to free GPU memory
+    const dust = document.getElementById("introDust");
+    if (dust) dust.innerHTML = "";
+    const petals = document.getElementById("introPetals");
+    if (petals) petals.innerHTML = "";
+
     // Start background website music now that website is revealed!
     playBackgroundMusic();
 
     if (introEl) {
       introEl.classList.add("is-complete");
-      // Completely hide intro from DOM and compositor after fade transition
+      // On mobile WebKit, hide intro quickly to free GPU textures before invitation renders
+      const hideDelay = window.innerWidth <= 767 ? 150 : 600;
       setTimeout(() => {
         introEl.style.display = "none";
-      }, 1300);
+      }, hideDelay);
     }
     document.body.classList.remove("intro-active");
     if (floatingMenu) floatingMenu.classList.add("is-visible");
@@ -810,7 +819,8 @@
   function buildIntroDust() {
     const container = document.getElementById("introDust");
     if (!container) return;
-    for (let i = 0; i < 30; i++) {
+    const count = window.innerWidth <= 767 ? 4 : 24;
+    for (let i = 0; i < count; i++) {
       const dot = document.createElement("div");
       dot.className = "dust-particle";
       const sz = 1.5 + Math.random() * 2.5;
@@ -829,7 +839,8 @@
   function buildIntroPetals() {
     const container = document.getElementById("introPetals");
     if (!container) return;
-    for (let i = 0; i < 16; i++) {
+    const count = window.innerWidth <= 767 ? 3 : 14;
+    for (let i = 0; i < count; i++) {
       const petal = document.createElement("div");
       petal.className = "petal";
       const w = 6 + Math.random() * 8;
@@ -868,7 +879,8 @@
     petalImg.src = ASSETS.petal;
 
     const petals = [];
-    for (let i = 0; i < 16; i++) {
+    const count = window.innerWidth <= 767 ? 5 : 16;
+    for (let i = 0; i < count; i++) {
       petals.push({
         x: Math.random() * width,
         y: Math.random() * height * 0.5,

@@ -224,18 +224,26 @@
       rsvpDeadline.textContent = rsvp.deadline;
     }
 
-    // RSVP Button (Google Form)
+    // RSVP Button (Google Form) & Fallback WhatsApp Link
     const rsvpWhatsappBtn = document.getElementById("rsvpWhatsappBtn");
+    const rsvpFallbackLink = document.getElementById("rsvpFallbackLink");
+    const waNumber = rsvp.whatsappFallback || rsvp.whatsappNumber || couple.whatsapp || "+917755063467";
+    const cleanPhone = waNumber.replace(/\D/g, "");
+    const waMsg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom || "Mukund"} & ${couple.bride || "Yashi"}, I am delighted to attend your wedding.`);
+    const waUrl = `https://wa.me/${cleanPhone}?text=${waMsg}`;
+
     if (rsvpWhatsappBtn) {
       if (rsvp.googleFormUrl) {
         rsvpWhatsappBtn.href = rsvp.googleFormUrl;
-      } else if (couple.whatsapp) {
-        const cleanPhone = couple.whatsapp.replace(/\D/g, "");
-        const msg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom} & ${couple.bride}, I am delighted to attend your wedding.`);
-        rsvpWhatsappBtn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
+      } else if (cleanPhone) {
+        rsvpWhatsappBtn.href = waUrl;
       }
       const btnInner = rsvpWhatsappBtn.querySelector(".rsvp-btn-inner");
       if (btnInner && rsvp.btnText) btnInner.textContent = rsvp.btnText;
+    }
+
+    if (rsvpFallbackLink) {
+      rsvpFallbackLink.href = waUrl;
     }
 
     // Google Calendar Link
@@ -1200,41 +1208,30 @@
 
     let isTicking = false;
     let isNearCouple = false;
-    let cachedCoupleTop = 0;
     let lastOffset = "";
-
-    function measureCouple() {
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      cachedCoupleTop = coupleSec.getBoundingClientRect().top + scrollY;
-    }
-
-    measureCouple();
-    window.addEventListener("resize", measureCouple, { passive: true });
 
     // Only listen to tree scroll calculations when near the couple section!
     new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         isNearCouple = e.isIntersecting;
         if (isNearCouple) {
-          measureCouple();
           updateTrees();
         }
       });
-    }, { rootMargin: "250px 0px 250px 0px" }).observe(coupleSec);
+    }, { rootMargin: "350px 0px 350px 0px" }).observe(coupleSec);
 
     function updateTrees() {
       if (!isNearCouple) return;
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      const rectTop = cachedCoupleTop - scrollY;
+      const rect = coupleSec.getBoundingClientRect();
       const winH = window.innerHeight || 800;
 
       // Keep trees closed until scrolled into upper half of screen
-      const startThreshold = winH * 0.40;
+      const startThreshold = winH * 0.45;
       const endThreshold = -winH * 0.20;
 
       let progress = 0;
-      if (rectTop <= startThreshold) {
-        progress = Math.max(0, Math.min(1, (startThreshold - rectTop) / (startThreshold - endThreshold)));
+      if (rect.top <= startThreshold) {
+        progress = Math.max(0, Math.min(1, (startThreshold - rect.top) / (startThreshold - endThreshold)));
       }
 
       const eased = Math.sin((progress * Math.PI) / 2);
@@ -1259,6 +1256,7 @@
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", () => { if (isNearCouple) updateTrees(); }, { passive: true });
     updateTrees();
   }
 

@@ -4171,8 +4171,12 @@ body.page-hidden * {
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* 0. Cross-Browser Light Color-Scheme Guarantee (Prevents Brave Night Mode from inverting ivory colors) */
-:root {
-  color-scheme: light !important;
+:root,
+html,
+body {
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  -webkit-print-color-adjust: exact !important;
 }
 
 /* 1. Meet the Couple: Guaranteed background rendering in Brave & Safari */
@@ -4182,12 +4186,16 @@ body.page-hidden * {
 .cpl-bg {
   position: relative !important;
   overflow: hidden !important;
-  color: var(--ink) !important;
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  color: #3e2b22 !important;
   background-color: #f7eedc !important;
   background-image: url(../assets/meet_the_couple/garden-bg-mobile.webp) !important;
   background-position: center top !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
+  mix-blend-mode: normal !important;
+  background-blend-mode: normal !important;
 }
 
 .couple-bg,
@@ -4202,6 +4210,44 @@ body.page-hidden * {
   background-repeat: no-repeat !important;
   display: block !important;
   pointer-events: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+
+.cpl-vignette,
+.couple-vignette {
+  mix-blend-mode: normal !important;
+  background-blend-mode: normal !important;
+  background: linear-gradient(180deg, rgba(247,238,220,0.08) 0%, transparent 15%, transparent 65%, rgba(247,238,220,0.85) 100%) !important;
+}
+
+.cpl-eyebrow {
+  color: #b37e22 !important;
+  -webkit-text-fill-color: #b37e22 !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+}
+
+.cpl-title {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+}
+
+.cpl-story-body {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+}
+
+.cpl-tag-chip {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  forced-color-adjust: none !important;
+  background-color: #f4e8cf !important;
+  border-color: rgba(216,169,87,.6) !important;
 }
 
 @media (min-width: 768px) {
@@ -4224,10 +4270,12 @@ body.page-hidden * {
 .ttk-card {
   opacity: 1 !important;
   transform: none !important;
-  color-scheme: light !important;
+  color-scheme: light only !important;
   forced-color-adjust: none !important;
   background-color: #fcf6ea !important;
-  background: #fcf6ea radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,240,210,.6) 0%, transparent 70%), linear-gradient(170deg, #fef9f0, #f8ecd6 55%, #f1e0c2) !important;
+  background-image: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,240,210,.6) 0%, transparent 70%), linear-gradient(170deg, #fef9f0, #f8ecd6 55%, #f1e0c2) !important;
+  background-blend-mode: normal !important;
+  mix-blend-mode: normal !important;
   border: 1.5px solid rgba(216,169,87,.52) !important;
   box-shadow: 0 1px #ffffffe6, 0 3px #d8a9572e, 0 10px 28px #3e2b2233, inset 0 0 0 1px #ffffff8c !important;
 }
@@ -4249,19 +4297,104 @@ body.page-hidden * {
   color: #8b2a3d !important;
   -webkit-text-fill-color: #8b2a3d !important;
   forced-color-adjust: none !important;
+  text-shadow: none !important;
 }
 
 .ttk-card-body {
-  opacity: 0.88 !important;
+  opacity: 0.95 !important;
   transform: none !important;
   color: #3e2b22 !important;
   -webkit-text-fill-color: #3e2b22 !important;
   forced-color-adjust: none !important;
+  text-shadow: none !important;
 }
 
 .ttk-card-icon-wrap:before {
   opacity: 1 !important;
   transform: scale(1) !important;
+}
+
+/* 2B. Hero Arch Invitation Typography: Guaranteed Light-Theme Contrast & Halo Removal */
+.invite-text-content,
+.inv-blessing,
+.inv-blessing-alt,
+.inv-blessing-alt-line1,
+.inv-kicker,
+.inv-names,
+.inv-parents,
+.inv-parent-block,
+.inv-parent-name,
+.inv-parent-parents,
+.inv-parent-sibling,
+.inv-occasion,
+.inv-meta,
+.inv-date,
+.inv-venue {
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+.inv-blessing-alt-line1 {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+.inv-kicker {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+.inv-names {
+  color: #a6384f !important;
+  -webkit-text-fill-color: #a6384f !important;
+  text-shadow: none !important;
+}
+
+.inv-names .inv-amp {
+  color: #c8902a !important;
+  -webkit-text-fill-color: #c8902a !important;
+  text-shadow: none !important;
+}
+
+.inv-parent-name {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+.inv-parent-parents {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+.inv-parent-sibling {
+  color: #8c2f42 !important;
+  -webkit-text-fill-color: #8c2f42 !important;
+  text-shadow: none !important;
+}
+
+.inv-occasion {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
+}
+
+.inv-date {
+  color: #77283a !important;
+  -webkit-text-fill-color: #77283a !important;
+  text-shadow: none !important;
+}
+
+.inv-venue {
+  color: #3e2b22 !important;
+  -webkit-text-fill-color: #3e2b22 !important;
+  text-shadow: none !important;
 }
 
 /* 3. Intro Reveal: Guaranteed Mukund & Yashi styling, typography & centering */
