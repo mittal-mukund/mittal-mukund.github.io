@@ -158,12 +158,12 @@ window.__WEDDING_CONFIG__ = {
   // ── 8. RSVP & SAVE THE DATE ────────────────────────────────────────────────
   rsvp: {
     heading: "Will you join us?",
-    deadline: "Kindly Respond by 15 January 2027",
     subtext: "We've saved a seat for you — at our table, in our hearts, and under the royal sky. Come celebrate with us as we begin this new chapter together.",
     btnText: "RSVP Here",
     googleFormUrl: "https://tinyurl.com/yashimukund2627",
     whatsappFallback: "+917755063467",
     whatsappMessage: "Hello Mukund & Yashi,\nI am delighted to attend your wedding on 26 and 27 January 2027.\nRegards,\n[Your Name]",
+    appleCalendarUrl: "assets/invite.ics",
     calendarEvent: {
       title: "Mukund & Yashi's Wedding (#SHIfoUNDlove)",
       startDate: "20270126",

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mukund & Yashi Wedding//Save The Date//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mukund-yashi-wedding-2027@shifoundlove
+DTSTAMP:20261111T000000Z
+DTSTART;VALUE=DATE:20270126
+DTEND;VALUE=DATE:20270128
+SUMMARY:Mukund & Yashi's Wedding (#SHIfoUNDlove)
+LOCATION:Jashn Wellness Resort\, Malihabad\, Lucknow\, Uttar Pradesh\, India
+DESCRIPTION:Join us for the royal wedding celebrations of Mukund Mittal & Yashi Agrawal on 26 & 27 January 2027.
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
