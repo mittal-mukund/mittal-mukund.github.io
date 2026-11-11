@@ -14,7 +14,7 @@ window.__WEDDING_CONFIG__ = {
     brideFull: "Yashi Agrawal",
     whatsapp: "+917755063467",
     date: "2027-01-27",
-    displayDate: "26 · 27 January 2027",
+    displayDate: "27 January 2027",
     venue: "Jashn Wellness Resort, Malihabad, Lucknow",
     venueMapsUrl: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6",
     hashtag: "#SHIfoUNDlove"
@@ -35,10 +35,10 @@ window.__WEDDING_CONFIG__ = {
 
   // ── 3. LIVE COUNTDOWN CONFIGURATION ────────────────────────────────────────
   countdown: {
-    label: "Celebrations begin In",
-    targetName: "Celebrations",
-    targetDate: "2027-01-26T17:00:00+05:30", // 26 January 2027, 5:00 PM IST
-    displayTarget: "26 January 2027 · 5:00 PM IST"
+    label: "Baraat Reception Begins In",
+    targetName: "Baraat Reception",
+    targetDate: "2027-01-27T19:00:00+05:30", // 27 January 2027, 7:00 PM IST
+    displayTarget: "Baraat Reception · 27 Jan 2027 · 7:00 PM"
   },
 
   // ── 4. LOVE STORY (MEET THE COUPLE) ────────────────────────────────────────
@@ -50,38 +50,8 @@ window.__WEDDING_CONFIG__ = {
     tags: ["#SHIfoUNDlove", "Travel & Wellness", "Heart & Logic", "Kindred Spirits"]
   },
 
-  // ── 5. CELEBRATION EVENTS (6 SPECIFIC CEREMONIAL SCROLLS) ────────────
+  // ── 5. CELEBRATION EVENTS (3 CEREMONIAL SCROLLS) ───────────────────────────
   events: [
-    {
-      id: "tilak",
-      name: "God Bharaayi and Tilak Ceremony",
-      date: "26 Jan 2027",
-      time: "5:00 PM",
-      venue: "Jashn Banquet",
-      note: "Auspicious Blessings to the Bride and Groom",
-      icon: "assets/shared/Diya.webp",
-      map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
-    },
-    {
-      id: "ring-sangeet",
-      name: "Ring Ceremony & Sangeet",
-      date: "26 Jan 2027",
-      time: "8:00 PM onwards",
-      venue: "Gulzar Bagh",
-      note: "Exchange of rings, musical harmony & celebration",
-      icon: "assets/event/pn-evt-ico-sangeet-x-v01.webp",
-      map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
-    },
-    {
-      id: "haldi",
-      name: "Haldi Ceremony",
-      date: "27 Jan 2027",
-      time: "10:00 AM",
-      venue: "Poolside Courtyard",
-      note: "A splash of turmeric, sunshine & joy",
-      icon: "assets/event/pn-evt-ico-haldi-x-v01.webp",
-      map: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6"
-    },
     {
       id: "baraat-reception",
       name: "Baraat Reception",
@@ -118,7 +88,7 @@ window.__WEDDING_CONFIG__ = {
   venueDetails: {
     name: "Jashn Wellness Resort",
     location: "Malihabad, Lucknow, Uttar Pradesh",
-    dates: "26 & 27 January 2027",
+    dates: "27 January 2027",
     mapUrl: "https://maps.app.goo.gl/yq4Fdy8pdYffjPQg6",
     description: "Set amidst the serene natural mango groves and regal heritage charm of Malihabad, Jashn Wellness Resort welcomes you to celebrate our sacred union across grand palatial courtyards and lush celebration lawns."
   },
@@ -158,18 +128,18 @@ window.__WEDDING_CONFIG__ = {
   // ── 8. RSVP & SAVE THE DATE ────────────────────────────────────────────────
   rsvp: {
     heading: "Will you join us?",
-    deadline: "Kindly RSVP by 15 January 2027",
+    deadline: "Kindly Respond by 15 January 2027",
     subtext: "We've saved a seat for you — at our table, in our hearts, and under the royal sky. Come celebrate with us as we begin this new chapter together.",
-    btnText: "YES, I'LL BE THERE",
-    googleFormUrl: "https://tinyurl.com/yashimukund2627",
+    btnText: "RSVP Here",
+    googleFormUrl: "https://tinyurl.com/yashimukund27",
     whatsappFallback: "+917755063467",
-    whatsappMessage: "Hello Mukund & Yashi, I am delighted to attend your wedding.",
+    whatsappMessage: "Hello Mukund & Yashi,\n\nI am delighted to attend your wedding on 27 January 2027.\n\nRegards,\n[Your Name]",
     calendarEvent: {
       title: "Mukund & Yashi's Wedding (#SHIfoUNDlove)",
-      startDate: "20270126",
-      endDate: "20270128",
+      startDate: "20270127T133000Z",
+      endDate: "20270128T013000Z",
       location: "Jashn Wellness Resort, Malihabad, Lucknow, Uttar Pradesh, India",
-      details: "Join us for the royal wedding celebrations of Mukund Mittal & Yashi Agrawal."
+      details: "Join us for Baraat Reception (27 Jan 2027 · 7:00 PM), Phere Ceremony, and Vidaayi of Mukund Mittal & Yashi Agrawal."
     }
   },
 
@@ -177,7 +147,7 @@ window.__WEDDING_CONFIG__ = {
   closing: {
     quote: "Every love story is beautiful, but ours is our favourite.",
     names: "Mukund & Yashi",
-    date: "26 · 27 January 2027",
+    date: "27 January 2027",
     hashtag: "#SHIfoUNDlove"
   },
 

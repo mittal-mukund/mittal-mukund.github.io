@@ -229,7 +229,7 @@
     const rsvpFallbackLink = document.getElementById("rsvpFallbackLink");
     const waNumber = rsvp.whatsappFallback || rsvp.whatsappNumber || couple.whatsapp || "+917755063467";
     const cleanPhone = waNumber.replace(/\D/g, "");
-    const waMsg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom || "Mukund"} & ${couple.bride || "Yashi"}, I am delighted to attend your wedding.`);
+    const waMsg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom || "Mukund"} & ${couple.bride || "Yashi"},\nI am delighted to attend your wedding on 26 and 27 January 2027.\nRegards,\n[Your Name]`);
     const waUrl = `https://wa.me/${cleanPhone}?text=${waMsg}`;
 
     if (rsvpWhatsappBtn) {

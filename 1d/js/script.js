@@ -229,7 +229,7 @@
     const rsvpFallbackLink = document.getElementById("rsvpFallbackLink");
     const waNumber = rsvp.whatsappFallback || rsvp.whatsappNumber || couple.whatsapp || "+917755063467";
     const cleanPhone = waNumber.replace(/\D/g, "");
-    const waMsg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom || "Mukund"} & ${couple.bride || "Yashi"}, I am delighted to attend your wedding.`);
+    const waMsg = encodeURIComponent(rsvp.whatsappMessage || `Hello ${couple.groom || "Mukund"} & ${couple.bride || "Yashi"},\n\nI am delighted to attend your wedding on 27 January 2027.\n\nRegards,\n[Your Name]`);
     const waUrl = `https://wa.me/${cleanPhone}?text=${waMsg}`;
 
     if (rsvpWhatsappBtn) {
@@ -251,7 +251,7 @@
     if (rsvpGcalBtn && rsvp.calendarEvent) {
       const cal = rsvp.calendarEvent;
       const calTitle = encodeURIComponent(cal.title || `${couple.groom} & ${couple.bride}'s Wedding`);
-      const calDates = `${cal.startDate || "20270126"}/${cal.endDate || "20270129"}`;
+      const calDates = `${cal.startDate || "20270127T133000Z"}/${cal.endDate || "20270128T013000Z"}`;
       const calLoc = encodeURIComponent(cal.location || couple.venue || "");
       const calDetails = encodeURIComponent(cal.details || "");
       rsvpGcalBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=${calDates}&location=${calLoc}&details=${calDetails}`;
@@ -291,7 +291,7 @@
     if (!cdWrap) return;
 
     const countdownData = config.countdown || {};
-    const targetDateStr = countdownData.targetDate || "2027-01-26T17:00:00+05:30";
+    const targetDateStr = countdownData.targetDate || "2027-01-27T19:00:00+05:30";
     const targetTime = new Date(targetDateStr).getTime();
 
     const cdDays = document.getElementById("cdDays");
@@ -382,7 +382,7 @@
     eventsList.forEach((evt, idx) => {
       const article = document.createElement("article");
       const isLeft = idx % 2 === 0;
-      const isMain = evt.id === "baraat-reception" || evt.id === "phere" || evt.id === "ring-sangeet";
+      const isMain = evt.id === "baraat-reception" || evt.id === "phere";
       article.className = `farman-stop ${isLeft ? "farman-left" : "farman-right"}${isMain ? " farman-stop--main" : ""}`;
       article.setAttribute("role", "listitem");
       article.setAttribute("data-event", evt.id);
