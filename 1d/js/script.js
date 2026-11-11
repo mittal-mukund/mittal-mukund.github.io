@@ -246,7 +246,7 @@
       rsvpFallbackLink.href = waUrl;
     }
 
-    // Google Calendar Link
+    // Google & Apple Calendar Links
     const rsvpGcalBtn = document.getElementById("rsvpGcalBtn");
     if (rsvpGcalBtn && rsvp.calendarEvent) {
       const cal = rsvp.calendarEvent;
@@ -255,6 +255,11 @@
       const calLoc = encodeURIComponent(cal.location || couple.venue || "");
       const calDetails = encodeURIComponent(cal.details || "");
       rsvpGcalBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&dates=${calDates}&location=${calLoc}&details=${calDetails}`;
+    }
+
+    const rsvpAppleCalBtn = document.getElementById("rsvpAppleCalBtn");
+    if (rsvpAppleCalBtn && rsvp.appleCalendarUrl) {
+      rsvpAppleCalBtn.href = rsvp.appleCalendarUrl;
     }
 
     // Closing Names, Quote & Hashtag

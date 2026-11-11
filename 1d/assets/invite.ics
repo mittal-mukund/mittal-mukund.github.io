@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mukund & Yashi Wedding//Save The Date//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mukund-yashi-wedding-2027@shifoundlove
+DTSTAMP:20261111T000000Z
+DTSTART:20270127T133000Z
+DTEND:20270128T013000Z
+SUMMARY:Mukund & Yashi's Wedding (#SHIfoUNDlove)
+LOCATION:Jashn Wellness Resort\, Malihabad\, Lucknow\, Uttar Pradesh\, India
+DESCRIPTION:Join us for Baraat Reception (27 Jan 2027\, 7:00 PM)\, Phere Ceremony\, and Vidaayi of Mukund Mittal & Yashi Agrawal.
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
